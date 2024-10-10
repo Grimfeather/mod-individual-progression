@@ -777,14 +777,19 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSki
 
 
 -- Tailoring Trainers
-DELETE FROM `npc_trainer` WHERE `ID` IN (2627, 3523, 4159, 4193, 4576, 5153, 16366, 16640, 16729, 17487, 18749, 18772, 26914, 26964, 26969, 27001, 28699, 33580, 33613, 33636, 33684);
+DELETE FROM `npc_trainer` WHERE `ID` IN (1703, 2627, 3004, 3363, 3523, 4159, 4193, 4576, 5153, 5567, 
+                                        11048, 11049, 11050, 16366, 16640, 16729, 17487, 18749, 18772, 
+                                        26914, 26964, 26969, 27001, 28699, 33580, 33613, 33636, 33684);
 
 -- Journeyman Tailoring
 UPDATE `creature_template` SET `subname` = 'Journeyman Tailor' WHERE `entry`=16366;
 UPDATE `creature_template` SET `subname` = 'Journeyman Tailor' WHERE `entry`=17487;
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
+(1703, -410000, 0, 0, 0, 0),
 (3523, -410000, 0, 0, 0, 0),
 (4193, -410000, 0, 0, 0, 0),
+(11048, -410000, 0, 0, 0, 0),
+(11050, -410000, 0, 0, 0, 0),
 (16366, -410000, 0, 0, 0, 0),
 (17487, -410000, 0, 0, 0, 0);
 
@@ -794,10 +799,18 @@ UPDATE `creature_template` SET `subname` = 'Expert Tailor' WHERE `entry`=16729;
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
 (2627, -410000, 0, 0, 0, 0),
 (2627, -410001, 0, 0, 0, 0),
+(3004, -410000, 0, 0, 0, 0),
+(3004, -410001, 0, 0, 0, 0), 
+(3363, -410000, 0, 0, 0, 0),
+(3363, -410001, 0, 0, 0, 0), 
 (4159, -410000, 0, 0, 0, 0),
 (4159, -410001, 0, 0, 0, 0),
 (5153, -410000, 0, 0, 0, 0),
 (5153, -410001, 0, 0, 0, 0),
+(5567, -410000, 0, 0, 0, 0),
+(5567, -410001, 0, 0, 0, 0),
+(11049, -410000, 0, 0, 0, 0),
+(11049, -410001, 0, 0, 0, 0),
 (16640, -410000, 0, 0, 0, 0),
 (16640, -410001, 0, 0, 0, 0),
 (16729, -410000, 0, 0, 0, 0),
@@ -828,13 +841,16 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSki
 
 
 -- Leatherworking Trainers
-DELETE FROM `npc_trainer` WHERE `ID` IN (1385, 3605, 3967, 4212, 4588, 5127, 8153, 16278, 16688, 16728, 17442, 18754, 18771, 19187, 21087, 26996, 33612, 33635, 33681);
+DELETE FROM `npc_trainer` WHERE `ID` IN (223, 1385, 1466, 3007, 3365, 3605, 3967, 4212, 4588, 5127, 5564, 8153, 11081, 11083, 11084, 16278, 16688, 16728, 17442, 18754, 18771, 19187, 21087, 26996, 33612, 33635, 33681);
 
 -- Journeyman Leatherworking
 UPDATE `creature_template` SET `subname` = 'Journeyman Leatherworker' WHERE `entry`=16278;
 UPDATE `creature_template` SET `subname` = 'Journeyman Leatherworker' WHERE `entry`=17442;
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
+(223, -380000, 0, 0, 0, 0),
+(1466, -380000, 0, 0, 0, 0),
 (3605, -380000, 0, 0, 0, 0),
+(11083, -380000, 0, 0, 0, 0),
 (16278, -380000, 0, 0, 0, 0),
 (17442, -380000, 0, 0, 0, 0);
 
@@ -844,14 +860,22 @@ UPDATE `creature_template` SET `subname` = 'Expert Leatherworker' WHERE `entry`=
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
 (1385, -380000, 0, 0, 0, 0),
 (1385, -380001, 0, 0, 0, 0),
+(3365, -380000, 0, 0, 0, 0),
+(3365, -380001, 0, 0, 0, 0),
 (3967, -380000, 0, 0, 0, 0),
 (3967, -380001, 0, 0, 0, 0),
 (4588, -380000, 0, 0, 0, 0),
 (4588, -380001, 0, 0, 0, 0),
 (5127, -380000, 0, 0, 0, 0),
 (5127, -380001, 0, 0, 0, 0),
+(5564, -380000, 0, 0, 0, 0),
+(5564, -380001, 0, 0, 0, 0),   
 (8153, -380000, 0, 0, 0, 0),
 (8153, -380001, 0, 0, 0, 0),
+(11081, -380000, 0, 0, 0, 0),    
+(11081, -380001, 0, 0, 0, 0),
+(11084, -380000, 0, 0, 0, 0),    
+(11084, -380001, 0, 0, 0, 0),
 (16688, -380000, 0, 0, 0, 0),
 (16688, -380001, 0, 0, 0, 0),
 (16728, -380000, 0, 0, 0, 0),
@@ -859,6 +883,9 @@ INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSki
 
 -- Artisan Leatherworking
 INSERT INTO `npc_trainer` (`ID`, `SpellID`, `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`) VALUES
+(3007, -380000, 0, 0, 0, 0),
+(3007, -380001, 0, 0, 0, 0),
+(3007, -380002, 0, 0, 0, 0),
 (4212, -380000, 0, 0, 0, 0),
 (4212, -380001, 0, 0, 0, 0),
 (4212, -380002, 0, 0, 0, 0);
