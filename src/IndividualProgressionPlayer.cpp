@@ -87,7 +87,7 @@ public:
     void OnPlayerAfterUpdateMaxHealth(Player* player, float& value) override
     {
         // TODO: This should be adjust to use an aura like damage adjustment. This is more robust to update when changing equipment, etc.
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
         {
             return;
         }
@@ -119,7 +119,7 @@ public:
 
     void OnPlayerQuestComputeXP(Player* player, Quest const* quest, uint32& xpValue) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->questXpFix || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->questXpFix || isExcludedFromNerfs(player))
         {
             return;
         }
@@ -136,7 +136,7 @@ public:
 
     void OnPlayerGiveXP(Player* player, uint32& amount, Unit* /*victim*/, uint8 xpSource) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
         {
             return;
         }
@@ -169,6 +169,17 @@ public:
         bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
         std::regex excludedAccountsRegex (sIndividualProgression->excludedAccountsRegex);
         return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
+    }
+
+    bool isExcludedFromNerfs(Player* player)
+    {
+        if(!sIndividualProgression->excludeAccounts) {
+            return false;
+        }
+        std::string accountName;
+        bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
+        std::regex excludedAccountsRegexNerfs (sIndividualProgression->excludedAccountsRegexNerfs);
+        return (accountNameFound && std::regex_match(accountName, excludedAccountsRegexNerfs));
     }
 
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
@@ -249,7 +260,7 @@ public:
 
     void OnPlayerCompleteQuest(Player* player, Quest const* quest) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
         {
             return;
         }
@@ -321,7 +332,7 @@ public:
 
     bool OnPlayerUpdateFishingSkill(Player* player, int32 /*skill*/, int32 /*zone_skill*/, int32 chance, int32 roll) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix || isExcludedFromProgression(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix || isExcludedFromNerfs(player))
             return true;
         if (chance < roll)
             return false;
