@@ -98,7 +98,7 @@ public:
                 sIndividualProgression->ComputeGearTuning(player, gearAdjustment, item->GetTemplate());
         }
         // Player is still in Vanilla content - give Vanilla health adjustment
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isEffectedByNerfs(player) && (player->GetLevel() < 61)))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (player->GetLevel() < 61))
         {
             float adjustmentAmount = 1.0f - sIndividualProgression->vanillaHealthAdjustment;
             float applyPercent = ((player->GetLevel() - 10.0f) / 50.0f);
@@ -106,7 +106,7 @@ public:
             value *= computedAdjustment;
         }
             // Player is in TBC content - give TBC health adjustment
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isEffectedByNerfs(player) && (player->GetLevel() < 71)))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (player->GetLevel() < 71))
         {
             value *= (sIndividualProgression->tbcHealthAdjustment - gearAdjustment);
         }
@@ -169,17 +169,6 @@ public:
         bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
         std::regex excludedAccountsRegex (sIndividualProgression->excludedAccountsRegex);
         return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
-    }
-
-    bool isEffectedByNerfs(Player* player)
-    {
-        if(!sIndividualProgression->excludeAccounts) {
-            return false;
-        }
-        std::string accountName;
-        bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
-        std::regex AccountsEffectedByNerfsRegex (sIndividualProgression->AccountsEffectedByNerfsRegex);
-        return (accountNameFound && std::regex_match(accountName, AccountsEffectedByNerfsRegex));
     }
 
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
