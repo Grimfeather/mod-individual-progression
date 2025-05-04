@@ -326,11 +326,3 @@ IndividualProgression.ExcludeAccounts = 0
 #        Default:     ""
 #
 IndividualProgression.ExcludedAccountsRegex = ""
-
-# IndividualProgression.ExcludedAccountsRegexNerfs
-#        Description: A regular expression to match account names that should be excluded from nerfs done by Individual Progression.
-#        This is useful for accounts that are used for testing, or other purposes where nerfs should not be applied.
-#        Only used if ExcludeAccounts is enabled.
-#        Default:     ""
-#
-IndividualProgression.ExcludedAccountsRegexNerfs = ""
