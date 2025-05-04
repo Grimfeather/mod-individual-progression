@@ -136,7 +136,7 @@ public:
 
     void OnPlayerGiveXP(Player* player, uint32& amount, Unit* /*victim*/, uint8 xpSource) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
+        if (!sIndividualProgression->enabled || isExcludedFromProgression(player))
         {
             return;
         }
