@@ -98,7 +98,7 @@ public:
                 sIndividualProgression->ComputeGearTuning(player, gearAdjustment, item->GetTemplate());
         }
         // Player is still in Vanilla content - give Vanilla health adjustment
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (player->GetLevel() < 61))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             float adjustmentAmount = 1.0f - sIndividualProgression->vanillaHealthAdjustment;
             float applyPercent = ((player->GetLevel() - 10.0f) / 50.0f);
@@ -106,7 +106,7 @@ public:
             value *= computedAdjustment;
         }
             // Player is in TBC content - give TBC health adjustment
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (player->GetLevel() < 71))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
         {
             value *= (sIndividualProgression->tbcHealthAdjustment - gearAdjustment);
         }
@@ -375,15 +375,15 @@ public:
         return;
     }
 
-    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
     {
         rDungeonId = RDF_CLASSIC;
     }
-    else if (rDungeonId == RDF_WRATH_OF_THE_LICH_KING && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+    else if (rDungeonId == RDF_WRATH_OF_THE_LICH_KING && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
     {
         rDungeonId = RDF_THE_BURNING_CRUSADE;
     }
-    else if (rDungeonId == RDF_WRATH_OF_THE_LICH_KING_HEROIC && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+    else if (rDungeonId == RDF_WRATH_OF_THE_LICH_KING_HEROIC && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
     {
         rDungeonId = RDF_THE_BURNING_CRUSADE_HEROIC;
     }
@@ -600,11 +600,11 @@ private:
         {
             return;
         }
-        if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (pet->GetOwner()->GetLevel() < 61)))
         {
             AdjustVanillaStats(pet);
         }
-        else if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(pet->GetOwner(), PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (pet->GetOwner()->GetLevel() < 71)))
         {
             AdjustTBCStats(pet);
         }
@@ -701,11 +701,11 @@ public:
         }
         Player* player = isPet ? healer->GetOwner()->ToPlayer() : healer->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             heal *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaHealingAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             heal *= (sIndividualProgression->tbcHealingAdjustment - gearAdjustment);
         }
@@ -726,11 +726,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) ||  (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -752,11 +752,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
@@ -787,11 +787,11 @@ public:
         }
         Player* player = isPet ? attacker->GetOwner()->ToPlayer() : attacker->ToPlayer();
         float gearAdjustment = computeTotalGearTuning(player);
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isExcludedFromProgression(player) && (player->GetLevel() < 61)))
         {
             damage *= (sIndividualProgression->ComputeVanillaAdjustment(player->GetLevel(), sIndividualProgression->vanillaPowerAdjustment) - gearAdjustment);
         }
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isExcludedFromProgression(player) && (player->GetLevel() < 71)))
         {
             damage *= (sIndividualProgression->tbcPowerAdjustment - gearAdjustment);
         }
