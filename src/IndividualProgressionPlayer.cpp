@@ -87,7 +87,7 @@ public:
     void OnPlayerAfterUpdateMaxHealth(Player* player, float& value) override
     {
         // TODO: This should be adjust to use an aura like damage adjustment. This is more robust to update when changing equipment, etc.
-        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -98,7 +98,7 @@ public:
                 sIndividualProgression->ComputeGearTuning(player, gearAdjustment, item->GetTemplate());
         }
         // Player is still in Vanilla content - give Vanilla health adjustment
-        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40))
+        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_NAXX40) || (isEffectedByNerfs(player) && (player->GetLevel() < 61)))
         {
             float adjustmentAmount = 1.0f - sIndividualProgression->vanillaHealthAdjustment;
             float applyPercent = ((player->GetLevel() - 10.0f) / 50.0f);
@@ -106,7 +106,7 @@ public:
             value *= computedAdjustment;
         }
             // Player is in TBC content - give TBC health adjustment
-        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        else if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) || (isEffectedByNerfs(player) && (player->GetLevel() < 71)))
         {
             value *= (sIndividualProgression->tbcHealthAdjustment - gearAdjustment);
         }
@@ -119,7 +119,7 @@ public:
 
     void OnPlayerQuestComputeXP(Player* player, Quest const* quest, uint32& xpValue) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->questXpFix || isExcludedFromNerfs(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->questXpFix)
         {
             return;
         }
@@ -171,15 +171,15 @@ public:
         return (accountNameFound && std::regex_match(accountName, excludedAccountsRegex));
     }
 
-    bool isExcludedFromNerfs(Player* player)
+    bool isEffectedByNerfs(Player* player)
     {
         if(!sIndividualProgression->excludeAccounts) {
             return false;
         }
         std::string accountName;
         bool accountNameFound = AccountMgr::GetName(player->GetSession()->GetAccountId(), accountName);
-        std::regex excludedAccountsRegexNerfs (sIndividualProgression->excludedAccountsRegexNerfs);
-        return (accountNameFound && std::regex_match(accountName, excludedAccountsRegexNerfs));
+        std::regex AccountsEffectedByNerfsRegex (sIndividualProgression->AccountsEffectedByNerfsRegex);
+        return (accountNameFound && std::regex_match(accountName, AccountsEffectedByNerfsRegex));
     }
 
     bool OnPlayerBeforeTeleport(Player* player, uint32 mapid, float x, float y, float z, float /*orientation*/, uint32 /*options*/, Unit* /*target*/) override
@@ -260,7 +260,7 @@ public:
 
     void OnPlayerCompleteQuest(Player* player, Quest const* quest) override
     {
-        if (!sIndividualProgression->enabled || isExcludedFromNerfs(player))
+        if (!sIndividualProgression->enabled)
         {
             return;
         }
@@ -332,7 +332,7 @@ public:
 
     bool OnPlayerUpdateFishingSkill(Player* player, int32 /*skill*/, int32 /*zone_skill*/, int32 chance, int32 roll) override
     {
-        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix || isExcludedFromNerfs(player))
+        if (!sIndividualProgression->enabled || !sIndividualProgression->fishingFix)
             return true;
         if (chance < roll)
             return false;
