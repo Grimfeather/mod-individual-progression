@@ -111,6 +111,13 @@ IndividualProgression.PreviousGearTuning = 0.01
 #
 IndividualProgression.HunterPetLevelFix = 1
 
+# IndificualProgression.WarlockDemonTrainers
+#        Description: In WotLK grimoires became absolete, new ranks and spells were now automatically learned on the respective levels.
+#                     Enable this option to restore Vanilla and TBC behavior so that grimoires need to be purchased.
+#        Default:   0 - Disabled
+#
+IndificualProgression.WarlockDemonTrainers = 0
+
 # IndividualProgression.RequirePreAQQuests
 #        Description: AQ is the only vanilla tier that does not require attunement, because of the "server-wide attunement" quest line.
 #                     Enable this option to require players to complete the Bang a Gong quest line to enter AQ
