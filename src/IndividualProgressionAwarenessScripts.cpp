@@ -73,7 +73,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster())
             {
                 return true;
             }
@@ -94,6 +94,41 @@ public:
     GameObjectAI* GetAI(GameObject* object) const override
     {
         return new gobject_ipp_aqwarAI(object);
+    }
+};
+
+class gobject_ipp_si : public GameObjectScript
+{
+public:
+    gobject_ipp_si() : GameObjectScript("gobject_ipp_si") { }
+
+    struct gobject_ipp_siAI: GameObjectAI
+    {
+        explicit gobject_ipp_siAI(GameObject* object) : GameObjectAI(object) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster())
+            {
+                return true;
+            }
+            
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
+            {
+                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_NAXX40);
+            }
+            else
+            {
+                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
+            }
+        }
+    };
+
+    GameObjectAI* GetAI(GameObject* object) const override
+    {
+        return new gobject_ipp_siAI(object);
     }
 };
 
@@ -247,7 +282,7 @@ public:
 
         bool CanBeSeen(Player const* player) override
         {
-            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            if (player->IsGameMaster())
             {
                 return true;
             }
@@ -268,6 +303,41 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_ipp_aqwarAI(creature);
+    }
+};
+
+class npc_ipp_si : public CreatureScript
+{
+public:
+    npc_ipp_si() : CreatureScript("npc_ipp_si") { }
+
+    struct npc_ipp_siAI: ScriptedAI
+    {
+        explicit npc_ipp_siAI(Creature* creature) : ScriptedAI(creature) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster())
+            {
+                return true;
+            }
+			
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+			
+            if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_NAXX40))
+            {
+                return sIndividualProgression->isBeforeProgression(target, PROGRESSION_NAXX40);
+            }
+            else
+            {
+                return sIndividualProgression->hasPassedProgression(target, PROGRESSION_AQ);
+            }			
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_siAI(creature);
     }
 };
 
@@ -538,15 +608,17 @@ public:
 // Add all scripts in one
 void AddSC_mod_individual_progression_awareness()
 {
-    new gobject_ipp_preaq(); // wanted poster cenarion hold
-    new gobject_ipp_we(); // war effort supplies in cities
-    new gobject_ipp_aqwar(); // aq war crystals
+    new gobject_ipp_preaq();  // wanted poster Cenarion Hold
+    new gobject_ipp_we();     // War Effort supplies in cities
+    new gobject_ipp_aqwar();  // AQ war crystals
+    new gobject_ipp_si();     // Scourge Invasion
     new gobject_ipp_naxx40();
     new gobject_ipp_tbc();
     new gobject_ipp_wotlk();
-    new npc_ipp_preaq(); // cenarion hold npcs
-    new npc_ipp_we(); // war effort npcs in cities
-    // new npc_ipp_aqwar(); // not used atm
+    new npc_ipp_preaq();      // Cenarion Hold NPCs
+    new npc_ipp_we();         // War Effort NPCs in cities
+    new npc_ipp_si();         // Scourge Invasion
+    // new npc_ipp_aqwar();   // not used atm
     new npc_ipp_naxx40();
     new npc_ipp_tbc();
     new npc_ipp_tbc_pre_t4();
