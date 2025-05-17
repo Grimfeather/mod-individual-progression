@@ -81,7 +81,6 @@ enum ProgressionAreas
     AREA_TWILIGHT_GROVE                  = 856,
     AREA_DREAM_BOUGH                     = 1111,
     AREA_JADEMIR_LAKE                    = 1112,
-    AREA_ROCKTUSK_FARM                   = 1296,
     AREA_VALLEY_OF_HEROES                = 1611,
     AREA_TWILIGHT_VALE                   = 2077,
     AREA_LIGHTS_HOPE                     = 2268,
