@@ -341,6 +341,32 @@ public:
     }
 };
 
+class npc_ipp_pre_naxx40 : public CreatureScript
+{
+public:
+    npc_ipp_pre_naxx40() : CreatureScript("npc_ipp_pre_naxx40") { }
+
+    struct npc_ipp_pre_naxx40AI: ScriptedAI
+    {
+        explicit npc_ipp_pre_naxx40AI(Creature* creature) : ScriptedAI(creature) { };
+
+        bool CanBeSeen(Player const* player) override
+        {
+            if (player->IsGameMaster() || !sIndividualProgression->enabled)
+            {
+                return true;
+            }
+            Player* target = ObjectAccessor::FindConnectedPlayer(player->GetGUID());
+            return sIndividualProgression->isBeforeProgression(target, PROGRESSION_AQ);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new npc_ipp_pre_naxx40AI(creature);
+    }
+};
+
 class npc_ipp_naxx40 : public CreatureScript
 {
 public:
@@ -619,6 +645,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_we();         // War Effort NPCs in cities
     new npc_ipp_si();         // Scourge Invasion
     // new npc_ipp_aqwar();   // not used atm
+    new npc_ipp_pre_naxx40(); // Scourge Invasion
     new npc_ipp_naxx40();
     new npc_ipp_tbc();
     new npc_ipp_tbc_pre_t4();
