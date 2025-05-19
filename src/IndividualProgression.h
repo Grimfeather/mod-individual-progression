@@ -74,10 +74,11 @@ enum ProgressionZones
 
 enum ProgressionAreas
 {
+	AREA_AZSHARA                         = 16,
     AREA_THE_DARK_PORTAL                 = 72,
     AREA_DREADMAUL_ROCK                  = 249,
     AREA_RUINS_OF_THAURISSAN             = 250,
-    AREA_BLACROCK_MOUNTAIN               = 254,
+    AREA_BLACKROCK_MOUNTAIN              = 254,
     AREA_SERADANE                        = 356,
     AREA_BOUGH_SHADOW                    = 438,
     AREA_GROVE_OF_THE_ANCIENTS           = 448,
@@ -93,6 +94,7 @@ enum ProgressionAreas
     AREA_DREADMAUL_POST                  = 1439,
     AREA_SERPENTS_COIL                   = 1440,
     AREA_VALLEY_OF_HEROES                = 1611,
+	AREA_BROKEN_PILLAR                   = 1938,
     AREA_ABYSSAL_SANDS                   = 1939,
     AREA_TWILIGHT_VALE                   = 2077,
     AREA_FROSTSABER_ROCK                 = 2241,
