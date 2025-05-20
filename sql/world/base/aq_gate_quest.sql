@@ -74,7 +74,7 @@ INSERT INTO `quest_offer_reward` (`ID`, `Emote1`, `Emote2`, `Emote3`, `Emote4`, 
 (108743, 0, 0, 0, 0, 0, 0, 0, 0, 'From the ground near the gong springs a special crystal. Perhaps favor from the Brood.', 12340),
 (108744, 0, 0, 0, 0, 0, 0, 0, 0, '', NULL);
     
-DELETE FROM `quest_template_addon` WHERE `ID` IN (108743, 108744);
+DELETE FROM `quest_template_addon` WHERE `ID` IN (8743, 108743, 108744);
 INSERT INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, 
 `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES 
 (8743, 0, 0, 0, 8742, 108744, 0, 0, 0, 0, 0, 910, 0, 0, 0, 0, 0),
