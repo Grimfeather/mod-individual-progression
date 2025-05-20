@@ -338,56 +338,56 @@ public:
     {
         switch (newArea) {
 			case AREA_DARKSHORE:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_GROVE_OF_THE_ANCIENTS:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;	
             case AREA_WILDBEND_RIVER:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;
             case AREA_TWILIGHT_VALE:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;            
 			case AREA_SILITHUS:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;	
             case AREA_HIVE_ASHI:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;	
             case AREA_HIVE_ZORA:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
                 break;	
             case AREA_HIVE_REGAL:
-                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ)))
+                if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
