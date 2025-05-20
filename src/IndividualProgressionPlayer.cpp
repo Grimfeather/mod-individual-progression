@@ -377,12 +377,22 @@ public:
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
+                else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
+                {
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE_AQ, false);
+                }
                 break;	
             case AREA_HIVE_ASHI:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
+                }
+                else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
+                {
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
                 break;	
             case AREA_HIVE_ZORA:
@@ -391,12 +401,22 @@ public:
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
                 }
+                else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
+                {
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE_AQ, false);
+                }
                 break;	
             case AREA_HIVE_REGAL:
                 if ((sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ)) && (sIndividualProgression->isBeforeProgression(player, PROGRESSION_AQ_WAR)))
                 {
                     player->RemoveAura(IPP_PHASE);
                     player->CastSpell(player, IPP_PHASE, false);
+                }
+                else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_AQ_WAR)) 
+                {
+                    player->RemoveAura(IPP_PHASE_AQ);
+                    player->CastSpell(player, IPP_PHASE_AQ, false);
                 }
                 break;	
             case AREA_BOUGH_SHADOW:
