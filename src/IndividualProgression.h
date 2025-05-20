@@ -47,7 +47,8 @@ enum BuffSpells
     RANGED_HASTE_SPELL   = 89507,
     SPELL_RUNE_TAP       = 48982,
     SPELL_LIFE_STEAL     = 20004,
-    IPP_PHASE            = 89509
+    IPP_PHASE            = 89509,
+    IPP_PHASE_AQ         = 89511
 };
 
 enum ProgressionQuestIDs
@@ -103,13 +104,13 @@ enum ProgressionState : uint8
     PROGRESSION_MOLTEN_CORE     = 1,
     PROGRESSION_ONYXIA          = 2,
     PROGRESSION_BLACKWING_LAIR  = 3,
-    PROGRESSION_PRE_AQ          = 4, // AQ War effort, AQ quest line
-    PROGRESSION_AQ_WAR          = 5, // AQ outdoors war
-    PROGRESSION_AQ              = 6, // AQ gates open, raid available
+    PROGRESSION_PRE_AQ          = 4,  // AQ War effort, AQ quest line
+    PROGRESSION_AQ_WAR          = 5,  // AQ outdoors war
+    PROGRESSION_AQ              = 6,  // AQ gates open, raid available
     PROGRESSION_NAXX40          = 7,
     PROGRESSION_TBC_TIER_1      = 8,  // Karazhan, Gruul's Lair, Magtheridon's Lair
     PROGRESSION_TBC_TIER_2      = 9,  // Serpentshrine Cavern, Tempest Keep
-    PROGRESSION_TBC_TIER_3      = 10,  // Hyjal Summit and Black Temple
+    PROGRESSION_TBC_TIER_3      = 10, // Hyjal Summit and Black Temple
     PROGRESSION_TBC_TIER_4      = 11, // Zul'Aman
     PROGRESSION_TBC_TIER_5      = 12, // Sunwell Plateau
     PROGRESSION_WOTLK_TIER_1    = 13, // WotLK Naxx, EoE, OS
