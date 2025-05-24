@@ -4,6 +4,40 @@ INSERT INTO `creature_loot_template` (Entry, Item, Reference, Chance, QuestRequi
 (9502, 11743, 0, 0, 0, 1, 1, 1, 1, 'Phalanx - Rockfist');
 
 
+/* Ring of Law bosses missing smart AI */
+
+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN (9027, 9028, 9029, 9030, 9031, 9032);
+
+DELETE FROM `smart_scripts` WHERE `entryorguid` IN (9027, 9028, 9029, 9030, 9031, 9032);
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
+(9027, 0, 0, 0, 2, 0, 100, 1, 0, 30, 0, 0, 0, 0, 11, 21049, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Gorosh the Dervish - Between 0-30% Health - Cast Bloodlust (No Repeat)'),
+(9027, 0, 1, 0, 0, 0, 100, 0, 7000, 11000, 9000, 15000, 0, 0, 11, 15708, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Gorosh the Dervish - In Combat - Cast Mortal Strike'),
+(9027, 0, 2, 0, 0, 0, 100, 0, 5000, 9000, 8000, 10000, 0, 0, 11, 13736, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Gorosh the Dervish - In Combat - Cast Whirlwind'),
+--
+(9028, 0, 0, 0, 0, 0, 100, 0, 4850, 18250, 4850, 18250, 0, 0, 11, 40504, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Grizzle - In Combat - Cast Cleave'),
+(9028, 0, 1, 0, 0, 0, 100, 0, 15000, 18000, 135000, 138000, 0, 0, 11, 8269, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Grizzle - In Combat - Cast Enrage'),
+(9028, 0, 2, 0, 0, 0, 100, 0, 10000, 13000, 11000, 14000, 0, 0, 11, 6524, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Grizzle - In Combat - Cast Ground Tremor'),
+--
+(9029, 0, 0, 0, 0, 0, 100, 0, 8000, 15000, 20000, 30000, 0, 0, 11, 7121, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Eviscerator - In Combat - Cast Anti-Magic Shield'),
+(9029, 0, 1, 0, 0, 0, 100, 0, 5000, 7000, 15000, 17000, 0, 0, 11, 15245, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Eviscerator - In Combat - Cast Shadow Bolt Volley'),
+(9029, 0, 2, 0, 0, 0, 100, 0, 3000, 9000, 12000, 19000, 0, 0, 11, 14331, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Eviscerator - In Combat - Cast Vicious Rend'),
+--
+(9030, 0, 0, 0, 0, 0, 100, 0, 500, 500, 2000, 3000, 0, 0, 11, 15254, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Ok\'thor the Breaker - In Combat - Cast Arcane Bolt'),
+(9030, 0, 1, 0, 0, 1, 100, 0, 1000, 3200, 2800, 5200, 0, 0, 11, 15453, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Ok\'thor the Breaker - In combat - Cast Arcane Explosion'),
+(9030, 0, 2, 0, 0, 0, 100, 0, 3000, 9000, 15000, 25000, 0, 0, 11, 13323, 0, 0, 0, 0, 0, 6, 30, 0, 0, 0, 0, 0, 0, 0,     'Ok\'thor the Breaker - In Combat - Cast Polymorph'),
+(9030, 0, 3, 0, 0, 0, 100, 0, 13000, 15000, 20000, 35000, 0, 0, 11, 13747, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Ok\'thor the Breaker - In Combat - Cast Slow'),
+--
+(9031, 0, 0, 0, 0, 0, 100, 0, 5000, 15000, 16000, 20000, 0, 0, 11, 8994, 32, 0, 0, 0, 0, 6, 30, 0, 0, 8994, 0, 0, 0, 0, 'Anub\'shiah - In Combat - Cast Banish'),
+(9031, 0, 1, 0, 0, 0, 100, 0, 6000, 8000, 7000, 15000, 0, 0, 11, 15470, 289, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Anub\'shiah - In Combat - Cast Curse of Tongues'),
+(9031, 0, 2, 0, 0, 0, 100, 0, 6000, 8000, 7000, 15000, 0, 0, 11, 11980, 33, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,      'Anub\'shiah - In Combat - Cast Curse of Weakness'),
+(9031, 0, 3, 0, 23, 0, 100, 0, 13787, 0, 10000, 10000, 0, 0, 11, 13787, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       'Anub\'shiah - On aura missing - Cast Demon Armor'),
+(9031, 0, 4, 0, 0, 0, 100, 0, 1000, 7000, 18000, 24000, 0, 0, 11, 15471, 0, 0, 0, 0, 0, 5, 15, 0, 0, 0, 0, 0, 0, 0,     'Anub\'shiah - In Combat - Cast Enveloping Web'),
+(9031, 0, 5, 0, 0, 0, 100, 0, 0, 1000, 3000, 4500, 0, 0, 11, 12739, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Anub\'shiah - In Combat - Cast Shadow Bolt'),
+--
+(9032, 0, 0, 0, 0, 0, 100, 0, 2000, 12000, 13000, 20000, 0, 0, 11, 15474, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Hedrum the Creeper - In Combat - Cast Web Explosion'),
+(9032, 0, 1, 0, 0, 0, 100, 0, 4000, 12000, 0, 0, 0, 0, 11, 15475, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Hedrum the Creeper - In Combat - Cast Baneful Poison');
+
+
 /*  Fix Dark Coffer event */
 
 SET @GUID         :=640001;
