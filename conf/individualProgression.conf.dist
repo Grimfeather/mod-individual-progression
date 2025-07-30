@@ -111,6 +111,13 @@ IndividualProgression.PreviousGearTuning = 0.01
 #
 IndividualProgression.HunterPetLevelFix = 1
 
+# IndificualProgression.WarlockDemonTrainers
+#        Description: In WotLK grimoires became absolete, new ranks and spells were now automatically learned on the respective levels.
+#                     Enable this option to restore Vanilla and TBC behavior so that grimoires need to be purchased.
+#        Default:   0 - Disabled
+#
+IndificualProgression.WarlockDemonTrainers = 0
+
 # IndividualProgression.RequireNaxxStrathEntrance
 #        Description: If enabled, requires players to first enter Naxx 40 through the original beta entrance in the back of Stratholme
 #                     before being able to use the teleportation crystal in EPL. This is consistent behavior with other Vanilla raids (MC, BL).
