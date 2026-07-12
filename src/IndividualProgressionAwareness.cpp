@@ -853,7 +853,7 @@ void AddSC_mod_individual_progression_awareness()
     new npc_ipp_tbc();
     new npc_ipp_tbc_pre_t3();         // TBC leatherworking vendors
     new npc_ipp_tbc_t3();             // TBC leatherworking vendors
-	new npc_ipp_tbc_t4();             // Ysuria <Portal Trainer>
+	// new npc_ipp_tbc_t4();
     new npc_ipp_za();
     new npc_ipp_pre_wotlk();
     new npc_ipp_wotlk();
