@@ -68,7 +68,6 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (
 37915  -- Timothy Cunningham, The Bulwark, Flight Master
 );
 
-
 SET @IPPPHASE     := 65536;
 
 -- Forest Song - Ashenvale - Draenei camp
