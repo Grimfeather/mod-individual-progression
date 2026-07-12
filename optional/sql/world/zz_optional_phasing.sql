@@ -60,12 +60,14 @@ UPDATE `creature_template` SET `ScriptName` = 'npc_ipp_tbc' WHERE `entry` IN (
 25103, -- Crewman Boltshine, Zep
 25104, -- Navigator Hatch, Zep
 25105, -- Sky-Captain Cableclamp, Zep
+27703, -- Ysuria, Theramore
 27705, -- Lorrin Foxfire, Stonard
 29093, -- Ian Drake, Stormwind
 29095, -- Edward Cairn, Undercity
 37888, -- Frax Bucketdrop, Thondroril River, Flight Master
 37915  -- Timothy Cunningham, The Bulwark, Flight Master
 );
+
 
 SET @IPPPHASE     := 65536;
 
