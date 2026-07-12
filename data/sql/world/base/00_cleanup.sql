@@ -28,6 +28,8 @@ DELETE FROM `creature` WHERE `guid` = 88156 AND `id` IN (20278); -- Vixton Pinch
 
 /* the following edits are temporary */
 
+-- undo forced phasing of Ysuria in Theramore
+UPDATE `creature` SET `ScriptName` = '' WHERE `id` = 27703;
 
 -- restore Midnight script, now properly overriding the script
 UPDATE `creature_template` SET `ScriptName` = 'boss_midnight' WHERE `entry` = 16151;
