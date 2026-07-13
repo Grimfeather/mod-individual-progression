@@ -30,6 +30,7 @@ DELETE FROM `creature` WHERE `guid` = 88156 AND `id` IN (20278); -- Vixton Pinch
 
 -- AV creatures that are no longer used or now created with scripts
 SET @CGUID  := 657000;
+SET @WPID   := 6570000;
 
 DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` = 2 AND `guid` BETWEEN @CGUID+801 AND @CGUID+836;
 DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` = 4 AND `guid` BETWEEN @CGUID+841 AND @CGUID+876;
@@ -39,6 +40,9 @@ DELETE FROM `creature_template_model` WHERE `CreatureID` IN (110981, 110990, 112
 DELETE FROM `creature_template_locale` WHERE `entry` IN (110981, 110990, 112051, 112127, 114282, 114283, 114284, 113358, 113359);
 DELETE FROM `creature_equip_template` WHERE `CreatureID` IN (112051, 112127, 114284, 113358, 113359, 122739, 122766, 131978, 132089);
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (110981, 110990, 113358, 113359, 114282, 114283, 114284, 112051, 112127);
+DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+88, @CGUID+89, @CGUID+105, @CGUID+106, @CGUID+114, @CGUID+133, @CGUID+138, @CGUID+139);
+DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+164, @CGUID+165, @CGUID+181, @CGUID+182, @CGUID+190, @CGUID+209, @CGUID+214, @CGUID+215);
+DELETE FROM `waypoint_data` WHERE `id` IN (@WPID+880, @WPID+890, @WPID+1050, @WPID+1060, @WPID+1140, @WPID+1330, @WPID+1380, @WPID+1390);
 
 -- undo forced phasing of Ysuria in Theramore
 UPDATE `creature` SET `ScriptName` = '' WHERE `id` = 27703;
