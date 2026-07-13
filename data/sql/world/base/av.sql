@@ -2932,6 +2932,7 @@ UPDATE `creature_template` SET `speed_walk` = 2, `flags_extra` = 0 WHERE entry I
 UPDATE `creature_template` SET `unit_flags` = 4160 WHERE `entry` IN (13577, 13441); -- enable pvp flag for cavalry commanders
 UPDATE `creature_template` SET `gossip_menu_id` = 65701 WHERE `entry` = 113441; -- Frostwolf Wolf Rider Commander
 UPDATE `creature_template` SET `gossip_menu_id` = 65702 WHERE `entry` = 113577; -- Stormpike Ram Rider Commander
+UPDATE `creature_template` SET `minlevel` = 60, `maxlevel` = 61 WHERE `entry` = 22726; -- Alterac Ram (1)
 
 DELETE FROM `gossip_menu` WHERE `MenuID` IN (65701, 65702);
 INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
