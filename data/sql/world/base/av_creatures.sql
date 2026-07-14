@@ -4,7 +4,7 @@ SET @CGUID  := 657000;
 /* ORIGINAL VANILLA AV */
 
 -- Alliance
-DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` = 1 AND `guid` BETWEEN @CGUID+301 AND @CGUID+399;
+DELETE FROM `creature` WHERE `map` = 30 AND `guid` BETWEEN @CGUID+301 AND @CGUID+399;
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
@@ -23,13 +23,25 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (@CGUID+311, 13598, 30, 0, 0, 1, 1, 1, 605.644, -33.8735, 41.5053, 5.06927, 430, 0, 0, 7403, 0, 0, 0, 0, 0, '', NULL, 0, NULL),        -- Stormpike Explosives Expert
 (@CGUID+312, 13356, 30, 0, 0, 1, 1, 1, 243.319, -361.115, 43.2876, 4.76966, 432000, 0, 1, 15720, 0, 2, 0, 0, 0, '', NULL, 0, NULL),    -- Stormpike Mine Layer
 --
-(@CGUID+313, 113437, 30, 0, 0, 1, 1, 1, -1291.28, -266.665, 91.6572, 3.29552, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Ichman
-(@CGUID+314, 113438, 30, 0, 0, 1, 1, 1, -771.787, -367.044, 68.4151, 1.08857, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Slidore
-(@CGUID+315, 113439, 30, 0, 0, 1, 1, 1, -1221.27, -354.514, 57.7049, 4.94094, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Vipore
+(@CGUID+321, 113437, 30, 0, 0, 1, 1, 1, -1291.28, -266.665, 91.6572, 3.29552, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Ichman
+(@CGUID+322, 113438, 30, 0, 0, 1, 1, 1, -771.787, -367.044, 68.4151, 1.08857, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Slidore
+(@CGUID+323, 113439, 30, 0, 0, 1, 1, 1, -1221.27, -354.514, 57.7049, 4.94094, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Vipore
+(@CGUID+324, 113437, 30, 0, 0, 2, 1, 1, -1291.28, -266.665, 91.6572, 3.29552, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Ichman
+(@CGUID+325, 113438, 30, 0, 0, 2, 1, 1, -771.787, -367.044, 68.4151, 1.08857, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Slidore
+(@CGUID+326, 113439, 30, 0, 0, 2, 1, 1, -1221.27, -354.514, 57.7049, 4.94094, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Vipore
+(@CGUID+327, 113437, 30, 0, 0, 4, 1, 1, -1291.28, -266.665, 91.6572, 3.29552, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Ichman
+(@CGUID+328, 113438, 30, 0, 0, 4, 1, 1, -771.787, -367.044, 68.4151, 1.08857, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Slidore
+(@CGUID+329, 113439, 30, 0, 0, 4, 1, 1, -1221.27, -354.514, 57.7049, 4.94094, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),  -- Wing Commander Vipore
 --
 (@CGUID+331, 113437, 30, 0, 0, 1, 1, 1, -205.716, -109.444, 103.695, 0, 300, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),          -- Wing Commander Ichman - air strike (snowfall graveyard)
 (@CGUID+332, 113438, 30, 0, 0, 1, 1, 1, -283.877, -318.774, 30.002, 0, 300, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Slidore - air strike (east crater)
 (@CGUID+333, 113439, 30, 0, 0, 1, 1, 1, -236.557, -257.686, 29.052, 0, 300, 40, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Vipore - air strike (west crater)
+(@CGUID+334, 113437, 30, 0, 0, 2, 1, 1, -205.716, -109.444, 103.695, 0, 300, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),          -- Wing Commander Ichman - air strike (snowfall graveyard)
+(@CGUID+335, 113438, 30, 0, 0, 2, 1, 1, -283.877, -318.774, 30.002, 0, 300, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Slidore - air strike (east crater)
+(@CGUID+336, 113439, 30, 0, 0, 2, 1, 1, -236.557, -257.686, 29.052, 0, 300, 40, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Vipore - air strike (west crater)
+(@CGUID+337, 113437, 30, 0, 0, 4, 1, 1, -205.716, -109.444, 103.695, 0, 300, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),          -- Wing Commander Ichman - air strike (snowfall graveyard)
+(@CGUID+338, 113438, 30, 0, 0, 4, 1, 1, -283.877, -318.774, 30.002, 0, 300, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Slidore - air strike (east crater)
+(@CGUID+339, 113439, 30, 0, 0, 4, 1, 1, -236.557, -257.686, 29.052, 0, 300, 40, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Vipore - air strike (west crater)
 --
 (@CGUID+340, 13576, 30, 0, 0, 1, 1, 1, 608.578, -38.9388, 41.632, 0.0369127, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),   -- Stormpike Ram Rider
 (@CGUID+341, 13576, 30, 0, 0, 1, 1, 1, 605.539, -47.0707, 40.748, 0.0400476, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
@@ -42,11 +54,9 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (@CGUID+348, 13576, 30, 0, 0, 1, 1, 1, 608.834, -41.1236, 41.7503, 0.0879623, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+349, 13576, 30, 0, 0, 1, 1, 1, 609.027, -44.8559, 41.9125, 0.0997443, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+351, 113577, 30, 0, 0, 1, 1, 1, 600.032, -2.92475, 42.0788, 5.00909, 432000, 0, 0, 24416, 0, 0, 0, 0, 0, '', NULL, 0, NULL);   -- Stormpike Ram Rider Commander
--- (@CGUID+352, 13577, 30, 0, 0, 1, 1, 1, 600.032, -2.92475, 42.0788, 5.00909, 432000, 0, 0, 24416, 0, 0, 0, 0, 0, '', NULL, 0, NULL), -- already placed by AC
--- (@CGUID+353, 13617, 30, 0, 0, 1, 1, 1, 610.239, -21.8454, 43.272, 4.90438, 430, 0, 0, 45780, 0, 0, 0, 0, 0, '', NULL, 0, NULL),     -- Stormpike Stable Master (already placed by AC)
 
 -- Horde
-DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` = 1 AND `guid` BETWEEN @CGUID+401 AND @CGUID+499;
+DELETE FROM `creature` WHERE `map` = 30 AND `guid` BETWEEN @CGUID+401 AND @CGUID+499;
 DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` IN (2, 4) AND `id` = 13448;
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
@@ -66,20 +76,28 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (@CGUID+411, 13597, 30, 0, 0, 1, 1, 1, -1240.5, -318.81, 61.2862, 5.73966, 430, 0, 0, 7403, 0, 0, 0, 0, 0, '', NULL, 0, NULL),         -- Frostwolf Explosives Expert
 (@CGUID+412, 13357, 30, 0, 0, 1, 1, 1, -760.987, -346.56, 67.5161, 1.28253, 432000, 0, 1, 15720, 0, 2, 0, 0, 0, '', NULL, 0, NULL),	   -- Frostwolf Mine Layer
 --
-(@CGUID+413, 113179, 30, 0, 0, 1, 1, 1, 210.875, -357.360, 56.4586, 5.67232, 432000, 0, 0, 29610, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Guse
-(@CGUID+414, 113180, 30, 0, 0, 1, 1, 1, 324.430, -497.170, 71.1594, 5.06268, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Jeztor
-(@CGUID+415, 113181, 30, 0, 0, 1, 1, 1, 691.614, -143.899, 56.5425, 2.55334, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Mulverick
---
 (@CGUID+419, 12121, 30, 0, 0, 1, 1, 0, -1373.29, -222.146, 98.5099, 4.50295, 1785, 0, 0, 2338, 0, 0, 0, 0, 0, '', NULL, 0, NULL),      -- Draka
 (@CGUID+420, 12122, 30, 0, 0, 1, 1, 0, -1366.28, -219.863, 98.5045, 5.5676, 1785, 0, 0, 2338, 0, 0, 0, 0, 0, '', NULL, 0, NULL),       -- Duros
 --
-(@CGUID+421, 13448, 30, 0, 0, 1, 1, 1, -1212.11, -261.774, 73.4561, 5.79449, 430, 0, 0, 5568, 0, 0, 0, 0, 0, '', NULL, 0, NULL),       -- Sergeant Yazra Bloodsnarl
-(@CGUID+422, 13448, 30, 0, 0, 2, 1, 1, -1212.11, -261.774, 73.4561, 5.79449, 430, 0, 0, 5568, 0, 0, 0, 0, 0, '', NULL, 0, NULL),       -- Sergeant Yazra Bloodsnarl (tbc)
-(@CGUID+423, 13448, 30, 0, 0, 4, 1, 1, -1212.11, -261.774, 73.4561, 5.79449, 430, 0, 0, 5568, 0, 0, 0, 0, 0, '', NULL, 0, NULL),       -- Sergeant Yazra Bloodsnarl (wotlk)
+(@CGUID+421, 113179, 30, 0, 0, 1, 1, 1, 210.875, -357.360, 56.4586, 5.67232, 432000, 0, 0, 29610, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Guse
+(@CGUID+422, 113180, 30, 0, 0, 1, 1, 1, 324.430, -497.170, 71.1594, 5.06268, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Jeztor
+(@CGUID+423, 113181, 30, 0, 0, 1, 1, 1, 691.614, -143.899, 56.5425, 2.55334, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Mulverick
+(@CGUID+424, 113179, 30, 0, 0, 2, 1, 1, 210.875, -357.360, 56.4586, 5.67232, 432000, 0, 0, 29610, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Guse
+(@CGUID+425, 113180, 30, 0, 0, 2, 1, 1, 324.430, -497.170, 71.1594, 5.06268, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Jeztor
+(@CGUID+426, 113181, 30, 0, 0, 2, 1, 1, 691.614, -143.899, 56.5425, 2.55334, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Mulverick
+(@CGUID+427, 113179, 30, 0, 0, 4, 1, 1, 210.875, -357.360, 56.4586, 5.67232, 432000, 0, 0, 29610, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Guse
+(@CGUID+428, 113180, 30, 0, 0, 4, 1, 1, 324.430, -497.170, 71.1594, 5.06268, 432000, 0, 0, 28710, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Jeztor
+(@CGUID+429, 113181, 30, 0, 0, 4, 1, 1, 691.614, -143.899, 56.5425, 2.55334, 432000, 0, 0, 30520, 0, 0, 0, 2, 0, '', NULL, 0, NULL),   -- Wing Commander Mulverick
 --
-(@CGUID+431, 113179, 30, 0, 0, 1, 1, 1, -283.877, -318.774, 30.002, 0, 300, 40, 0, 29610, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Guse - air strike (east crater)
-(@CGUID+432, 113180, 30, 0, 0, 1, 1, 1, -236.557, -257.686, 29.052, 0, 300, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),           -- Wing Commander Jeztor - air strike (west crater)
-(@CGUID+433, 113181, 30, 0, 0, 1, 1, 1, -205.716, -109.444, 103.695, 0, 300, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),          -- Wing Commander Mulverick - air strike (snowfall graveyard)
+(@CGUID+431, 113179, 30, 0, 0, 1, 1, 1, -283.877, -318.774, 30.002, 0, 432000, 40, 0, 29610, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Guse - air strike (east crater)
+(@CGUID+432, 113180, 30, 0, 0, 1, 1, 1, -236.557, -257.686, 29.052, 0, 432000, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Jeztor - air strike (west crater)
+(@CGUID+433, 113181, 30, 0, 0, 1, 1, 1, -205.716, -109.444, 103.695, 0, 432000, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),       -- Wing Commander Mulverick - air strike (snowfall graveyard)
+(@CGUID+434, 113179, 30, 0, 0, 2, 1, 1, -283.877, -318.774, 30.002, 0, 432000, 40, 0, 29610, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Guse - air strike (east crater)
+(@CGUID+435, 113180, 30, 0, 0, 2, 1, 1, -236.557, -257.686, 29.052, 0, 432000, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Jeztor - air strike (west crater)
+(@CGUID+436, 113181, 30, 0, 0, 2, 1, 1, -205.716, -109.444, 103.695, 0, 432000, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),       -- Wing Commander Mulverick - air strike (snowfall graveyard)
+(@CGUID+437, 113179, 30, 0, 0, 4, 1, 1, -283.877, -318.774, 30.002, 0, 432000, 40, 0, 29610, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Guse - air strike (east crater)
+(@CGUID+438, 113180, 30, 0, 0, 4, 1, 1, -236.557, -257.686, 29.052, 0, 432000, 40, 0, 28710, 0, 1, 0, 0, 0, '', NULL, 0, NULL),        -- Wing Commander Jeztor - air strike (west crater)
+(@CGUID+439, 113181, 30, 0, 0, 4, 1, 1, -205.716, -109.444, 103.695, 0, 432000, 20, 0, 30520, 0, 1, 0, 0, 0, '', NULL, 0, NULL),       -- Wing Commander Mulverick - air strike (snowfall graveyard)
 --
 (@CGUID+440, 13440, 30, 0, 0, 1, 1, 1, -1225.26, -625.173, 53.1274, 2.42435, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),   -- Frostwolf Wolf Rider
 (@CGUID+441, 13440, 30, 0, 0, 1, 1, 1, -1227.35, -627.697, 53.7139, 2.4322, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
@@ -92,10 +110,8 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (@CGUID+448, 13440, 30, 0, 0, 1, 1, 1, -1236.25, -629.42, 52.6461, 2.33167, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+449, 13440, 30, 0, 0, 1, 1, 1, -1238.34, -631.301, 52.5725, 2.28455, 432000, 0, 0, 14355, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+451, 113441, 30, 0, 0, 1, 1, 1, -1250.35, -633.115, 52.5533, 0.816636, 432000, 0, 0, 24416, 0, 0, 0, 0, 0, '', NULL, 0, NULL), -- Frostwolf Wolf Rider Commander
-(@CGUID+452, 13441, 30, 0, 0, 1, 1, 1, -1250.35, -633.115, 52.5533, 0.816636, 432000, 0, 0, 24416, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
-(@CGUID+453, 13616, 30, 0, 0, 1, 1, 1, -1245.6, -638.91, 52.5509, 2.20837, 430, 0, 0, 45780, 0, 0, 0, 0, 0, '', NULL, 0, NULL),        -- Frostwolf Stable Master
 --
-(@CGUID+481, 10981, 30, 0, 0, 1, 1, 0, -1269.34, -609.557, 55.3371, 6.23614, 300, 0, 0, 2260, 0, 0, 0, 0, 0, '', NULL, 0, NULL), -- Frostwolves Inside Kennel
+(@CGUID+481, 10981, 30, 0, 0, 1, 1, 0, -1269.34, -609.557, 55.3371, 6.23614, 300, 0, 0, 2260, 0, 0, 0, 0, 0, '', NULL, 0, NULL),       -- Frostwolves Inside Kennel
 (@CGUID+482, 10981, 30, 0, 0, 1, 1, 0, -1268.76, -604.023, 55.374, 6.20865, 300, 0, 0, 2260, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+483, 10981, 30, 0, 0, 1, 1, 0, -1268.32, -598.362, 55.3851, 6.19601, 300, 0, 0, 2338, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
 (@CGUID+484, 10981, 30, 0, 0, 1, 1, 0, -1267.99, -592.288, 55.403, 6.21171, 300, 0, 0, 2260, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
@@ -108,7 +124,7 @@ UPDATE `creature` SET `unit_flags` = 134221888 WHERE `guid` BETWEEN @CGUID+340 A
 UPDATE `creature` SET `unit_flags` = 134221888 WHERE `guid` BETWEEN @CGUID+440 AND @CGUID+452;
 
 -- Winterax Hold + Graveyards
-DELETE FROM `creature` WHERE `map` = 30 AND `spawnMask` = 1 AND `guid` BETWEEN @CGUID+501 AND @CGUID+599;
+DELETE FROM `creature` WHERE `map` = 30 AND `guid` BETWEEN @CGUID+501 AND @CGUID+599;
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
