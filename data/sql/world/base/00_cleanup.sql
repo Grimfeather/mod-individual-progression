@@ -43,6 +43,8 @@ DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (110981
 DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+88, @CGUID+89, @CGUID+105, @CGUID+106, @CGUID+114, @CGUID+133, @CGUID+138, @CGUID+139);
 DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+164, @CGUID+165, @CGUID+181, @CGUID+182, @CGUID+190, @CGUID+209, @CGUID+214, @CGUID+215);
 DELETE FROM `waypoint_data` WHERE `id` IN (@WPID+880, @WPID+890, @WPID+1050, @WPID+1060, @WPID+1140, @WPID+1330, @WPID+1380, @WPID+1390);
+DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+313, @CGUID+314, @CGUID+315, @CGUID+413, @CGUID+414, @CGUID+415);
+DELETE FROM `waypoint_data` WHERE `id` IN (@WPID+3130, @WPID+3140, @WPID+3150, @WPID+4130, @WPID+4140, @WPID+4150);
 
 -- undo forced phasing of Ysuria in Theramore
 UPDATE `creature` SET `ScriptName` = '' WHERE `id` = 27703;
