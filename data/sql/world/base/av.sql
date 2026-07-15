@@ -1545,7 +1545,7 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 DELETE FROM `waypoint_data` WHERE `id` IN (@WPID+3210, @WPID+3220, @WPID+3230, @WPID+4210, @WPID+4220, @WPID+4230);
 INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES 
 --
-(@WPID+3210, 1, -1291.28, -266.665, 91.6572, 0, 5000, 1, 0, 100, 0), -- Wing Commander Ichman
+(@WPID+3210, 1, -1291.28, -266.665, 91.6572, 0, 0, 1, 0, 100, 0), -- Wing Commander Ichman
 (@WPID+3210, 2, -1312.17, -270.878, 91.6453, 0, 0, 1, 0, 100, 0),
 (@WPID+3210, 3, -1317.35, -274.523, 91.1179, 0, 0, 1, 0, 100, 0),
 (@WPID+3210, 4, -1318.83, -281.937, 90.6615, 0, 0, 1, 0, 100, 0),
@@ -1637,7 +1637,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+3210, 90, 632.77, -85.05, 41.44, 0, 0, 1, 0, 100, 0),
 (@WPID+3210, 91, 571.05, -52.57, 38.23, 0, 0, 1, 0, 100, 0),
 --
-(@WPID+3220, 1, -771.787, -367.044, 68.4151, 0, 5000, 1, 0, 100, 0), -- Wing Commander Slidore
+(@WPID+3220, 1, -771.787, -367.044, 68.4151, 0, 0, 1, 0, 100, 0), -- Wing Commander Slidore
 (@WPID+3220, 2, -760.003, -344.998, 67.3863, 0, 0, 1, 0, 100, 0),
 (@WPID+3220, 3, -740.324, -343.139, 66.6291, 0, 0, 1, 0, 100, 0),
 (@WPID+3220, 4, -675.56, -378.62, 65.6, 0, 0, 1, 0, 100, 0),
@@ -1702,7 +1702,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+3220, 63, 632.77, -85.05, 41.44, 0, 0, 1, 0, 100, 0),
 (@WPID+3220, 64, 572.7764, -41.2713, 37.6083, 0, 0, 1, 0, 100, 0),
 --
-(@WPID+3230, 1, -1221.27, -354.514, 57.7049, 0, 5000, 1, 0, 100, 0), -- Wing Commander Vipore
+(@WPID+3230, 1, -1221.27, -354.514, 57.7049, 0, 0, 1, 0, 100, 0), -- Wing Commander Vipore
 (@WPID+3230, 2, -1219.2, -366.638, 57.238, 0, 0, 1, 0, 100, 0),
 (@WPID+3230, 3, -1194.22, -365.63, 52.7935, 0, 0, 1, 0, 100, 0),
 (@WPID+3230, 4, -1172.35, -354.742, 52.0752, 0, 0, 1, 0, 100, 0),
@@ -1779,7 +1779,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+3230, 75, 574.17, -54.0257, 37.902, 0, 0, 1, 0, 100, 0),
 (@WPID+3230, 76, 570.107, -48.83, 38.124, 0, 0, 1, 0, 100, 0),
 --
-(@WPID+4210, 1, 210.875, -357.360, 56.4586, 0, 5000, 1, 0, 100, 0), -- Wing Commander Guse
+(@WPID+4210, 1, 210.875, -357.360, 56.4586, 0, 0, 1, 0, 100, 0), -- Wing Commander Guse
 (@WPID+4210, 2, 197.457, -376.12, 49.2678, 0, 0, 1, 0, 100, 0),
 (@WPID+4210, 3, 201.609, -373.264, 49.2678, 0, 0, 1, 0, 100, 0),
 (@WPID+4210, 4, 212.754, -364.293, 42.3979, 0, 0, 1, 0, 100, 0),
@@ -1855,7 +1855,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+4210, 74, -1323.77, -290.607, 90.6643, 0, 0, 1, 0, 100, 0),
 (@WPID+4210, 75, -1332.84, -330.704, 91.1457, 0, 0, 1, 0, 100, 0),
 --
-(@WPID+4220, 1, 324.43, -497.17, 71.1594, 0, 5000, 1, 0, 100, 0), -- Wing Commander Jeztor
+(@WPID+4220, 1, 324.43, -497.17, 71.1594, 0, 0, 1, 0, 100, 0), -- Wing Commander Jeztor
 (@WPID+4220, 2, 326.952, -502.857, 71.1407, 0, 0, 1, 0, 100, 0),
 (@WPID+4220, 3, 331.897, -503.978, 71.1734, 0, 0, 1, 0, 100, 0),
 (@WPID+4220, 4, 374.845, -499.47, 71.2761, 0, 0, 1, 0, 100, 0),
@@ -1940,7 +1940,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+4220, 83, -1334.46, -320.937, 90.6359, 0, 0, 1, 0, 100, 0),
 (@WPID+4220, 84, -1336.75, -330.005, 90.9907, 0, 0, 1, 0, 100, 0),
 --
-(@WPID+4230, 1, 691.614, -143.899, 56.5425, 0, 5000, 1, 0, 100, 0), -- Wing Commander Mulverick
+(@WPID+4230, 1, 691.614, -143.899, 56.5425, 0, 0, 1, 0, 100, 0), -- Wing Commander Mulverick
 (@WPID+4230, 2, 686.419, -140.739, 56.4963, 0, 0, 1, 0, 100, 0),
 (@WPID+4230, 3, 674.321, -132.873, 49.6726, 0, 0, 1, 0, 100, 0),
 (@WPID+4230, 4, 657.908, -122.201, 49.7357, 0, 0, 1, 0, 100, 0),
@@ -2701,8 +2701,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (13439, 0, 3, 0, 0, 0, 100, 0, 9000, 13000, 18000, 34000, 0, 0, 11, 16509, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Vipore - In Combat - Cast Rend'),
 --
 (113179, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14026, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Guse - On Gossip Hello - Quest Credit'),
-(113179, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Guse - On Gossip Hello - Remove Unit Flags'),
-(113179, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+4210, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Guse - On Gossip Hello - Start Waypoints'),
+(113179, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Guse - On Gossip Hello - Remove Unit Flags'),
+(113179, 0, 2, 0, 62, 0, 100, 0, 65711, 0, 0, 0, 0, 0, 232, @WPID+4210, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Guse - On Gossip Select - Start Waypoints'),
 (113179, 0, 3, 4, 108, 0, 100, 0, 75, @WPID+4210, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13179, 20, 0,0,0,0,0,0,            'Wing Commander Guse - On Waypoint Reached - Set Visible'),
 (113179, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13179, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Guse - On Waypoint Reached - Reset Faction'),
 (113179, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Guse - On Waypoint Reached - Set Invisible'),
@@ -2710,8 +2710,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113179, 0, 7, 0, 0, 0, 100, 0, 4100, 9300, 10200, 17900, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Guse - In Combat - Cast Strike'),
 (113179, 0, 8, 0, 0, 0, 100, 0, 1700, 10300, 6000, 15400, 0, 0, 11, 15572, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Guse - In Combat - Cast Sunder Armor'),
 (113180, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14028, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Jeztor - On Gossip Hello - Quest Credit'), 
-(113180, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Jeztor - On Gossip Hello - Remove Unit Flags'),
-(113180, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+4220, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Jeztor - On Gossip Hello - Start Waypoints'),
+(113180, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Jeztor - On Gossip Hello - Remove Unit Flags'),
+(113180, 0, 2, 0, 62, 0, 100, 0, 65712, 0, 0, 0, 0, 0, 232, @WPID+4220, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Jeztor - On Gossip Select - Start Waypoints'),
 (113180, 0, 3, 4, 108, 0, 100, 0, 84, @WPID+4220, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13180, 20, 0,0,0,0,0,0,            'Wing Commander Jeztor - On Waypoint Reached - Set Visible'),
 (113180, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13180, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Jeztor - On Waypoint Reached - Reset Faction'),
 (113180, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Jeztor - On Waypoint Reached - Set Invisible'),
@@ -2719,8 +2719,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113180, 0, 7, 0, 0, 0, 100, 0, 4100, 9300, 10200, 17900, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Jeztor - In Combat - Cast Strike'),
 (113180, 0, 8, 0, 0, 0, 100, 0, 1700, 10300, 6000, 15400, 0, 0, 11, 15572, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Jeztor - In Combat - Cast Sunder Armor'),
 (113181, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14027, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Mulverick - On Gossip Hello - Quest Credit'),
-(113181, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Mulverick - On Gossip Hello - Remove Unit Flags'),
-(113181, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+4230, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Mulverick - On Gossip Hello - Start Waypoints'),
+(113181, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Mulverick - On Gossip Hello - Remove Unit Flags'),
+(113181, 0, 2, 0, 62, 0, 100, 0, 65713, 0, 0, 0, 0, 0, 232, @WPID+4230, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Mulverick - On Gossip Select - Start Waypoints'),
 (113181, 0, 3, 4, 108, 0, 100, 0, 97, @WPID+4230, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13181, 20, 0,0,0,0,0,0,            'Wing Commander Mulverick - On Waypoint Reached - Set Visible'),
 (113181, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13181, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Mulverick - On Waypoint Reached - Reset Faction'),
 (113181, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Mulverick - On Waypoint Reached - Set Invisible'),
@@ -2728,8 +2728,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113181, 0, 7, 0, 0, 0, 100, 0, 4100, 9300, 10200, 17900, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Mulverick - In Combat - Cast Strike'),
 (113181, 0, 8, 0, 0, 0, 100, 0, 1700, 10300, 6000, 15400, 0, 0, 11, 15572, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Wing Commander Mulverick - In Combat - Cast Sunder Armor'),
 (113437, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14029, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Ichman - On Gossip Hello - Quest Credit'),
-(113437, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Ichman - On Gossip Hello - Remove Unit Flags'),
-(113437, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+3210, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Ichman - On Gossip Hello - Start Waypoints'),
+(113437, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Ichman - On Gossip Hello - Remove Unit Flags'),
+(113437, 0, 2, 0, 62, 0, 100, 0, 65714, 0, 0, 0, 0, 0, 232, @WPID+3210, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Ichman - On Gossip Select - Start Waypoints'),
 (113437, 0, 3, 4, 108, 0, 100, 0, 91, @WPID+3210, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13437, 20, 0,0,0,0,0,0,            'Wing Commander Ichman - On Waypoint Reached - Set Visible'),
 (113437, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13437, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Ichman - On Waypoint Reached - Reset Faction'),
 (113437, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Ichman - On Waypoint Reached - Set Invisible'),
@@ -2739,8 +2739,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113437, 0, 9, 0, 108, 0, 100, 0, 3, @WPID+3210, 0, 0, 0, 0, 11, 16380, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Ichman - Out of Combat - Cast Greater Invisibility'),
 (113437, 0, 10, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 28, 16380, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Ichman - On Aggro - Remove Aura Greater Invisibility'),
 (113438, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14030, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Slidore - On Gossip Hello - Quest Credit'),
-(113438, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Slidore - On Gossip Hello - Remove Unit Flags'),
-(113438, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+3220, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Slidore - On Gossip Hello - Start Waypoints'),
+(113438, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Slidore - On Gossip Hello - Remove Unit Flags'),
+(113438, 0, 2, 0, 62, 0, 100, 0, 65715, 0, 0, 0, 0, 0, 232, @WPID+3220, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Slidore - On Gossip Select - Start Waypoints'),
 (113438, 0, 3, 4, 108, 0, 100, 0, 64, @WPID+3220, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13438, 20, 0,0,0,0,0,0,            'Wing Commander Slidore - On Waypoint Reached - Set Visible'),
 (113438, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13438, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Slidore - On Waypoint Reached - Reset Faction'),
 (113438, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Slidore - On Waypoint Reached - Set Invisible'),
@@ -2748,8 +2748,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113438, 0, 7, 0, 0, 0, 100, 0, 4000, 6000, 7000, 9000, 0, 0, 11, 15580, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Wing Commander Slidore - In Combat - Cast Strike'),
 (113438, 0, 8, 0, 0, 0, 100, 0, 9000, 13000, 18000, 34000, 0, 0, 11, 16509, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,  'Wing Commander Slidore - In Combat - Cast Rend'),
 (113439, 0, 0, 1, 64, 0, 100, 0, 0, 0, 0, 0, 0, 0, 33, 14031, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,                'Wing Commander Vipore - On Gossip Hello - Quest Credit'),
-(113439, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Vipore - On Gossip Hello - Remove Unit Flags'),
-(113439, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, @WPID+3230, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Wing Commander Vipore - On Gossip Hello - Start Waypoints'),
+(113439, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 258, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Wing Commander Vipore - On Gossip Hello - Remove Unit Flags'),
+(113439, 0, 2, 0, 62, 0, 100, 0, 65716, 0, 0, 0, 0, 0, 232, @WPID+3230, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Wing Commander Vipore - On Gossip Select - Start Waypoints'),
 (113439, 0, 3, 4, 108, 0, 100, 0, 76, @WPID+3230, 0, 0, 0, 0, 47, 1, 0,0,0,0,0, 11, 13439, 20, 0,0,0,0,0,0,            'Wing Commander Vipore - On Waypoint Reached - Set Visible'),
 (113439, 0, 4, 5, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 13439, 20, 0, 0, 0, 0, 0, 0,               'Wing Commander Vipore - On Waypoint Reached - Reset Faction'),
 (113439, 0, 5, 6, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Wing Commander Vipore - On Waypoint Reached - Set Invisible'),
@@ -2849,8 +2849,6 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (-(@CGUID+339), 0, 2, 0, 0, 0, 100, 0, 0, 2000, 4000, 5000, 0, 0, 11, 22088, 0, 0, 0, 0, 0, 2, 0,0,0,0,0,0,0,0,        'Wing Commander Vipore (strike) - In Combat - Cast Fireball'),
 (-(@CGUID+339), 0, 3, 0, 0, 0, 100, 0, 8000, 8000, 7500, 7500, 0, 0, 11, 15285, 0, 0, 0, 0, 0, 2, 0,0,0,0,0,0,0,0,     'Wing Commander Vipore (strike) - In Combat - Cast Fireball Volley'),
 (-(@CGUID+339), 0, 4, 0, 0, 0, 100, 0, 13000, 13000, 9000, 9000, 0, 0, 11, 21188, 0, 0, 0, 0, 0, 2, 0,0,0,0,0,0,0,0,   'Wing Commander Vipore (strike) - In Combat - Cast Stun Bomb Attack');
-
-
 
 UPDATE `creature_template` SET `flags_extra` = flags_extra|134217728 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439); -- CREATURE_FLAG_EXTRA_DONT_OVERRIDE_SAI_ENTRY
 
@@ -3076,11 +3074,140 @@ UPDATE `creature_template` SET `gossip_menu_id` = 65701 WHERE `entry` = 113441; 
 UPDATE `creature_template` SET `gossip_menu_id` = 65702 WHERE `entry` = 113577; -- Stormpike Ram Rider Commander
 UPDATE `creature_template` SET `minlevel` = 60, `maxlevel` = 61 WHERE `entry` = 22726; -- Alterac Ram (1)
 
-UPDATE `creature_template` SET `gossip_menu_id` = 0, `npcflag` = 2 WHERE `entry` IN (13179, 13180, 13181, 13437, 13438, 13439, 22721, 31828, 22697, 31826, 22598, 31825, 22597, 32766, 22698, 31824, 22722, 31823, 37484, 37480);
--- UPDATE `creature_template` SET `gossip_menu_id` = 0, `npcflag` = 3 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439, 122721, 131828, 122697, 131826, 122598, 131825, 122597, 132766, 122698, 131824, 122722, 131823); -- todo: wing commanders gossip
--- Ichman = gossip 5146
--- Vipore = gossip 5147
 
+/* Gossip Menus */
+
+-- Wing Commanders at base currently don't have the gossip. todo: they should get gossip when the airstrike is ready
+UPDATE `creature_template` SET `gossip_menu_id` = 0, `npcflag` = 2 WHERE `entry` IN 
+(13179, 13180, 13181, 13437, 13438, 13439, 22721, 31828, 22697, 31826, 22598, 31825, 22597, 32766, 22698, 31824, 22722, 31823, 37484, 37480);
+
+UPDATE `creature_template` SET `gossip_menu_id` = 65711, `npcflag` = 3 WHERE `entry` IN (113179,122721,131828); -- Wing Commander Guse
+UPDATE `creature_template` SET `gossip_menu_id` = 65712, `npcflag` = 3 WHERE `entry` IN (113180,122697,131826); -- Wing Commander Jeztor
+UPDATE `creature_template` SET `gossip_menu_id` = 65713, `npcflag` = 3 WHERE `entry` IN (113181,122598,131825); -- Wing Commander Mulverick
+UPDATE `creature_template` SET `gossip_menu_id` = 65714, `npcflag` = 3 WHERE `entry` IN (113437, 122597, 132766); -- Wing Commander Ichman
+UPDATE `creature_template` SET `gossip_menu_id` = 65715, `npcflag` = 3 WHERE `entry` IN (113438, 122698, 131824); -- Wing Commander Slidore
+UPDATE `creature_template` SET `gossip_menu_id` = 65716, `npcflag` = 3 WHERE `entry` IN (113439, 122722, 131823); -- Wing Commander Vipore
+
+DELETE FROM `gossip_menu` WHERE `MenuID` BETWEEN 65711 AND 65716;
+INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
+(65711, 65711),
+(65712, 65712),
+(65713, 65713),
+(65714, 65714),
+(65715, 65715),
+(65716, 65716);
+
+-- npc text on rescue
+DELETE FROM `npc_text` WHERE `ID` BETWEEN 65711 AND 65716;
+INSERT INTO `npc_text` (`ID`, `text0_0`, `BroadcastTextID0`, `Probability0`) VALUES 
+(65711, 'Good work, soldier. I need to get back to base camp! Will you cover me?', 8635, 1),
+(65712, 'About damn time someone came. What took you so long? Ah, nevermind. Cover me, soldier. I gotta make it back to base!', 8637, 1),
+(65713, 'I need a few good wing men to get me out of here safely and back to base.', 8647, 1),
+(65714, 'I was shot down by that reckless fool, Mulverick. I fear that if I do not make it back to base, all will be lost! Mulverick and his squad of War Riders must be stopped!', 8763, 1),
+(65715, 'I heard their mocking laughter as my gryphon crashed and burned, $c.$B$B"Slidore, you stink!" They shouted.$B$BNobody talks to Slidore that way! Help me get out of here so that I can show them who the real stinker is!', 8767, 1),
+(65716, 'I can\'t believe it... I was doing a routine recon mission over the central DMZ when all hell broke loose. I saw the Horde Wing Commander, Mulverick, take out both Ichman and Slidore! Anger took hold of me and I broke from my wing man and drove that show-off, Mulverick, down. Unfortunately, he clipped my gryphon before he crashed, forcing me down as well. I ended up captured by these savages.$B$BI have to get back to base! Help!', 8765, 1);
+
+-- gossip text on rescue
+DELETE FROM `gossip_menu_option` WHERE `MenuID` BETWEEN 65711 AND 65716;
+INSERT INTO `gossip_menu_option` (`MenuID`, `OptionID`, `OptionIcon`, `OptionText`, `OptionBroadcastTextID`, `OptionType`, `OptionNpcFlag`, `ActionMenuID`, `ActionPoiID`, `BoxCoded`, `BoxMoney`, `BoxText`, `BoxBroadcastTextID`, `VerifiedBuild`) VALUES
+(65711, 0, 0, 'I got your back, Guse.', 8636, 1, 1, 0, 0, 0, 0, '', 0, 0),
+(65712, 0, 0, 'You can count on me, Jeztor.', 8638, 1, 1, 0, 0, 0, 0, '', 0, 0),
+(65713, 0, 0, 'I will be your wingman!', 8648, 1, 1, 0, 0, 0, 0, '', 0, 0),
+(65714, 0, 0, 'I got your back, Ichman. GO GO GO!', 8764, 1, 1, 0, 0, 0, 0, '', 0, 0),
+(65715, 0, 0, 'I got you covered, Vipore. Move out!', 8766, 1, 1, 0, 0, 0, 0, '', 0, 0),
+(65716, 0, 0, 'I got your back, Slidore, but to be honest, you do stink. Take a shower, man.', 8768, 1, 1, 0, 0, 0, 0, '', 0, 0);
+
+/* todo: npc text when airstrike is ready; currently the beacon is given to the player automatically
+(8659, 0, '', 'The fleet is ready, $n. You must take this beacon and place it at the eastern crater of the central battlezone. Defend the beacon from attackers until the fleet is able to lock on to its coordinates!', 1, 1, 0, 0, 0, 0, 0, 0, 1, 18019)
+(8668, 0, '', 'The fleet is ready, $n. You must take this beacon and place it at the western crater of the central battlezone. Defend the beacon from attackers until the fleet is able to lock on to its coordinates!', 1, 0, 0, 0, 0, 0, 0, 0, 1, 18019)
+(8670, 0, 'The time has come to prove your worth as a wing man, $n. Take this beacon and plant it dead center of the Snowfall graveyard. Defend it until my fleet arrives.$B$B<Mulverick salutes.>', '', 1, 1, 113, 0, 0, 0, 0, 0, 1, 18019)
+--
+(8795, 0, '$n! Finally!$B$BYou must take this beacon and plant it in the eastern crater of the central battle grounds. My flight will attack when the beacon beams its coordinates!', '', 1, 5, 0, 0, 0, 0, 0, 0, 1, 18019)
+(8798, 0, 'The gryphons are ready to strike, $n! You must take this beacon and plant it in the western crater of the central battlegrounds.$B$BDo this and the battle is ours!', '', 1, 5, 0, 0, 0, 0, 0, 0, 1, 18019)
+(8792, 0, 'Pay attention, soldier! You need to take this beacon to the Snowfall graveyard and plant it! Protect it long enough so that my gryphon can lock on.$B$BIf my gryphon gets a solid strike location, Mulv and his crew will be humiliated!', '', 1, 1, 11, 0, 0, 0, 0, 0, 1, 18019);
+*/
+
+/* todo: gossip text for beacon accept; currently the beacon is given to the player automatically
+(8667, 0, 'I\'ll get that beacon to the crater safely, Guse. You can count on me!', 'I\'ll get that beacon to the crater safely, Guse. You can count on me!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8669, 0, 'Consider it done, Jeztor. Give me a beacon.', 'Consider it done, Jeztor. Give me a beacon.', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8671, 0, 'I\'m ready to plant the beacon, Mulv. Give me a beacon.', 'I\'m ready to plant the beacon, Mulv. Give me a beacon.', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+--
+(8793, 0, 'I\'m your man, Ich. Give me a beacon!', 'I\'m your man, Ich. Give me a beacon!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8796, 0, 'Give me the beacon, Slidore! Also, you still stink!', 'Give me the beacon, Slidore! Also, you still stink!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8799, 0, 'I am ready to rock, Vipore! Give me a beacon.', 'I am ready to rock, Vipore! Give me a beacon.', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019);
+*/
+
+DELETE FROM `creature_text` WHERE `CreatureID` IN (113179, 113180, 113181, 113437, 113438, 113439);
+INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES 
+--
+(113179, 0, 1, '', 12, 7, 100, 0, 0, 0, 8604, 0, 'Guse - On Rescue'),
+(113179, 0, 2, '', 12, 7, 100, 0, 0, 0, 8605, 0, 'Guse - On Return to Base'),
+(113179, 0, 3, '', 14, 7, 100, 0, 0, 0, 8673, 0, 'Guse - On Airstrike Ready'),
+(113179, 0, 4, '', 14, 7, 100, 0, 0, 0, 10339, 0, 'Guse - On Visible in Field of Strife'),
+--
+(113180, 0, 1, '', 12, 7, 100, 0, 0, 0, 8606, 0,  'Jeztor - On Rescue'),
+(113180, 0, 2, '', 12, 7, 100, 0, 0, 0, 8607, 0,  'Jeztor - On Return to Base'),
+(113180, 0, 3, '', 14, 7, 100, 0, 0, 0, 8674, 0,  'Jeztor - On Airstrike Ready'),
+(113180, 0, 4, '', 14, 7, 100, 0, 0, 0, 10343, 0, 'Jeztor - On Visible in Field of Strife'),
+(113180, 0, 5, '', 14, 7, 100, 0, 0, 0, 10342, 0, 'Jeztor - On kill'),
+--
+(113181, 0, 1, '', 12, 7, 100, 0, 0, 0, 8609, 0,  'Mulverick - On Rescue'),
+(113181, 0, 2, '', 12, 7, 100, 0, 0, 0, 8611, 0,  'Mulverick - On Return to Base'),
+(113181, 0, 3, '', 14, 7, 100, 0, 0, 0, 8672, 0,  'Mulverick - On Airstrike Ready'),
+(113181, 0, 4, '', 14, 7, 100, 0, 0, 0, 10347, 0, 'Mulverick - On Visible in Field of Strife'),
+(113181, 0, 5, '', 14, 7, 100, 0, 0, 0, 8610, 0,  'Mulverick - On kill'),
+--
+(113437, 0, 1, '', 12, 7, 100, 0, 0, 0, 8771, 0,  'Ichman - On Rescue'),
+(113437, 0, 2, '', 12, 7, 100, 0, 0, 0, 8772, 0,  'Ichman - On Last Waypoint'), -- Ichman doesn't run all the way back to base
+(113437, 0, 3, '', 14, 7, 100, 0, 0, 0, 8791, 0,  'Ichman - On Airstrike Ready'),
+(113437, 0, 4, '', 14, 7, 100, 0, 0, 0, 10358, 0, 'Ichman - On Visible in Field of Strife'),
+(113437, 0, 5, '', 14, 7, 100, 0, 0, 0, 8773, 0,  'Ichman - On kill'),
+--
+(113438, 0, 1, '', 12, 7, 100, 0, 0, 0, 8769, 0,  'Slidore - On Rescue'),
+(113438, 0, 2, '', 14, 7, 100, 0, 0, 0, 8794, 0,  'Slidore - On Airstrike Ready'),
+(113438, 0, 3, '', 14, 7, 100, 0, 0, 0, 10356, 0, 'Slidore - On Visible in Field of Strife'),
+--
+(113439, 0, 1, '', 12, 7, 100, 0, 0, 0, 8770, 0,  'Vipore - On Rescue'),
+(113439, 0, 2, '', 14, 7, 100, 0, 0, 0, 8797, 0,  'Vipore - On Airstrike Ready'),
+(113439, 0, 3, '', 14, 7, 100, 0, 0, 0, 10357, 0, 'Vipore - On Visible in Field of Strife');
+
+
+DELETE FROM `broadcast_text` WHERE `ID` IN (8604, 8605, 8606, 8607, 8609, 8610, 8611, 8672, 8673, 8674, 8769, 8770, 8771, 8772, 8773, 8791, 8794, 8797, 10339, 10342, 10343, 10347, 10356, 10357, 10358);
+INSERT INTO `broadcast_text` (`ID`, `LanguageID`, `MaleText`, `FemaleText`, `EmoteID1`, `EmoteID2`, `EmoteID3`, `EmoteDelay1`, `EmoteDelay2`, `EmoteDelay3`, `SoundEntriesId`, `EmotesID`, `Flags`, `VerifiedBuild`) VALUES
+-- Guse
+(8604,  7, '', 'Cover me, soldier! I have to make it back to our base and get the fleet prepped for an aerial assault!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8605,  7, '', 'WOOT! Made it!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8673,  7, '', 'War Riders are now ready! Soldiers of the Horde, I need your assistance.', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10339, 7, '', 'Guse is joining the battle! Time to take out the Stormpike filth!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+-- Jeztor
+(8606,  7, '', 'There\'s no time to waste, trooper. I must get back to base immediately! Cover me!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8607,  7, '', 'Let\'s get down to business!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8674,  7, '', 'Jeztor\'s Riders are ready! Soldiers of the Horde, report for duty!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10342, 7, '', 'Jeztor\'s coming for you, Stormpike!', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10343, 7, '', 'Jeztor lives! Time to light up the Valley sky, Commander.', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+-- Mulverick
+(8609,  7, 'I need to get back to my ride. Search and destroy imminent! Cover me! On my six! GO GO GO!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8610,  7, 'I come for you, puny Alliance!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8611,  7, 'Good work, soldier. Now we light the fires and spite their ire!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8672,  7, 'Yeee hawww! Mulverick\'s fleet is ready to rock. All able bodied Horde soldiers need request a beacon and try their damndest to plant it so that my War Riders can home in for the aerial assault.', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10347, 7, 'Incoming aerial support to Dun Baldar! Stormpike bow down!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+-- Ichman
+(8771,  7, 'Just get me close enough to our base and I can channel a teleport!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8772,  7, 'This is far enough! Meet me back at base!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8773,  7, 'You\'re going down, Mulv!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8791,  7, 'Soldiers of Stormpike, come to my aid! The beacon must be planted.', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10358, 7, 'Drek\'Thar, I\'m coming for you!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+-- Slidore
+(8769,  7, 'Cover me, I\'m making a break for it!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8794,  7, 'My flight is ready! Soldiers come to my aid!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10356, 7, 'I\'m coming Frostwolf, and this time you\'re gonna feel the flames!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+-- Vipore
+(8770,  7, 'We\'ve got no time to waste. This is a really long run! Cover me!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(8797,  7, 'Their spirits are restored! The gryphons are ready to strike! Come, soldiers! Come to my side!', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019),
+(10357, 7, 'Senior Wing Commander Vipore, launching. Pray for a swift death, Frostwolf.', '', 0, 0, 0, 0, 0, 0, 0, 0, 1, 18019);
+
+
+-- Cavalry Commanders
 DELETE FROM `gossip_menu` WHERE `MenuID` IN (65701, 65702);
 INSERT INTO `gossip_menu` (`MenuID`, `TextID`) VALUES
 (65701, 65701),
@@ -3096,7 +3223,7 @@ INSERT INTO `npc_text` (`ID`, `text0_0`, `BroadcastTextID0`, `Probability0`) VAL
 (65701, 'We ride on your command!', 8902, 1),
 (65702, 'You have done an exceptional job, soldier! The cavalry is ready to ride on your command.', 8871, 1);
 
--- UPDATE `gossip_menu` SET `TextID` = 6066 WHERE `MenuID` IN (5021, 5124);
+
 UPDATE `gameobject_template` SET `Data0` = 1 WHERE `entry` IN (178465, 178670); -- only 1 player needed for elemental boss summoning ritual
 
 -- Creature Text for NPC_LOKHOLAR_THE_ICE_LORD and NPC_IVUS_THE_FOREST_LORD
