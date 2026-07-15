@@ -78,7 +78,7 @@ void IndividualProgression::ForceUpdateProgressionState(Player* player, Progress
     if (!player || !player->IsInWorld())
         return;
 
-    if (!newState)
+    if (!newState && newState != 0)
         return;
 
     // remove all hidden progression quests first
