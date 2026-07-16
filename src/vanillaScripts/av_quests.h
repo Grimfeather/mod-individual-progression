@@ -101,19 +101,18 @@ struct AVAirFleet
     uint32 questId;
     TeamId team;
     uint8 index;
-    uint32 beaconItem;
     uint32 questGiverEntry;
     char const* commanderName;
 };
 
 std::array<AVAirFleet, 6> constexpr AV_AIR_FLEETS =
 { {
-    { AV_Q_H_COMMANDER1, TEAM_HORDE,    0, ITEM_BEACON_GUSE,      NPC_WING_CMDR_GUSE,      "Guse"      }, // 6825
-    { AV_Q_H_COMMANDER2, TEAM_HORDE,    1, ITEM_BEACON_JEZTOR,    NPC_WING_CMDR_JEZTOR,    "Jeztor"    }, // 6826
-    { AV_Q_H_COMMANDER3, TEAM_HORDE,    2, ITEM_BEACON_MULVERICK, NPC_WING_CMDR_MULVERICK, "Mulverick" }, // 6827
-    { AV_Q_A_COMMANDER3, TEAM_ALLIANCE, 0, ITEM_BEACON_ICHMAN,    NPC_WING_CMDR_ICHMAN,    "Ichman"    }, // 6943
-    { AV_Q_A_COMMANDER1, TEAM_ALLIANCE, 1, ITEM_BEACON_SLIDORE,   NPC_WING_CMDR_SLIDORE,   "Slidore"   }, // 6942
-    { AV_Q_A_COMMANDER2, TEAM_ALLIANCE, 2, ITEM_BEACON_VIPORE,    NPC_WING_CMDR_VIPORE,    "Vipore"    }  // 6941
+    { AV_Q_H_COMMANDER1, TEAM_HORDE,    0, NPC_WING_CMDR_GUSE,      "Guse"      }, // 6825
+    { AV_Q_H_COMMANDER2, TEAM_HORDE,    1, NPC_WING_CMDR_JEZTOR,    "Jeztor"    }, // 6826
+    { AV_Q_H_COMMANDER3, TEAM_HORDE,    2, NPC_WING_CMDR_MULVERICK, "Mulverick" }, // 6827
+    { AV_Q_A_COMMANDER3, TEAM_ALLIANCE, 0, NPC_WING_CMDR_ICHMAN,    "Ichman"    }, // 6943
+    { AV_Q_A_COMMANDER1, TEAM_ALLIANCE, 1, NPC_WING_CMDR_SLIDORE,   "Slidore"   }, // 6942
+    { AV_Q_A_COMMANDER2, TEAM_ALLIANCE, 2, NPC_WING_CMDR_VIPORE,    "Vipore"    }  // 6941
 } };
 
 struct AVSupplyTexts
@@ -197,7 +196,6 @@ struct AVQuestState
 
     // Call of Air: per-team, per-fleet (indexed by AVAirFleet::index)
     std::array<std::array<uint32, 3>, 2> airTurnIns = { { { 0, 0, 0 }, { 0, 0, 0 } } };
-    // std::array<std::array<bool, 3>, 2> beaconIssued = { { { false, false, false }, { false, false, false } } };
 };
 
 #endif // MOD_IP_AV_QUESTS_H
