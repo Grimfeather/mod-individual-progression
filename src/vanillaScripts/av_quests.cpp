@@ -41,7 +41,16 @@ namespace
 
     bool CavalryReady(AVQuestState const& state, TeamId team)
     {
-        return (state.StablesCompleted[team] && state.HarnessesCompleted[team]);
+        return (state.StablesCompleted[team] && state.HidesCompleted[team]);
+    }
+
+    bool AirstrikeReady(AVQuestState const& state, AVAirFleet const& fleet, TeamId /*team*/)
+    {
+        // Use the fleet's configured team to match where turn-ins are recorded.
+        uint32 turnIns = state.airTurnIns[fleet.team][fleet.index];
+        uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.AirStrikeTurnIns", 50);
+
+        return (turnIns >= required);
     }
 
     uint32 SupplyTextId(AVQuestState const& state, TeamId team)
@@ -144,32 +153,30 @@ namespace
 
         state.StablesCompleted[team] = true;
 
-        if (state.HarnessesCompleted[team] == false)
-        {
-            ChatHandler(player->GetSession()).PSendSysMessage("We still need more harnesses, please help the Cavalry Commander.");
-            return;
-        }
+        if (team == TEAM_ALLIANCE)
+            ChatHandler(player->GetSession()).PSendSysMessage("Well done, Alliance! We have enough Alterac Rams in our stables to provide mounts to all of our ram riders!");
+        else
+            ChatHandler(player->GetSession()).PSendSysMessage("Well done, Horde! We have enough Frostwolves in our stables to provide mounts to all of our wolf riders!");
     }
 
-    void HandleHarnessTurnIn(Player* player, AVQuestState& state, TeamId team)
+    void HandleHidesTurnIn(Player* player, AVQuestState& state, TeamId team)
     {
-        uint32 turnIns = ++state.harnessTurnIns[team];
+        uint32 turnIns = ++state.hidesTurnIns[team];
         uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.StablesTurnIns", 10);
 
-        ChatHandler(player->GetSession()).PSendSysMessage("Harness turn-ins: {}/{}", turnIns, required);
+        ChatHandler(player->GetSession()).PSendSysMessage("Hides turn-ins: {}/{}", turnIns, required);
 
         if (turnIns < required)
             return;
 
-        state.HarnessesCompleted[team] = true;
-
-        if (state.StablesCompleted[team] == false)
-        {
-            ChatHandler(player->GetSession()).PSendSysMessage("We still need more mounts, please help the stables.");
-            return;
-        }
+        state.HidesCompleted[team] = true;
 
         bool isAlliance = team == TEAM_ALLIANCE;
+
+        if (isAlliance)
+            ChatHandler(player->GetSession()).PSendSysMessage("We have gathered enough hides from the wolves. Soon, the cavalry will be ready to ride! Speak to me again when we have stabled enough rams.");
+        else
+            ChatHandler(player->GetSession()).PSendSysMessage("We have gathered enough hides from the rams. Soon, the cavalry will be ready to ride! Speak to me again when we have stabled enough wolves.");
 
         uint32 npcEntryQuest = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A : NPC_CAV_CMDR_H;
         uint32 npcEntryPatrol = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A_PATROL : NPC_CAV_CMDR_H_PATROL;
@@ -212,52 +219,57 @@ namespace
 
     void HandleAirStrikeTurnIn(Player* player, AVQuestState& state, AVAirFleet const& fleet)
     {
-        if (state.beaconIssued[fleet.team][fleet.index])
-            return; // strike already called this match; the commander should be hidden anyway
-
         uint32 turnIns = ++state.airTurnIns[fleet.team][fleet.index];
         uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.AirStrikeTurnIns", 50);
-
-        ChatHandler(player->GetSession()).PSendSysMessage("{}'s Fleet: {}/{}", fleet.commanderName, turnIns, required);
 
         if (turnIns < required)
             return;
 
-        // Threshold reached: this turn-in claims the beacon, if the player qualifies.
-        uint32 repFaction = fleet.team == TEAM_HORDE ? AV_FACTION_FROSTWOLF_CLAN : AV_FACTION_STORMPIKE_GUARD;
-        if (player->GetReputationRank(repFaction) < REP_HONORED)
-        {
-            ChatHandler(player->GetSession()).PSendSysMessage(
-                "Wing Commander {} only entrusts the beacon to those Honored with the {}.",
-                fleet.commanderName, fleet.team == TEAM_HORDE ? "Frostwolf Clan" : "Stormpike Guard");
+        if (!AirstrikeReady(state, fleet, fleet.team))
             return;
+
+        AVSummonPos const* posPtr = nullptr;
+        uint32 dummyEntry = 0;
+
+        switch (fleet.questGiverEntry)
+        {
+        case NPC_WING_CMDR_GUSE:
+            posPtr = &NPC_CMDR_POS_GUSE;
+            dummyEntry = NPC_DUMMY_CMDR_GUSE;
+            break;
+        case NPC_WING_CMDR_JEZTOR:
+            posPtr = &NPC_CMDR_POS_JEZTOR;
+            dummyEntry = NPC_DUMMY_CMDR_JEZTOR;
+            break;
+        case NPC_WING_CMDR_MULVERICK:
+            posPtr = &NPC_CMDR_POS_MULV;
+            dummyEntry = NPC_DUMMY_CMDR_MULV;
+            break;
+        case NPC_WING_CMDR_ICHMAN:
+            posPtr = &NPC_CMDR_POS_ICHMAN;
+            dummyEntry = NPC_DUMMY_CMDR_ICHMAN;
+            break;
+        case NPC_WING_CMDR_SLIDORE:
+            posPtr = &NPC_CMDR_POS_SLIDORE;
+            dummyEntry = NPC_DUMMY_CMDR_SLIDORE;
+            break;
+        case NPC_WING_CMDR_VIPORE:
+            posPtr = &NPC_CMDR_POS_VIPORE;
+            dummyEntry = NPC_DUMMY_CMDR_VIPORE;
+            break;
+        default:
+            break;
         }
 
-        ItemPosCountVec dest;
-        if (player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, fleet.beaconItem, 1) != EQUIP_ERR_OK)
-        {
-            ChatHandler(player->GetSession()).PSendSysMessage(
-                "Your bags are full! Make room and complete one more turn-in to receive the beacon.");
-            return;
-        }
+        if (posPtr && dummyEntry)
+            player->SummonCreature(dummyEntry, posPtr->x, posPtr->y, posPtr->z, posPtr->o, TEMPSUMMON_TIMED_DESPAWN, AV_CMDR_LIFETIME_MS);
 
-        Item* beacon = player->StoreNewItem(dest, fleet.beaconItem, true);
-        if (!beacon)
-            return;
-
-        player->SendNewItem(beacon, 1, true, false);
-        state.beaconIssued[fleet.team][fleet.index] = true;
-
-        // The fleet has lifted off: its base-camp commander disappears for the match.
-        if (Creature* commander = player->FindNearestCreature(fleet.questGiverEntry, 100.0f))
+        if (Creature* commander = player->FindNearestCreature(fleet.questGiverEntry, 30.0f))
         {
             commander->SetVisible(false);
             commander->SetFaction(AV_FACTION_FRIENDLY);
+            commander->RemoveNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
         }
-
-        ChatHandler(player->GetSession()).PSendSysMessage(
-            "Wing Commander {} hands you his beacon and takes to the skies! Plant it at the target location.",
-            fleet.commanderName);
     }
 
     void SendSupplyStatus(Player* player, Creature* creature, AVQuestState& state, TeamId team)
@@ -316,7 +328,7 @@ public:
                     player->CompleteQuest(AV_Q_A_STABLES);
             }
         }
-        
+
         return true;
     }
 
@@ -367,10 +379,10 @@ public:
 
             // ----------------- Harnesses -----------------
         case AV_Q_A_HARNESS:
-            HandleHarnessTurnIn(player, state, TEAM_ALLIANCE);
+            HandleHidesTurnIn(player, state, TEAM_ALLIANCE);
             break;
         case AV_Q_H_HARNESS:
-            HandleHarnessTurnIn(player, state, TEAM_HORDE);
+            HandleHidesTurnIn(player, state, TEAM_HORDE);
             break;
 
             // ---------------- Air strikes (Call of Air) ----------------
@@ -404,7 +416,7 @@ public:
     bool CanCreatureGossipHello(Player* player, Creature* creature) override
     {
         TeamId team;
-        AVQuestState* state = GetState(player, creature, team);
+        AVQuestState* state = GetStateScraps(player, creature, team);
         if (!state)
             return false;
 
@@ -416,36 +428,41 @@ public:
     bool CanCreatureGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
     {
         TeamId team;
-        AVQuestState* state = GetState(player, creature, team);
+
+        AVQuestState* state = GetStateScraps(player, creature, team);
+
         if (!state)
             return false;
 
-        // The supplies question (the only DB gossip option on these NPCs;
-        // DB-driven options arrive with action = OptionType).
+        // DB-provided option selected -> show scripted supply/airstrike menu depending on NPC.
         if (action == GOSSIP_OPTION_GOSSIP)
         {
-            SendSupplyStatus(player, creature, *state, team);
-            return true;
+            if (state)
+            {
+                SendSupplyStatus(player, creature, *state, team);
+                return true;
+            }
+            return false;
         }
 
-        // The script-added upgrade button.
+        // Scrap upgrade action unchanged.
         if (action == AV_GOSSIP_ACTION_UPGRADE)
         {
-            if (UpgradeReady(*state, team))
+            if (state && UpgradeReady(*state, team))
             {
                 ++state->defenderTier[team];
                 UpgradeDefenders(player->GetBattleground(), team, state->defenderTier[team]);
                 creature->SetNpcFlag(UNIT_NPC_FLAG_QUESTGIVER); // resume turn-ins
             }
-            SendSupplyStatus(player, creature, *state, team); // show the new status
+            if (state)
+                SendSupplyStatus(player, creature, *state, team); // show the new status
             return true;
         }
 
         return false;
     }
-
 private:
-    static AVQuestState* GetState(Player* player, Creature* creature, TeamId& team)
+    static AVQuestState* GetStateScraps(Player* player, Creature* creature, TeamId& team)
     {
         uint32 entry = creature->GetEntry();
         if (entry != NPC_MURGOT_DEEPFORGE && entry != NPC_SMITH_REGZAR)

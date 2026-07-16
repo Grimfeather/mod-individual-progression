@@ -93,6 +93,12 @@ UPDATE `creature_template` SET `minlevel` = 80, `maxlevel` = 80 WHERE `entry` = 
 UPDATE `creature_template` SET `minlevel` = 70, `maxlevel` = 70 WHERE `entry` = 22535; -- Champion Irondeep Guard (1)
 UPDATE `creature_template` SET `minlevel` = 80, `maxlevel` = 80 WHERE `entry` = 31936; -- Champion Irondeep Guard (2)
 
+-- add Morloch missing text
+DELETE FROM `creature_text` WHERE `CreatureID` IN (11657, 11677);
+INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
+(11657, 0, 0, 'I am here! And the Irondeep Mine is... MINE!', 12, 0, 100, 0, 0, 0, 10024, 0, 'Morloch'),
+(11677, 0, 0, 'Snivvle is here!  Snivvle claims the Coldtooth mine!', 12, 0, 100, 0, 0, 0, 10025, 0, 'Taskmaster Snivvle');
+
 DELETE FROM `creature_template_addon` WHERE `entry` IN 
 (110987, 111600, 111602, 113080, 113081, 113098, 113099, 113396, 113397, 122750, 122747, 122748, 122743, 122746, 122749, 122741, 122744, 122745, 
  132021, 132018, 132019, 132014, 132020, 132012, 132015, 132016, 132017, 132143, 132139, 132140, 131948, 131947, 131946, 131951, 131950, 131949, 
