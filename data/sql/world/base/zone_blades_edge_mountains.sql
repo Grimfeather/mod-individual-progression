@@ -60,6 +60,29 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (24039, 0, 1, 2, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 17321, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Sundered Ghost - On Update - Cast Spirit Spawn-in'),
 (24039, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 21, 50, 0, 0, 0, 0, 0, 0, 0,                     'Sundered Ghost - On Update - Attack Start');
 
+-- fix summon event: Vim\'gol the Vile
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (22911, 23040, 23081);
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2308101);
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
+`event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
+--
+(22911, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                       'Vim\'gol the Vile - On Aggro - Say Text 0'),
+(22911, 0, 1, 0, 6, 0, 100, 512, 0, 0, 0, 0, 0, 0, 11, 39862, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Vim\'gol the Vile - On Death - Cast Vim\'gol: Summon Vim\'gol\'s Vile Grimoire Chest'),
+(22911, 0, 2, 0, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 11, 40545, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Vim\'gol the Vile - On 50% HP - Cast Unholy Growth (No repeat)'),
+(22911, 0, 3, 0, 23, 0, 100, 1, 40545, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Vim\'gol the Vile - On Has Aura - Say Text 1'),
+(22911, 0, 4, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Vim\'gol the Vile - On Respawn - Set Invisible'),
+(22911, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Vim\'gol the Vile - On Respawn - Set Faction Friendly'),
+--
+(23040, 0, 0, 0, 101, 0, 100, 512, 1, 3, 4000, 4000, 4000, 0, 45, 1, 1, 0, 0, 0, 0, 11, 23081, 50, 0, 0, 0, 0, 0, 0,   'Vim\'gols Circle Bunny - On Near Player - Set Data 1-1 for Summon Bunny'),
+--
+(23081, 0, 0, 1, 38, 0, 100, 0, 1, 1, 60000, 60000, 0, 0, 11, 39921, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         'Vim\'gols Summon Bunny - On Data Set - Cast pentagram beam'),
+(23081, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 2308101, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Vim\'gols Summon Bunny - On Data Set - Run Script 2308101'),
+--
+(2308101, 9, 1, 0, 0, 0, 100, 0, 4000, 4000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 11, 22911, 20, 0, 0, 0, 0, 0, 0,        'Script9 - Vim\'gols Summon Bunny - Set Visible Vim\'gol the Vile'),
+(2308101, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 11, 22911, 20, 0, 0, 0, 0, 0, 0,               'Script9 - Vim\'gols Summon Bunny - Reset Faction Friendly Vim\'gol the Vile');
+
 -- fix worldserver error, wrong target type
 UPDATE `smart_scripts` SET `target_type` = 1 WHERE `entryorguid` = 19747 AND `event_type` = 4 AND `id` = 15;
 
