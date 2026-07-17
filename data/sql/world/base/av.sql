@@ -9,13 +9,13 @@ SET @WPID   := 6570000;
 DELETE FROM `creature_formations` WHERE `leaderGUID` IN
 (@CGUID+610, @CGUID+613, @CGUID+615, @CGUID+617, @CGUID+619, @CGUID+621, @CGUID+623, @CGUID+625, @CGUID+627, @CGUID+630, @CGUID+638, @CGUID+639,
  @CGUID+701, @CGUID+703, @CGUID+705, @CGUID+707, @CGUID+709, @CGUID+711, @CGUID+713, @CGUID+714, @CGUID+715, @CGUID+716, @CGUID+717, @CGUID+718,
- @CGUID+720, @CGUID+722, @CGUID+724, @CGUID+726, @CGUID+728, @CGUID+730, @CGUID+732,
+ @CGUID+720, @CGUID+722, @CGUID+724, @CGUID+726, @CGUID+728, @CGUID+730, @CGUID+732, @CGUID+745,
  @CGUID+670, @CGUID+673, @CGUID+675, @CGUID+677, @CGUID+679, @CGUID+681, @CGUID+683, @CGUID+685, @CGUID+687, @CGUID+690, @CGUID+698, @CGUID+699, -- TBC
  @CGUID+751, @CGUID+753, @CGUID+755, @CGUID+757, @CGUID+759, @CGUID+761, @CGUID+763, @CGUID+764, @CGUID+765, @CGUID+766, @CGUID+767, @CGUID+768,
- @CGUID+770, @CGUID+772, @CGUID+774, @CGUID+776, @CGUID+778, @CGUID+780, @CGUID+782,
+ @CGUID+770, @CGUID+772, @CGUID+774, @CGUID+776, @CGUID+778, @CGUID+780, @CGUID+782, @CGUID+795,
  @CGUID+810, @CGUID+813, @CGUID+815, @CGUID+817, @CGUID+819, @CGUID+821, @CGUID+823, @CGUID+825, @CGUID+827, @CGUID+830, @CGUID+838, @CGUID+839, -- WOTLK
  @CGUID+851, @CGUID+853, @CGUID+855, @CGUID+857, @CGUID+859, @CGUID+861, @CGUID+863, @CGUID+864, @CGUID+865, @CGUID+866, @CGUID+867, @CGUID+868,
- @CGUID+870, @CGUID+872, @CGUID+874, @CGUID+876, @CGUID+878, @CGUID+880, @CGUID+882);
+ @CGUID+870, @CGUID+872, @CGUID+874, @CGUID+876, @CGUID+878, @CGUID+880, @CGUID+882, @CGUID+895);
 
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES
 --
@@ -150,6 +150,9 @@ INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, 
 (@CGUID+732, @CGUID+732, 0, 0, 515, 0, 0),
 (@CGUID+732, @CGUID+733, 3, 135, 515, 0, 0),
 (@CGUID+732, @CGUID+734, 3, 225, 515, 0, 0),
+(@CGUID+745, @CGUID+745, 0, 0, 515, 0, 0),
+(@CGUID+745, @CGUID+746, 3, 135, 515, 0, 0),
+(@CGUID+745, @CGUID+747, 3, 225, 515, 0, 0),
 --
 (@CGUID+751, @CGUID+751, 0, 0, 515, 0, 0), -- horde, TBC
 (@CGUID+751, @CGUID+752, 3, 270, 515, 0, 0),
@@ -195,6 +198,9 @@ INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, 
 (@CGUID+782, @CGUID+782, 0, 0, 515, 0, 0),
 (@CGUID+782, @CGUID+783, 3, 135, 515, 0, 0),
 (@CGUID+782, @CGUID+784, 3, 225, 515, 0, 0),
+(@CGUID+795, @CGUID+795, 0, 0, 515, 0, 0),
+(@CGUID+795, @CGUID+796, 3, 135, 515, 0, 0),
+(@CGUID+795, @CGUID+797, 3, 225, 515, 0, 0),
 --
 (@CGUID+851, @CGUID+851, 0, 0, 515, 0, 0), -- horde, WOTLK
 (@CGUID+851, @CGUID+852, 3, 270, 515, 0, 0),
@@ -239,19 +245,22 @@ INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, 
 (@CGUID+880, @CGUID+881, 3, 270, 515, 0, 0),
 (@CGUID+882, @CGUID+882, 0, 0, 515, 0, 0),
 (@CGUID+882, @CGUID+883, 3, 135, 515, 0, 0),
-(@CGUID+882, @CGUID+884, 3, 225, 515, 0, 0);
+(@CGUID+882, @CGUID+884, 3, 225, 515, 0, 0),
+(@CGUID+895, @CGUID+895, 0, 0, 515, 0, 0),
+(@CGUID+895, @CGUID+896, 3, 135, 515, 0, 0),
+(@CGUID+895, @CGUID+897, 3, 225, 515, 0, 0);
 
 DELETE FROM `creature_addon` WHERE `guid` IN 
 (@CGUID+301, @CGUID+307, @CGUID+309, @CGUID+310, @CGUID+312, @CGUID+408, @CGUID+409, @CGUID+412,
- @CGUID+606, @CGUID+607, @CGUID+608, @CGUID+609, @CGUID+610, @CGUID+613, @CGUID+615, @CGUID+617, @CGUID+619, @CGUID+621, @CGUID+623, @CGUID+625, 
- @CGUID+627, @CGUID+629, @CGUID+630, @CGUID+638, @CGUID+639, @CGUID+701, @CGUID+703, @CGUID+705, @CGUID+707, @CGUID+709, @CGUID+711, @CGUID+713, 
- @CGUID+714, @CGUID+715, @CGUID+716, @CGUID+717, @CGUID+720, @CGUID+722, @CGUID+724, @CGUID+726, @CGUID+728, @CGUID+730, @CGUID+732,
- @CGUID+666, @CGUID+667, @CGUID+668, @CGUID+669, @CGUID+670, @CGUID+673, @CGUID+675, @CGUID+677, @CGUID+679, @CGUID+681, @CGUID+683, @CGUID+685, -- TBC
- @CGUID+687, @CGUID+689, @CGUID+690, @CGUID+698, @CGUID+699, @CGUID+751, @CGUID+753, @CGUID+755, @CGUID+757, @CGUID+759, @CGUID+761, @CGUID+763, 
- @CGUID+764, @CGUID+765, @CGUID+766, @CGUID+767, @CGUID+770, @CGUID+772, @CGUID+774, @CGUID+776, @CGUID+778, @CGUID+780, @CGUID+782,
- @CGUID+806, @CGUID+807, @CGUID+808, @CGUID+809, @CGUID+810, @CGUID+813, @CGUID+815, @CGUID+817, @CGUID+819, @CGUID+821, @CGUID+823, @CGUID+825, -- WOTLK
- @CGUID+827, @CGUID+829, @CGUID+830, @CGUID+838, @CGUID+839, @CGUID+851, @CGUID+853, @CGUID+855, @CGUID+857, @CGUID+859, @CGUID+861, @CGUID+863, 
- @CGUID+864, @CGUID+865, @CGUID+866, @CGUID+867, @CGUID+870, @CGUID+872, @CGUID+874, @CGUID+876, @CGUID+878, @CGUID+880, @CGUID+882);
+ @CGUID+606, @CGUID+607, @CGUID+608, @CGUID+609, @CGUID+610, @CGUID+613, @CGUID+615, @CGUID+617, @CGUID+619, @CGUID+621, @CGUID+623, @CGUID+625,
+ @CGUID+627, @CGUID+629, @CGUID+630, @CGUID+638, @CGUID+639, @CGUID+701, @CGUID+703, @CGUID+705, @CGUID+707, @CGUID+709, @CGUID+711, @CGUID+713,
+ @CGUID+714, @CGUID+715, @CGUID+716, @CGUID+717, @CGUID+720, @CGUID+722, @CGUID+724, @CGUID+726, @CGUID+728, @CGUID+730, @CGUID+732, @CGUID+745, @CGUID+748, -- Vanilla
+ @CGUID+666, @CGUID+667, @CGUID+668, @CGUID+669, @CGUID+670, @CGUID+673, @CGUID+675, @CGUID+677, @CGUID+679, @CGUID+681, @CGUID+683, @CGUID+685,
+ @CGUID+687, @CGUID+689, @CGUID+690, @CGUID+698, @CGUID+699, @CGUID+751, @CGUID+753, @CGUID+755, @CGUID+757, @CGUID+759, @CGUID+761, @CGUID+763,
+ @CGUID+764, @CGUID+765, @CGUID+766, @CGUID+767, @CGUID+770, @CGUID+772, @CGUID+774, @CGUID+776, @CGUID+778, @CGUID+780, @CGUID+782, @CGUID+795, @CGUID+798, -- TBC
+ @CGUID+806, @CGUID+807, @CGUID+808, @CGUID+809, @CGUID+810, @CGUID+813, @CGUID+815, @CGUID+817, @CGUID+819, @CGUID+821, @CGUID+823, @CGUID+825,
+ @CGUID+827, @CGUID+829, @CGUID+830, @CGUID+838, @CGUID+839, @CGUID+851, @CGUID+853, @CGUID+855, @CGUID+857, @CGUID+859, @CGUID+861, @CGUID+863,
+ @CGUID+864, @CGUID+865, @CGUID+866, @CGUID+867, @CGUID+870, @CGUID+872, @CGUID+874, @CGUID+876, @CGUID+878, @CGUID+880, @CGUID+882, @CGUID+895, @CGUID+898); -- WOTLK
 
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES 
 -- alliance
@@ -337,6 +346,8 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 (@CGUID+728, @WPID+7280, 0, 0, 0, 0, 0, NULL),
 (@CGUID+730, @WPID+7300, 0, 0, 0, 0, 0, NULL),
 (@CGUID+732, @WPID+7320, 0, 0, 0, 0, 0, NULL),
+(@CGUID+745, @WPID+7450, 0, 0, 0, 0, 0, NULL),
+(@CGUID+748, @WPID+7480, 0, 0, 0, 0, 0, NULL),
 --
 (@CGUID+751, @WPID+7010, 0, 0, 0, 0, 0, NULL), -- TBC
 (@CGUID+753, @WPID+7030, 0, 0, 0, 0, 0, NULL),
@@ -356,6 +367,8 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 (@CGUID+778, @WPID+7280, 0, 0, 0, 0, 0, NULL),
 (@CGUID+780, @WPID+7300, 0, 0, 0, 0, 0, NULL),
 (@CGUID+782, @WPID+7320, 0, 0, 0, 0, 0, NULL),
+(@CGUID+795, @WPID+7450, 0, 0, 0, 0, 0, NULL),
+(@CGUID+798, @WPID+7480, 0, 0, 0, 0, 0, NULL),
 --
 (@CGUID+851, @WPID+7010, 0, 0, 0, 0, 0, NULL), -- WOTLK
 (@CGUID+853, @WPID+7030, 0, 0, 0, 0, 0, NULL),
@@ -374,7 +387,9 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 (@CGUID+876, @WPID+7260, 0, 0, 0, 0, 0, NULL),
 (@CGUID+878, @WPID+7280, 0, 0, 0, 0, 0, NULL),
 (@CGUID+880, @WPID+7300, 0, 0, 0, 0, 0, NULL),
-(@CGUID+882, @WPID+7320, 0, 0, 0, 0, 0, NULL);
+(@CGUID+882, @WPID+7320, 0, 0, 0, 0, 0, NULL),
+(@CGUID+895, @WPID+7450, 0, 0, 0, 0, 0, NULL),
+(@CGUID+898, @WPID+7480, 0, 0, 0, 0, 0, NULL);
 
 DELETE FROM `waypoint_data` WHERE `id` IN (@WPID+3010, @WPID+3070, @WPID+3090, @WPID+3100, @WPID+3120, @WPID+4080, @WPID+4090, @WPID+4120);
 INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES 
@@ -905,8 +920,8 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 
 -- horde
 DELETE FROM `waypoint_data` WHERE `id` IN
-(@WPID+7010, @WPID+7030, @WPID+7050, @WPID+7070, @WPID+7090, @WPID+7110, @WPID+7130, @WPID+7140, @WPID+7150, 
- @WPID+7160, @WPID+7170, @WPID+7200, @WPID+7220, @WPID+7240, @WPID+7260, @WPID+7280, @WPID+7300, @WPID+7320);
+(@WPID+7010, @WPID+7030, @WPID+7050, @WPID+7070, @WPID+7090, @WPID+7110, @WPID+7130, @WPID+7140, @WPID+7150,  @WPID+7160,
+ @WPID+7170, @WPID+7200, @WPID+7220, @WPID+7240, @WPID+7260, @WPID+7280, @WPID+7300, @WPID+7320, @WPID+7450, @WPID+7480);
 
 INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES 
 --
@@ -1231,7 +1246,31 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+7320, 22, -571.38, -292.436, 49.32, 1.19528, 0, 0, 0, 100, 0),
 (@WPID+7320, 23, -556.252, -275.628, 52.1857, 0.82222, 0, 0, 0, 100, 0),
 (@WPID+7320, 24, -539.345, -255.275, 55.6822, 0.881125, 0, 0, 0, 100, 0),
-(@WPID+7320, 25, -537.784, -245.572, 57.0883, 1.41127, 0, 0, 0, 100, 0);
+(@WPID+7320, 25, -537.784, -245.572, 57.0883, 1.41127, 0, 0, 0, 100, 0),
+--
+(@WPID+7450, 1, -1383.49, -546.799, 54.9423, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 2, -1405.66, -566.04, 55.606, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 3, -1422.72, -582.533, 53.0462, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 4, -1435.31, -591.088, 50.9058, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 5, -1434.78, -603.581, 51.2421, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 6, -1435.31, -591.088, 50.9058, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 7, -1422.72, -582.533, 53.0462, 0, 0, 0, 0, 100, 0),
+(@WPID+7450, 8, -1405.66, -566.04, 55.606, 0, 0, 0, 0, 100, 0),
+--
+(@WPID+7480, 1, -1489.49, -698.809, 46.7333, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 2, -1485.85, -683.43, 47.6697, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 3, -1489.75, -664.575, 49.3815, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 4, -1493.88, -651.322, 48.5963, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 5, -1491.56, -632.823, 47.5012, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 6, -1472.89, -615.974, 49.8203, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 7, -1460.35, -607.107, 51.3541, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 8, -1447.87, -607.473, 51.196, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 9, -1460.35, -607.107, 51.3541, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 10, -1472.89, -615.974, 49.8203, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 11, -1491.56, -632.823, 47.5012, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 12, -1493.88, -651.322, 48.5963, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 13, -1489.75, -664.575, 49.3815, 0, 0, 0, 0, 100, 0),
+(@WPID+7480, 14, -1485.85, -683.43, 47.6697, 0, 0, 0, 0, 100, 0);
 
 DELETE FROM `creature_formations` WHERE `leaderGUID` IN (@CGUID+521, @CGUID+525, @CGUID+911, @CGUID+921, @CGUID+915, @CGUID+925);
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES
@@ -3008,7 +3047,10 @@ DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN
  -(@CGUID+334), -(@CGUID+335), -(@CGUID+336), -(@CGUID+434), -(@CGUID+435), -(@CGUID+436),
  -(@CGUID+337), -(@CGUID+338), -(@CGUID+339), -(@CGUID+437), -(@CGUID+438), -(@CGUID+439));
 
-INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
+`event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`, 
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES 
 --
 (@CENTRY+1, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Air Strike Target (East Crater) - On Respawn - Set Invisible'),
 (@CENTRY+2, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Air Strike Target (West Crater) - On Respawn - Set Invisible'),
