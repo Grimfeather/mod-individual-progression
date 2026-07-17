@@ -176,8 +176,26 @@ AVSummonPos constexpr NPC_CMDR_POS_ICHMAN  = { 571.382f, -52.5525f, 38.1889f, 0.
 AVSummonPos constexpr NPC_CMDR_POS_SLIDORE = { 572.7764f, -41.2713f, 37.6083f, 4.5694f  };
 AVSummonPos constexpr NPC_CMDR_POS_VIPORE  = { 568.903f, -49.0058f, 38.4363f, 0.279571f };
 
+AVSummonPos constexpr NPC_STABLE_RAM_POS_1 = { 589.665, -20.8456, 41.9585, 0.823041 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_2 = { 586.718, -18.3519, 42.1206, 0.865452 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_3 = { 583.452, -15.4545, 42.1211, 0.534014 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_4 = { 580.715, -12.0537, 42.6436, 0.455474 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_5 = { 617.894, -21.2753, 43.5477, 3.65599 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_6 = { 616.702, -17.6173, 43.4773, 4.04084 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_7 = { 615.241, -14.7880, 43.3175, 4.09974 };
+AVSummonPos constexpr NPC_STABLE_RAM_POS_8 = { 614.291, -11.4423, 43.0801, 4.19006 };
+
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_1 = { -1269.34, -609.557, 55.3371, 6.23614 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_2 = { -1268.76, -604.023, 55.374, 6.20865 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_3 = { -1268.32, -598.362, 55.3851, 6.19601 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_4 = { -1267.99, -592.288, 55.403, 6.21171 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_5 = { -1253.7, -593.578, 55.3931, 3.07013 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_6 = { -1254.05, -599.235, 55.3866, 3.12511 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_7 = { -1254.76, -604.668, 55.3866, 3.07798 };
+AVSummonPos constexpr NPC_STABLE_WOLF_POS_8 = { -1254.97, -610.393, 55.3319, 3.08584 };
+
 uint32 constexpr AV_DUMMY_LIFETIME_MS = 10000; // 10 seconds
-uint32 constexpr AV_CMDR_LIFETIME_MS = 7200000; // 2 hours
+uint32 constexpr AV_2H_LIFETIME_MS = 7200000; // 2 hours
 
 // Per-match accumulation, keyed by Battleground instance id (Battleground.h:333).
 // All arrays are indexed by TeamId (TEAM_ALLIANCE = 0, TEAM_HORDE = 1).
