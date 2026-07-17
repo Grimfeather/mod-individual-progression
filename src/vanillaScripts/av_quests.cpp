@@ -279,6 +279,8 @@ namespace
         uint32 turnIns = ++state.airTurnIns[fleet.team][fleet.index];
         uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.AirStrikeTurnIns", 50);
 
+        ChatHandler(player->GetSession()).PSendSysMessage("{}'s Fleet turn-ins: {}/{}", fleet.commanderName, turnIns, required);
+
         if (turnIns < required)
             return;
 
