@@ -145,22 +145,22 @@ uint8 constexpr AV_DEFENDER_TIER_CHAMPION = 3;
 
 std::array<AVDefenderChain, 7> constexpr AV_ALLIANCE_DEFENDER_CHAINS = { {
     { { 112050, 13326, 13331, 13422 }, true  }, // graveyard defenders
-    { { 113080, 13552, 13553, 13554 }, true  }, // Irondeep Guard
-    { { 113098, 13555, 13556, 13557 }, true  }, // Irondeep Surveyor
-    { { 113087, 13549, 13550, 13551 }, true  }, // Coldmine Invader
-    { { 113096, 13546, 13547, 13548 }, true  }, // Coldmine Explorer
-    { { 12048, 13327, 13336, 13427  }, true  }, // Sentinel
-    { { 12127, 13324, 13333, 13424  }, true  }, // Guardsman
+    { { 13080, 13552, 13553, 13554 }, true  }, // Irondeep Guard
+    { { 13098, 13555, 13556, 13557 }, true  }, // Irondeep Surveyor
+    { { 13087, 13549, 13550, 13551 }, true  }, // Coldmine Invader
+    { { 13096, 13546, 13547, 13548 }, true  }, // Coldmine Explorer
+    { { 12048, 13327, 13336, 13427 }, true  }, // Sentinel
+    { { 12127, 13324, 13333, 13424 }, true  }, // Guardsman
 } };
 
 std::array<AVDefenderChain, 7> constexpr AV_HORDE_DEFENDER_CHAINS = { {
     { { 112053, 13328, 13332, 13421 }, true  }, // graveyard guardians
-    { { 113081, 13543, 13544, 13545 }, true  }, // Irondeep Raider
-    { { 113099, 13540, 13541, 13542 }, true  }, // Irondeep Explorer
-    { { 113089, 13534, 13535, 13536 }, true  }, // Coldmine Guard
-    { { 113097, 13537, 13538, 13539 }, true  }, // Coldmine Surveyor
-    { { 12051, 13329, 13334, 13425  }, true  }, // Legionnaire
-    { { 12052, 13330, 13337, 13428  }, true  }, // Warrior
+    { { 13081, 13543, 13544, 13545 }, true  }, // Irondeep Raider
+    { { 13099, 13540, 13541, 13542 }, true  }, // Irondeep Explorer
+    { { 13089, 13534, 13535, 13536 }, true  }, // Coldmine Guard
+    { { 13097, 13537, 13538, 13539 }, true  }, // Coldmine Surveyor
+    { { 12051, 13329, 13334, 13425 }, true  }, // Legionnaire
+    { { 12052, 13330, 13337, 13428 }, true  }, // Warrior
 } };
 
 constexpr char const* AV_TIER_NAMES[4] = { "Regular", "Seasoned", "Veteran", "Champion" };
