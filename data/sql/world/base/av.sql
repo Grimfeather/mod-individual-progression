@@ -3556,12 +3556,10 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 --
 (13358, 0, 0, 0, 1, 0, 100, 513, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Stormpike Bowman - Out of Combat - Disable Combat Movement (No Repeat)'),
 (13358, 0, 1, 0, 10, 0, 100, 0, 0, 80, 2300, 3900, 0, 0, 11, 22121, 64, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Stormpike Bowman - Within 0-80 Range - Cast Shoot'), -- OOC
-(13358, 0, 2, 0, 26, 0, 100, 0, 0, 80, 2300, 3900, 0, 0, 11, 22121, 64, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Stormpike Bowman - Within 0-80 Range - Cast Shoot'), -- IC
-(13358, 0, 3, 0, 104, 0, 100, 0, 0, 13358, 1, 20, 2000, 0, 41, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Stormpike Bowman - bunker/tower destroyed - Force Despawn'), -- check if AC archer is gone
+(13358, 0, 2, 0, 0, 0, 100, 0, 0, 80, 2300, 3900, 0, 0, 11, 22121, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Stormpike Bowman - Within 0-80 Range - Cast Shoot'), -- IC
 (13359, 0, 0, 0, 1, 0, 100, 513, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Frostwolf Bowman - Out of Combat - Disable Combat Movement (No Repeat)'),
 (13359, 0, 1, 0, 10, 0, 100, 0, 0, 80, 2300, 3900, 1, 0, 11, 22121, 64, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Frostwolf Bowman - Within 0-80 Range - Cast Shoot'), -- OOC
-(13359, 0, 2, 0, 26, 0, 100, 0, 0, 80, 2300, 3900, 0, 0, 11, 22121, 64, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,         'Frostwolf Bowman - Within 0-80 Range - Cast Shoot'), -- IC
-(13359, 0, 3, 0, 104, 0, 100, 0, 0, 13359, 1, 20, 2000, 0, 41, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Frostwolf Bowman - bunker/tower destroyed - Force Despawn'), -- check if AC archer is gone
+(13359, 0, 2, 0, 0, 0, 100, 0, 0, 80, 2300, 3900, 0, 0, 11, 22121, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Frostwolf Bowman - Within 0-80 Range - Cast Shoot'), -- IC
 --
 (14282, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8876, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Frostwolf Bloodhound - In Combat - Cast Thrash'),
 (14283, 0, 0, 0, 25, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 8876, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  'Stormpike Owl - In Combat - Cast Thrash'),
