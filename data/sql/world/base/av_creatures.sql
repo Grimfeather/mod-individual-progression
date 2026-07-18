@@ -709,7 +709,7 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 (@CGUID+900, 14282, 30, 0, 0, 4, 1, 0, -1491.76, -700.468, 46.7683, 1.2519, 300, 0, 0, 1371, 0, 0, 0, 0, 0, '', NULL, 0, NULL);
 
 -- Druids and Elemental lords, TBC and WotLK
-DELETE FROM `creature` WHERE `map` = 30 AND `guid` BETWEEN @CGUID+901 AND @CGUID+930;
+DELETE FROM `creature` WHERE `map` = 30 AND `guid` BETWEEN @CGUID+901 AND @CGUID+999;
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, 
 `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES 
 --
