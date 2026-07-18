@@ -246,6 +246,9 @@ UPDATE `creature_template` SET `PetSpellDataId` = 0 WHERE `entry` IN
 10077, 10221, 10357, 10359, 10375, 10644, 10737, 10741, 10806, 10882, 10979, 10981, 11357, 11359, 11360, 11361, 11368, 11371, 11372, 11373, 11735, 11736, 11737, 11738, 11739, 12037, 12347, 12418, 
 12431, 12432, 12433, 13036, 13896, 14123, 14222, 14228, 14232, 14234, 14268, 14274, 14280, 14283, 14430, 14472, 14476, 14491, 14532, 14821, 14965, 15041, 15043, 15974, 15975, 15976, 16453);
 
+-- During TBC these beasts had no PetSpellDataId, no default spells.
+UPDATE `creature_template` SET `PetSpellDataId` = 0 WHERE `entry` IN (18477);
+
 -- update `PetSpellDataId` with Vanilla/TBC values
 UPDATE `creature_template` SET `PetSpellDataId` = 5880  WHERE `entry` = 30;
 UPDATE `creature_template` SET `PetSpellDataId` = 10495 WHERE `entry` = 43;
