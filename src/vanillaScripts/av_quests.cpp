@@ -144,9 +144,66 @@ namespace
     {
         uint32 turnIns = ++state.stablesTurnIns[team];
         uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.StablesTurnIns", 10);
-        uint32 npcEntry = team == TEAM_ALLIANCE ? NPC_AV_STABLE_MASTER_A : NPC_AV_STABLE_MASTER_H;
+        uint32 npcEntry = team == TEAM_ALLIANCE ? NPC_AV_ALTERAC_RAM : NPC_AV_FROSTWOLF;
+        bool isAlliance = team == TEAM_ALLIANCE;
+        AVSummonPos const* posPtr = nullptr;
 
         ChatHandler(player->GetSession()).PSendSysMessage("Mount turn-ins: {}/{}", turnIns, required);
+
+        switch (turnIns)
+        {
+        case 1:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_1;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_1;
+            break;
+        case 2:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_2;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_2;
+            break;
+        case 3:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_3;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_3;
+            break;
+        case 4:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_4;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_4;
+            break;
+        case 5:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_5;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_5;
+            break;
+        case 6:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_6;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_6;
+            break;
+        case 7:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_7;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_7;
+            break;
+        case 8:
+            if (isAlliance)
+                posPtr = &NPC_STABLE_RAM_POS_8;
+            else
+                posPtr = &NPC_STABLE_WOLF_POS_8;
+            break;
+        }
+
+        if (posPtr && npcEntry)
+            player->SummonCreature(npcEntry, posPtr->x, posPtr->y, posPtr->z, posPtr->o, TEMPSUMMON_TIMED_DESPAWN, AV_2H_LIFETIME_MS);
 
         if (turnIns < required)
             return;
@@ -222,6 +279,8 @@ namespace
         uint32 turnIns = ++state.airTurnIns[fleet.team][fleet.index];
         uint32 required = sConfigMgr->GetOption<uint32>("IndividualProgression.AV.AirStrikeTurnIns", 50);
 
+        ChatHandler(player->GetSession()).PSendSysMessage("{}'s Fleet turn-ins: {}/{}", fleet.commanderName, turnIns, required);
+
         if (turnIns < required)
             return;
 
@@ -262,7 +321,7 @@ namespace
         }
 
         if (posPtr && dummyEntry)
-            player->SummonCreature(dummyEntry, posPtr->x, posPtr->y, posPtr->z, posPtr->o, TEMPSUMMON_TIMED_DESPAWN, AV_CMDR_LIFETIME_MS);
+            player->SummonCreature(dummyEntry, posPtr->x, posPtr->y, posPtr->z, posPtr->o, TEMPSUMMON_TIMED_DESPAWN, AV_2H_LIFETIME_MS);
 
         if (Creature* commander = player->FindNearestCreature(fleet.questGiverEntry, 30.0f))
         {
