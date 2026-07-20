@@ -3573,10 +3573,12 @@ UPDATE `creature_template` SET `name` = 'Commander Dardosh' WHERE `entry` = 1314
 UPDATE `creature_template` SET `name` = 'Lieutenant Murp' WHERE `entry` = 13146;
 UPDATE `creature_template` SET `speed_walk` = 2, `flags_extra` = 0 WHERE entry IN (13256, 13419); -- remove CREATURE_FLAG_EXTRA_INSTANCE_BIND for elemental bosses
 UPDATE `creature_template` SET `unit_flags` = 4160 WHERE `entry` IN (13577, 13441); -- enable pvp flag for cavalry commanders
-UPDATE `creature_template` SET `flags_extra` = 2 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439);
 UPDATE `creature_template` SET `npcflag` = 0 WHERE `entry` IN (13256, 13419, 22629, 22627, 31822, 31821); -- remove quest giver flag from elemental lords
 UPDATE `gameobject_template` SET `Data0` = 1 WHERE `entry` IN (178465, 178670); -- only 1 player needed for elemental boss summoning ritual
 UPDATE `item_template` SET `spellcategorycooldown_1` = 10000 WHERE `entry` IN (17323, 17324, 17325, 17505, 17506, 17507); -- 10 seconds cooldown for beacons
+
+DELETE FROM `smart_scripts` WHERE `entryorguid` IN (-657421, -657422, -657423, -657321, -657322, -657323); -- 00_cleanup
+UPDATE `creature_template` SET `flags_extra` = 2 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439); -- 00_cleanup
 
 UPDATE `creature_template` SET `gossip_menu_id` = 65701 WHERE `entry` IN (113441, 122552, 131994); -- Frostwolf Wolf Rider Commander
 UPDATE `creature_template` SET `gossip_menu_id` = 65702 WHERE `entry` IN (113577, 122575, 132101); -- Stormpike Ram Rider Commander
