@@ -58,7 +58,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (25509, 0, 1, 0, 0, 0, 100, 0, 7000, 13000, 11000, 17000, 0, 0, 11, 46270, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Priestess of Torment - In Combat - Cast Whirlwind'),
 (25588, 0, 0, 0, 0, 0, 100, 0, 3000, 11000, 30000, 30000, 0, 0, 11, 46875, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Hand of the Deceiver - In Combat - Cast Felfire Portal'),
 (25588, 0, 1, 0, 0, 0, 100, 0, 4000, 8000, 2000, 6000, 0, 0, 11, 45770, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Hand of the Deceiver - In Combat - Cast Shadow Bolt Volley'),
-(25588, 0, 2, 0, 2, 0, 100, 1, 0, 25, 0, 0, 0, 0, 11, 45772, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Hand of the Deceiver - Between Health 0-25% - Cast Shadow Infusion'),
+(25588, 0, 2, 0, 2, 0, 100, 1, 0, 20, 0, 0, 0, 0, 11, 45772, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Hand of the Deceiver - Between Health 0-20% - Cast Shadow Infusion'),
 (25588, 0, 3, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 39, 50, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Hand of the Deceiver - On Aggro - Call For Help'),
 (25588, 0, 4, 0, 1, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 11, 46757, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Hand of the Deceiver - Out of Combat - Cast Shadow Channeling'),
 (25592, 0, 0, 0, 0, 0, 100, 0, 6000, 12000, 6000, 12000, 0, 0, 11, 46306, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Doomfire Destroyer - In Combat - Cast Create Doomfire Shard'),
