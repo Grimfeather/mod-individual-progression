@@ -3352,8 +3352,6 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (-(@CGUID+339), 0, 3, 0, 0, 0, 100, 0, 8000, 8000, 7500, 7500, 0, 0, 11, 15285, 0, 0, 0, 0, 0, 2, 0,0,0,0,0,0,0,0,     'Wing Commander Vipore (strike) - In Combat - Cast Fireball Volley'),
 (-(@CGUID+339), 0, 4, 0, 0, 0, 100, 0, 13000, 13000, 9000, 9000, 0, 0, 11, 21188, 0, 0, 0, 0, 0, 2, 0,0,0,0,0,0,0,0,   'Wing Commander Vipore (strike) - In Combat - Cast Stun Bomb Attack');
 
-UPDATE `creature_template` SET `flags_extra` = flags_extra|134217728 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439); -- CREATURE_FLAG_EXTRA_DONT_OVERRIDE_SAI_ENTRY
-
 UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` IN
 (10981, 10990, 12051, 12127, 12159, 13256, 13419, 14282, 14283, 14284, 12050, 13326, 13331, 13422, 12053, 13328, 13332, 13421, 13358, 13359, 13440, 13441, 13576, 13577,
  113256, 113419, 112050, 112053, 113236, 113284, 113442, 113443, 113441, 113577);
@@ -3575,8 +3573,9 @@ UPDATE `creature_template` SET `name` = 'Commander Dardosh' WHERE `entry` = 1314
 UPDATE `creature_template` SET `name` = 'Lieutenant Murp' WHERE `entry` = 13146;
 UPDATE `creature_template` SET `speed_walk` = 2, `flags_extra` = 0 WHERE entry IN (13256, 13419); -- remove CREATURE_FLAG_EXTRA_INSTANCE_BIND for elemental bosses
 UPDATE `creature_template` SET `unit_flags` = 4160 WHERE `entry` IN (13577, 13441); -- enable pvp flag for cavalry commanders
-UPDATE `gameobject_template` SET `Data0` = 1 WHERE `entry` IN (178465, 178670); -- only 1 player needed for elemental boss summoning ritual
+UPDATE `creature_template` SET `flags_extra` = 2 WHERE `entry` IN (113179, 113180, 113181, 113437, 113438, 113439);
 UPDATE `creature_template` SET `npcflag` = 0 WHERE `entry` IN (13256, 13419, 22629, 22627, 31822, 31821); -- remove quest giver flag from elemental lords
+UPDATE `gameobject_template` SET `Data0` = 1 WHERE `entry` IN (178465, 178670); -- only 1 player needed for elemental boss summoning ritual
 UPDATE `item_template` SET `spellcategorycooldown_1` = 10000 WHERE `entry` IN (17323, 17324, 17325, 17505, 17506, 17507); -- 10 seconds cooldown for beacons
 
 UPDATE `creature_template` SET `gossip_menu_id` = 65701 WHERE `entry` IN (113441, 122552, 131994); -- Frostwolf Wolf Rider Commander
