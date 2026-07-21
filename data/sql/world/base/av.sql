@@ -2391,7 +2391,7 @@ INSERT INTO `creature_questender` (`id`, `quest`) VALUES
 
 UPDATE `quest_template_addon` SET `SpecialFlags` = 0 WHERE `ID` IN (7361, 7362, 7363, 7364, 7365, 7366, 7367, 7368, 7401, 7402); -- not repeatable quests
 UPDATE `quest_template_addon` SET `SpecialFlags` = 2 WHERE `ID` IN (7301, 7302); -- QUEST_SPECIAL_FLAGS_EXPLORATION_OR_EVENT
-UPDATE `quest_template` SET  `AllowableRaces` = 1101 WHERE `ID` = 7402; -- alliance only
+UPDATE `quest_template` SET `AllowableRaces` = 1101 WHERE `ID` = 7402; -- alliance only
 
 UPDATE `quest_template_addon` SET `PrevQuestID` = 7361 WHERE `ID` = 7421; -- Darkspear Defense
 UPDATE `quest_template_addon` SET `PrevQuestID` = 7362 WHERE `ID` = 7422; -- Tuft it Out
@@ -2405,9 +2405,28 @@ UPDATE `quest_template_addon` SET `PrevQuestID` = 7402 WHERE `ID` = 7428; -- Wan
 -- restore vanilla AV quests
 DELETE FROM `disables` WHERE `sourceType` = 1 AND `entry` IN (7181, 7202, 7381, 7382); -- Korrak quests
 
-DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 19 AND `SourceEntry` IN (7181, 7202, 7381, 7382, 8271, 8272);
+DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 19 AND `SourceEntry` IN
+(7181, 7202, 7381, 7382, 8271, 8272, 7161, 7162, 7163, 7164, 7165, 7166, 7401, 7402, 7421, 7422, 7423, 7424, 7425, 7426, 7427, 7428);
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
 `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
+--
+(19, 0, 7161, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7161 only available during vanilla'), -- first time racial turn-in quests
+(19, 0, 7162, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7162 only available during vanilla'),
+(19, 0, 7163, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7163 only available during vanilla'),
+(19, 0, 7164, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7164 only available during vanilla'),
+(19, 0, 7165, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7165 only available during vanilla'),
+(19, 0, 7166, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7166 only available during vanilla'),
+(19, 0, 7401, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7401 only available during vanilla'),
+(19, 0, 7402, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7402 only available during vanilla'),
+--
+(19, 0, 7421, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7421 only available during vanilla'), -- repeatable racial turn-in quests
+(19, 0, 7422, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7422 only available during vanilla'),
+(19, 0, 7423, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7423 only available during vanilla'),
+(19, 0, 7424, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7424 only available during vanilla'),
+(19, 0, 7425, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7425 only available during vanilla'),
+(19, 0, 7426, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7426 only available during vanilla'),
+(19, 0, 7427, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7427 only available during vanilla'),
+(19, 0, 7428, 0, 0, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Quest 7428 only available during vanilla'),
 --
 (19, 0, 7181, 0, 0, 8, 0, 66005, 0, 0, 1, 0, 0, '', 'Quest: \'The Legend of Korrak\' only available before patch 1.10'),
 (19, 0, 7381, 0, 0, 8, 0, 66005, 0, 0, 1, 0, 0, '', 'Quest: \'The Return of Korrak\' only available before patch 1.10'),
@@ -2451,16 +2470,25 @@ DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId` = 28 AND `SourceEntry` 
 INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry`, `SourceId`, `ElseGroup`, `ConditionTypeOrReference`, `ConditionTarget`, 
 `ConditionValue1`, `ConditionValue2`, `ConditionValue3`, `NegativeCondition`, `ErrorType`, `ErrorTextId`, `ScriptName`, `Comment`) VALUES 
 -- SourceGroup 0 = alliance, 1 = horde
-(28, 1, 17306, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Stormpike Soldiers Blood only drops inside Alterac Valley Battleground'),
-(28, 0, 17423, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Storm Crystal only drops inside Alterac Valley Battleground'),
-(28, 1, 18142, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Severed Night Elf Head only drops inside Alterac Valley Battleground'),
-(28, 1, 18143, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Tuft of Gnome Hair only drops inside Alterac Valley Battleground'),
-(28, 1, 18144, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Human Bone Chip only drops inside Alterac Valley Battleground'),
-(28, 0, 18145, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Tauren Hoof only drops inside Alterac Valley Battleground'),
-(28, 0, 18146, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Darkspear Troll Mojo only drops inside Alterac Valley Battleground'),
-(28, 0, 18147, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Forsaken Heart only drops inside Alterac Valley Battleground'),
-(28, 1, 18206, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Dwarf Spine only drops inside Alterac Valley Battleground'),
-(28, 0, 18207, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '', 'Orc Tooth only drops inside Alterac Valley Battleground');
+(28, 1, 17306, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Stormpike Soldiers Blood only drops inside Alterac Valley Battleground'),
+(28, 0, 17423, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Storm Crystal only drops inside Alterac Valley Battleground'),
+--
+(28, 1, 18142, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Severed Night Elf Head only drops inside Alterac Valley Battleground'),
+(28, 1, 18142, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Severed Night Elf Head only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 1, 18143, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Tuft of Gnome Hair only drops inside Alterac Valley Battleground'),
+(28, 1, 18143, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Tuft of Gnome Hair only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 1, 18144, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Human Bone Chip only drops inside Alterac Valley Battleground'),
+(28, 1, 18144, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Human Bone Chip only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 0, 18145, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Tauren Hoof only drops inside Alterac Valley Battleground'),
+(28, 0, 18145, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Tauren Hoof only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 0, 18146, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Darkspear Troll Mojo only drops inside Alterac Valley Battleground'),
+(28, 0, 18146, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Darkspear Troll Mojo only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 0, 18147, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Forsaken Heart only drops inside Alterac Valley Battleground'),
+(28, 0, 18147, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Forsaken Heart only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 1, 18206, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Dwarf Spine only drops inside Alterac Valley Battleground'),
+(28, 1, 18206, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Dwarf Spine only drops if the player has NOT completed PROGRESSION_PRE_TBC'),
+(28, 0, 18207, 0, 1, 22, 0, 30, 0, 0, 0, 0, 0, '',   'Orc Tooth only drops inside Alterac Valley Battleground'),
+(28, 0, 18207, 0, 1, 8, 0, 66008, 0, 0, 1, 0, 0, '', 'Orc Tooth only drops if the player has NOT completed PROGRESSION_PRE_TBC');
 
 -- only drop Stormpike Soldiers Blood from alliance creatures + correct drop rate and amount
 DELETE FROM `creature_loot_template` WHERE `Item` = 17306;
