@@ -235,20 +235,12 @@ namespace
         else
             ChatHandler(player->GetSession()).PSendSysMessage("We have gathered enough hides from the rams. Soon, the cavalry will be ready to ride! Speak to me again when we have stabled enough wolves.");
 
+
         uint32 npcEntryQuest = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A : NPC_CAV_CMDR_H;
-        uint32 npcEntryPatrol = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A_PATROL : NPC_CAV_CMDR_H_PATROL;
-
         Creature* npcQuest = player->FindNearestCreature(npcEntryQuest, 50.0f);
-        Creature* npcPatrol = player->FindNearestCreature(npcEntryPatrol, 50.0f);
 
-        if (!npcQuest || !npcPatrol)
-            return;
+        npcQuest->RemoveNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
 
-        npcQuest->SetVisible(false);
-        npcQuest->SetFaction(AV_FACTION_FRIENDLY);
-
-        npcPatrol->SetVisible(true);
-        npcPatrol->SetFaction(isAlliance ? AV_FACTION_STORMPIKE_PVP : AV_FACTION_FROSTWOLF_PVP);
     }
 
     // Estimate for the supplies gossip option, using existing broadcast texts as examples
@@ -475,13 +467,51 @@ public:
     bool CanCreatureGossipHello(Player* player, Creature* creature) override
     {
         TeamId team;
-        AVQuestState* state = GetStateScraps(player, creature, team);
-        if (!state)
-            return false;
 
-        player->PrepareGossipMenu(creature, creature->GetCreatureTemplate()->GossipMenuId, true);
-        SendGossipMenuFor(player, SupplyTextId(*state, team), creature);
-        return true;
+        if (creature->GetEntry() == NPC_SMITH_REGZAR || creature->GetEntry() == NPC_MURGOT_DEEPFORGE)
+        {
+            AVQuestState* state = GetStateScraps(player, creature, team);
+
+            if (!state)
+                return false;
+
+            player->PrepareGossipMenu(creature, creature->GetCreatureTemplate()->GossipMenuId, true);
+            SendGossipMenuFor(player, SupplyTextId(*state, team), creature);
+            return true;
+        }
+  
+        if (creature->GetEntry() == NPC_CAV_CMDR_A || creature->GetEntry() == NPC_CAV_CMDR_H)
+        {
+            AVQuestState* state = GetStateStables(player, creature, team);
+
+            if (!state)
+                return false;
+
+            bool isAlliance = team == TEAM_ALLIANCE;
+
+            if (!state->StablesCompleted[team] || !state->HidesCompleted[team])
+                return false;
+
+            uint32 npcEntryQuest = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A : NPC_CAV_CMDR_H;
+            uint32 npcEntryPatrol = team == TEAM_ALLIANCE ? NPC_CAV_CMDR_A_PATROL : NPC_CAV_CMDR_H_PATROL;
+
+            Creature* npcQuest = player->FindNearestCreature(npcEntryQuest, 50.0f);
+            Creature* npcPatrol = player->FindNearestCreature(npcEntryPatrol, 50.0f);
+
+            if (!npcQuest || !npcPatrol)
+                return false;
+
+            npcQuest->SetVisible(false);
+            npcQuest->SetFaction(AV_FACTION_FRIENDLY);
+
+            npcPatrol->SetVisible(true);
+            npcPatrol->SetFaction(isAlliance ? AV_FACTION_STORMPIKE_PVP : AV_FACTION_FROSTWOLF_PVP);
+
+            return true;
+        }
+
+        // Let the default handler show gossip for all other creatures.
+        return false;
     }
 
     bool CanCreatureGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
@@ -532,6 +562,20 @@ private:
             return nullptr;
 
         team = entry == NPC_MURGOT_DEEPFORGE ? TEAM_ALLIANCE : TEAM_HORDE;
+        return &avState[bg->GetInstanceID()];
+    }
+
+    static AVQuestState* GetStateStables(Player* player, Creature* creature, TeamId& team)
+    {
+        uint32 entry = creature->GetEntry();
+        if (entry != NPC_CAV_CMDR_A && entry != NPC_CAV_CMDR_H)
+            return nullptr;
+
+        Battleground* bg = player->GetBattleground();
+        if (!bg || bg->GetBgTypeID(true) != BATTLEGROUND_AV)
+            return nullptr;
+
+        team = entry == NPC_CAV_CMDR_A ? TEAM_ALLIANCE : TEAM_HORDE;
         return &avState[bg->GetInstanceID()];
     }
 };
