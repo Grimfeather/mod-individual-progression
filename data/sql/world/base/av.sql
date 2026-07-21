@@ -1631,8 +1631,8 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (@WPID+3160, 2, 612.29, -30.47, 42.5, 0, 0, 1, 0, 100, 0),
 (@WPID+3160, 3, 618.43, -34.64, 42.47, 0, 0, 1, 0, 100, 0),
 (@WPID+3160, 4, 618.25, -37.88, 42.3, 0, 0, 1, 0, 100, 0),
-(@WPID+3160, 5, 617.73, -38.27, 42.28, 3.65604, 10000, 1, 0, 100, 0), -- speech
-(@WPID+3160, 6, 630.89, -54.83, 41.96, 0, 0, 1, 0, 100, 0), -- shout
+(@WPID+3160, 5, 617.73, -38.27, 42.28, 0, 0, 1, 0, 100, 0),
+(@WPID+3160, 6, 630.89, -54.83, 41.96, 0, 10000, 1, 0, 100, 0), -- speech
 (@WPID+3160, 7, 632.77, -85.05, 41.44, 0, 0, 1, 0, 100, 0),
 (@WPID+3160, 8, 618.78, -143.02, 33.43, 0, 0, 1, 0, 100, 0),
 (@WPID+3160, 9, 621.47, -167.45, 36.29, 0, 0, 1, 0, 100, 0),
@@ -1722,8 +1722,8 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 --
 (@WPID+4160, 0, -1250.35, -633.115, 52.5533, 0, 0, 1, 0, 100, 0), -- Wolf Rider Commander
 (@WPID+4160, 1, -1246.13, -630.323, 52.2069, 0, 0, 1, 0, 100, 0),
-(@WPID+4160, 2, -1238.51, -623.159, 51.602, 5.5182, 10000, 1, 0, 100, 0), -- speech
-(@WPID+4160, 3, -1223.28, -611.65, 51.8654, 0, 0, 1, 0, 100, 0), -- shout
+(@WPID+4160, 2, -1238.51, -623.159, 51.602, 0, 0, 1, 0, 100, 0),
+(@WPID+4160, 3, -1223.28, -611.65, 51.8654, 0, 10000, 1, 0, 100, 0), -- speech
 (@WPID+4160, 4, -1214.53, -586.614, 52.0944, 0, 0, 1, 0, 100, 0),
 (@WPID+4160, 5, -1209.22, -571.452, 53.0851, 0, 0, 1, 0, 100, 0),
 (@WPID+4160, 6, -1198.07, -539.628, 52.0421, 0, 0, 1, 0, 100, 0),
@@ -3364,7 +3364,7 @@ DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN
 
 UPDATE `gameobject_template` SET `AIName` = 'SmartGameObjectAI' WHERE `entry` IN (178465, 178670);
 DELETE FROM `smart_scripts` WHERE `source_type` = 1 AND `entryorguid` IN (-657971, -657972, 178465, 178670);
-DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (11325601, 11325602, 11325603, 11341901, 11341902, 11341903);
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (11325601, 11325602, 11325603, 11341901, 11341902, 11341903, 11344101, 11357701);
 
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, 
 `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`, 
@@ -3418,8 +3418,10 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113441, 0, 3, 0, 0, 0, 100, 0, 4000, 7000, 7000, 9000, 0, 0, 11, 15284, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Frostwolf Wolf Rider Commander - In Combat - Cast Cleave'),
 (113441, 0, 4, 5, 62, 0, 100, 0, 65701, 0,0,0,0,0, 12, 113256, 3, 10000, 0,0,0,8,0,0,0,0, -1250.35, -633.12, 52.55, 0, 'Frostwolf Wolf Rider Commander - On Gossip Select - Summon NPC_AV_DUMMY_H'),
 (113441, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Frostwolf Wolf Rider Commander - On Gossip Select - Remove gossip select'),
-(113441, 0, 6, 0, 108, 0, 100, 1, 2, @WPID+4160, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Frostwolf Wolf Rider Commander - On WP Reached - Say Text 0'),
-(113441, 0, 7, 0, 108, 0, 100, 1, 3, @WPID+4160, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Frostwolf Wolf Rider Commander - On WP Reached - Say Text 1'),
+(113441, 0, 6, 0, 108, 0, 100, 1, 3, @WPID+4160, 0, 0, 0, 0, 80, 11344101, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Frostwolf Wolf Rider Commander - On WP Reached - Run Script 11344101'),
+--
+(11344101, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Script9 - Frostwolf Wolf Rider Commander - Say Text 0'),
+(11344101, 9, 1, 0, 0, 0, 100, 0, 10000, 10000, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Script9 - Frostwolf Wolf Rider Commander - Say Text 1'),
 --
 (113577, 0, 0, 1, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Stormpike Ram Rider Commander - On Respawn - Set Invisible'),
 (113577, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Stormpike Ram Rider Commander - On Respawn - Set Faction Friendly'),
@@ -3427,8 +3429,10 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (113577, 0, 3, 0, 0, 0, 100, 0, 4000, 7000, 7000, 9000, 0, 0, 11, 15284, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Stormpike Ram Rider Commander - In Combat - Cast Cleave'),
 (113577, 0, 4, 5, 62, 0, 100, 0, 65701, 0,0,0,0,0, 12, 113419, 3, 10000, 0,0,0,8,0,0,0,0, 600.03, -2.925, 42.08, 0,    'Stormpike Ram Rider Commander - On Gossip Select - Summon NPC_AV_DUMMY_A'),
 (113577, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Stormpike Ram Rider Commander - On Gossip Select - Remove gossip select'),
-(113577, 0, 6, 0, 108, 0, 100, 1, 5, @WPID+3160, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Stormpike Ram Rider Commander - On WP Reached - Say Text 0'),
-(113577, 0, 7, 0, 108, 0, 100, 1, 6, @WPID+3160, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Stormpike Ram Rider Commander - On WP Reached - Say Text 1'),
+(113577, 0, 6, 0, 108, 0, 100, 1, 6, @WPID+3160, 0, 0, 0, 0, 80, 11357701, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Stormpike Ram Rider Commander - On WP Reached - Run Script 11357701'),
+--
+(11357701, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Script9 - Stormpike Ram Rider Commander - Say Text 0'),
+(11357701, 9, 1, 0, 0, 0, 100, 0, 10000, 10000, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Script9 - Stormpike Ram Rider Commander - Say Text 1'),
 --
 (113256, 0, 0, 1, 54, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'NPC_AV_DUMMY_H - On Just Summoned - Set Invisible'),
 (113256, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'NPC_AV_DUMMY_H - On Just Summoned - Set Faction Friendly'),
