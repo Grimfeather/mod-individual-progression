@@ -372,11 +372,17 @@ public:
             {
                 if (player->HasQuest(AV_Q_H_STABLES) && player->GetQuestStatus(AV_Q_H_STABLES) == QUEST_STATUS_INCOMPLETE)
                     player->CompleteQuest(AV_Q_H_STABLES);
+
+                creature->SetFaction(AV_FACTION_FRIENDLY);
+                creature->DespawnOrUnsummon(16000ms);
             }
             else if (creature->GetEntry() == NPC_AV_ALTERAC_RAM)
             {
                 if (player->HasQuest(AV_Q_A_STABLES) && player->GetQuestStatus(AV_Q_A_STABLES) == QUEST_STATUS_INCOMPLETE)
                     player->CompleteQuest(AV_Q_A_STABLES);
+
+                creature->SetFaction(AV_FACTION_FRIENDLY);
+                creature->DespawnOrUnsummon(16000ms);
             }
         }
 
