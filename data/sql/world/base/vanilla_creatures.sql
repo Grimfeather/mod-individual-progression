@@ -12406,9 +12406,6 @@ UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 3.120567, 
 /*  Flawless Draenethyst Fragment  */
 UPDATE `creature_template` SET `speed_walk` = 1.0, `DamageModifier` = 1.925466, `ArmorModifier` = 1.5, `BaseAttackTime` = 1610, `RangeAttackTime` = 1771 WHERE `entry` = 7365;
 
-/*  Restless Shade  */
-UPDATE `creature_template` SET `minlevel` = 58, `maxlevel` = 60, `HealthModifier` = 1.35, `ArmorModifier` = 1.45, `unit_class` = 1 WHERE `entry` = 7370;
-
 /*  Deadwind Mauler  */
 UPDATE `creature_template` SET `DamageModifier` = 1.5, `ArmorModifier` = 0.5 WHERE `entry` = 7371;
 
@@ -18099,18 +18096,6 @@ UPDATE `creature_template` SET `maxlevel` = 1, `DamageModifier` = 1.3, `RangeAtt
 
 /*  Frost Ram  */
 UPDATE `creature_template` SET `maxlevel` = 1, `DamageModifier` = 1.3, `RangeAttackTime` = 2200 WHERE `entry` = 12371;
-
-/*  Wailing Spectre  */
-UPDATE `creature_template` SET `minlevel` = 58, `maxlevel` = 60, `DamageModifier` = 0.95, `HealthModifier` = 1.35, `ArmorModifier` = 0.95 WHERE `entry` = 12377;
-
-/*  Damned Soul  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 2.15, `HealthModifier` = 1.35 WHERE `entry` = 12378;
-
-/*  Unliving Caretaker  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 1.0, `HealthModifier` = 1.35, `ArmorModifier` = 1.05, `unit_class` = 1 WHERE `entry` = 12379;
-
-/*  Unliving Resident  */
-UPDATE `creature_template` SET `minlevel` = 59, `maxlevel` = 60, `DamageModifier` = 1.25, `HealthModifier` = 1.35, `ArmorModifier` = 1.05, `unit_class` = 1 WHERE `entry` = 12380;
 
 /*  Ley Sprite  */
 UPDATE `creature_template` SET `DamageModifier` = 1.5 WHERE `entry` = 12381;
