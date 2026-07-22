@@ -1,6 +1,7 @@
-/* Sets TBC creatures to values extracted from cMangos TBC, which has high quality, pre-nef TBC Content */
-/* These may need more updating as AzerothCore development continues to TBC and makes more corrections,
-   But this is a better starting point than current AzerothCore TBC content which is quite bug */
+/* 
+ * Sets TBC creatures to values extracted from cMangos TBC, which has high quality, pre-nef TBC Content
+ * These may need more updating as AzerothCore development continues to TBC and makes more corrections.
+ */
 
 /*  Skeletal Aberration  */
 UPDATE `creature_template` SET `DamageModifier` = 1.0, `ArmorModifier` = 1.33333 WHERE `entry` = 1786;
@@ -22,6 +23,21 @@ UPDATE `creature_template` SET `ArmorModifier` = 1.33333 WHERE `entry` = 1825;
 
 /*  Northshire Guard Justin  */
 UPDATE `creature_template` SET `DamageModifier` = 2.5 WHERE `entry` = 9095;
+
+/*  Restless Shade  */
+UPDATE `creature_template` SET `minlevel` = 68, `maxlevel` = 69, `HealthModifier` = 1, `ArmorModifier` = 1, `unit_class` = 1 WHERE `entry` = 7370;
+
+/*  Wailing Spectre  */
+UPDATE `creature_template` SET `minlevel` = 69, `maxlevel` = 70, `DamageModifier` = 1, `HealthModifier` = 1, `ArmorModifier` = 1 WHERE `entry` = 12377;
+
+/*  Damned Soul  */
+UPDATE `creature_template` SET `minlevel` = 68, `maxlevel` = 69, `DamageModifier` = 0.8, `HealthModifier` = 1 WHERE `entry` = 12378;
+
+/*  Unliving Caretaker  */
+UPDATE `creature_template` SET `minlevel` = 69, `maxlevel` = 70, `DamageModifier` = 0.6, `HealthModifier` = 1, `ArmorModifier` = 1, `unit_class` = 1 WHERE `entry` = 12379;
+
+/*  Unliving Resident  */
+UPDATE `creature_template` SET `minlevel` = 69, `maxlevel` = 70, `DamageModifier` = 0.7, `HealthModifier` = 1, `ArmorModifier` = 1, `unit_class` = 1 WHERE `entry` = 12380;
 
 /*  Tender  */
 UPDATE `creature_template` SET `speed_walk` = 1.2, `speed_run` = 1.14286, `faction` = 16 WHERE `entry` = 15271;
