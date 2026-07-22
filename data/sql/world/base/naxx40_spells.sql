@@ -173,10 +173,10 @@ INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES (26046, 'spel
 DELETE FROM `spell_script_names` WHERE `spell_id` IN (26234, 28819);
 INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 (26234, 'spell_submerge_visual_aura'),
-(28819, 'spell_submerge_visual_aura');
+(28819, 'spell_gen_submerge_visual'); -- AC's updated version
 
 -- Update heigan teleport player (unused in core)
-UPDATE `spell_target_position` SET `PositionX`=2917.43, `PositionY`=-3769.18, `PositionZ`=273.62, `Orientation`=3.1415 WHERE `ID`=29273;
+UPDATE `spell_target_position` SET `PositionX` = 2917.43, `PositionY` = -3769.18, `PositionZ` = 273.62, `Orientation` = 3.1415 WHERE `ID` = 29273;
 
 -- Grobbulus
 -- Poison damage by Poison Cloud ~3k to ~1k
