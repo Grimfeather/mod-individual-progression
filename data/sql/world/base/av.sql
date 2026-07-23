@@ -3541,7 +3541,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (12159, 0, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Korrak the Bloodrager - On Respawn - Set Faction Friendly'),
 (12159, 0, 2, 3, 1, 0, 100, 1, 7200000, 7200000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Korrak the Bloodrager - OOC after 2 hours - Set visible (no repeat)'),
 (12159, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Korrak the Bloodrager - OOC after 2 hours - Reset Faction'),
-(12159, 0, 4, 6, 9, 0, 100, 0, 0, 0, 7000, 10000, 0, 10, 11, 20276, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Korrak the Bloodrager - Within 0-10 Range - Cast Knockdown'),
+(12159, 0, 4, 5, 9, 0, 100, 0, 0, 0, 7000, 10000, 0, 10, 11, 20276, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Korrak the Bloodrager - Within 0-10 Range - Cast Knockdown'),
 (12159, 0, 5, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 13, 0, 30, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,                    'Korrak the Bloodrager - On Knockdown - Reduce Aggro'),
 (12159, 0, 6, 0, 0, 0, 100, 0, 9000, 12000, 8000, 11000, 0, 0, 11, 19129, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Korrak the Bloodrager - In Combat - Cast Massive Tremor'),
 --
