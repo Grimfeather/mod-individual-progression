@@ -1226,7 +1226,52 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (339000, 9, 7, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 82, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               "Script9 - Apothecary Helbrim - Add NpcFlags Questgiver"),
 (339000, 9, 8, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               "Script9 - Apothecary Helbrim - Set Inactive");
 
-UPDATE `creature_text` SET `Emote` = 1 WHERE `CreatureID` = 3390 AND `GroupID` = 1;
 DELETE FROM `creature_text` WHERE `CreatureID` = 3390 AND `GroupID` = 1 AND `ID` = 1;
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
 (3390, 1, 1, "Thank you for the spores, $n.  They are now prepared for transport.", 12, 0, 100, 1, 0, 0, 1078, 0, "Apothecary Helbrim");
+
+-- Script end event for quest Brutal Armor (ported from CMaNGOS TBC)
+UPDATE `creature_template` SET `AIName` = "SmartAI" WHERE `entry` = 5878;
+
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = 5878;
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (587800, 587801, 587802);
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
+`event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
+--
+(5878, 0, 0, 0, 20, 0, 100, 0, 1838, 0, 0, 0, 0, 0, 80, 587800, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          "Thun'grim Firegaze - On Quest 'Brutal Armor' Turned In - Run Script 587800"),
+(5878, 0, 1, 0, 108, 0, 100, 0, 3, 209530, 0, 0, 0, 0, 80, 587801, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       "Thun'grim Firegaze - On Waypoint 3 Reached (Path 209530) - Run Script 587801"),
+(5878, 0, 2, 0, 108, 0, 100, 0, 3, 209531, 0, 0, 0, 0, 80, 587802, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,       "Thun'grim Firegaze - On Waypoint 3 Reached (Path 209531) - Run Script 587802"),
+--
+(587800, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 "Script9 - Thun'grim Firegaze - Set Active"),
+(587800, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 "Script9 - Thun'grim Firegaze - Remove NpcFlags Questgiver"),
+(587800, 9, 2, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 209530, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     "Script9 - Thun'grim Firegaze - Start Waypoint Path 209530"),
+--
+(587801, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 2.92829,           "Script9 - Thun'grim Firegaze - Set Orientation"),
+(587801, 9, 1, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            "Script9 - Thun'grim Firegaze - Say Text 0"),
+(587801, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 17, 69, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                "Script9 - Thun'grim Firegaze - Set EmoteState 69"),
+(587801, 9, 3, 0, 0, 0, 100, 0, 15000, 15000, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         "Script9 - Thun'grim Firegaze - Set EmoteState 0"),
+(587801, 9, 4, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 4.30012,     "Script9 - Thun'grim Firegaze - Change Orientation"),
+(587801, 9, 5, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 17, 233, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         "Script9 - Thun'grim Firegaze - Set EmoteState 233"),
+(587801, 9, 6, 0, 0, 0, 100, 0, 20000, 20000, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,         "Script9 - Thun'grim Firegaze - Set EmoteState 0"),
+(587801, 9, 7, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 209531, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     "Script9 - Thun'grim Firegaze - Start Waypoint Path 209531"),
+--
+(587802, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0.820305,    "Script9 - Thun'grim Firegaze - Reset Orientation"),
+(587802, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                  "Script9 - Thun'grim Firegaze - Say Text 1"),
+(587802, 9, 2, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 82, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           "Script9 - Thun'grim Firegaze - Add NpcFlags Questgiver"),
+(587802, 9, 3, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 "Script9 - Thun'grim Firegaze - Set Inactive");
+
+DELETE FROM `waypoint_data` WHERE `id` IN (209530, 209531);
+INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `velocity`, `delay`, `smoothTransition`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES
+(209530, 1, -423.713, -3167.24, 212.779, 0, 0, 0, 0, 0, 0, 100, 0),
+(209530, 2, -423.211, -3164.23, 212.864, 0, 0, 0, 0, 0, 0, 100, 0),
+(209530, 3, -425.1, -3162.25, 212.697, 2.92829, 0, 0, 0, 0, 0, 100, 0),
+--
+(209531, 1, -423.211, -3164.23, 212.864, 0, 0, 0, 0, 1, 0, 100, 0),
+(209531, 2, -423.713, -3167.24, 212.779, 0, 0, 0, 0, 1, 0, 100, 0),
+(209531, 3, -437.62, -3176.26, 211.385, 0, 0, 0, 0, 1, 0, 100, 0);
+
+DELETE FROM `quest_greeting` WHERE `ID` = 5878;
+INSERT INTO `quest_greeting` (`ID`, `Greeting`) VALUES
+(5878, "My vision has darkened, but there are many kinds of sight...");
