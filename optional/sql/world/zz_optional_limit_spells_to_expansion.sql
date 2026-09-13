@@ -16,8 +16,7 @@ UPDATE `trainer_spell` SET `ReqLevel` = 71 WHERE `TrainerId` IN (3, 4) AND `Spel
 
 -- Hunter
 UPDATE `trainer_spell` SET `ReqLevel` = 64 WHERE `TrainerId` = 7 AND `SpellId` = 34074;  -- Aspect of the Viper, level 20 -> 64
-UPDATE `trainer_spell` SET `ReqLevel` = 71 WHERE `TrainerId` = 7 AND `SpellId` = 34120;  -- Steady Shot (Rank 2), level 62 -> 71
-UPDATE `trainer_spell` SET `ReqLevel` = 71 WHERE `TrainerId` = 7 AND `SpellId` = 56641;  -- Steady Shot (Rank 1), level 50 -> 71
+UPDATE `trainer_spell` SET `ReqLevel` = 62 WHERE `TrainerId` = 7 AND `SpellId` = 56641;  -- Steady Shot (Rank 1), level 50 -> 62
 
 -- Rogue
 UPDATE `trainer_spell` SET `ReqLevel` = 71 WHERE `TrainerId` = 9 AND `SpellId` = 51722;  -- Dismantle, level 20 -> 71
