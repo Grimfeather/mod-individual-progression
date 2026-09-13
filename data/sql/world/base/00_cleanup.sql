@@ -28,6 +28,9 @@ DELETE FROM `creature` WHERE `guid` = 88156 AND `id` IN (20278); -- Vixton Pinch
 
 /* the following edits are temporary */
 
+-- rank 2 was rank 1 during TBC, undo mistake thinking it didn't exist durint TBC
+UPDATE `trainer_spell` SET `ReqLevel` = 62 WHERE `TrainerId` = 7 AND `SpellId` = 34120;  -- Steady Shot (Rank 2), level 72 -> 62
+
 -- undo forced phasing of Ysuria in Theramore
 UPDATE `creature` SET `ScriptName` = '' WHERE `id` = 27703;
 
