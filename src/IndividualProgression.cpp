@@ -6,6 +6,7 @@
 #include "naxxramas_40.h"
 #include "ReputationMgr.h"
 #include "PetDefines.h"
+#include "SpellMgr.h"
 
 IndividualProgression* IndividualProgression::instance()
 {
@@ -1030,6 +1031,7 @@ private:
         sIndividualProgression->fishingFix = sConfigMgr->GetOption<bool>("IndividualProgression.FishingFix", true);
         sIndividualProgression->VanillaHunterPets = sConfigMgr->GetOption<bool>("IndividualProgression.VanillaHunterPets", true);
         sIndividualProgression->WarlockDemonTrainers = sConfigMgr->GetOption<bool>("IndividualProgression.WarlockDemonTrainers", true);
+        sIndividualProgression->SpellCastTimes = sConfigMgr->GetOption<bool>("IndividualProgression.SpellCastTimes", false);
         sIndividualProgression->simpleConfigOverride = sConfigMgr->GetOption<bool>("IndividualProgression.SimpleConfigOverride", true);
         sIndividualProgression->progressionLimit = sConfigMgr->GetOption<uint8>("IndividualProgression.ProgressionLimit", 0);
         sIndividualProgression->startingProgression = sConfigMgr->GetOption<uint8>("IndividualProgression.StartingProgression", 0);
@@ -1127,6 +1129,71 @@ public:
         {
             sWorld->setBoolConfig(CONFIG_OBJECT_QUEST_MARKERS, false);
             sWorld->setBoolConfig(CONFIG_OBJECT_SPARKLES, false);
+        }
+    }
+
+    void AdjustCastTimes(std::initializer_list<uint32> spellIds, uint8 castTimeIndex)
+    {
+        for (uint32 spellId : spellIds)
+        {
+            SpellInfo* spellInfo = const_cast<SpellInfo*>(sSpellMgr->GetSpellInfo(spellId));
+            if (!spellInfo)
+                return;
+            spellInfo->CastTimeEntry = sSpellCastTimesStore.LookupEntry(castTimeIndex);
+        }
+    };
+
+    void OnBeforeWorldInitialized() override
+    {
+        if (sIndividualProgression->SpellCastTimes)
+        {
+            // Mounts
+            for (SkillLineAbilityEntry const* skillLine : GetSkillLineAbilitiesBySkillLine(SKILL_MOUNTS))
+                AdjustCastTimes({ skillLine->Spell }, 14); // from 1.5 to 3 seconds
+
+            // Minipets
+            for (SkillLineAbilityEntry const* skillLine : GetSkillLineAbilitiesBySkillLine(SKILL_COMPANIONS))
+                AdjustCastTimes({ skillLine->Spell }, 4); // from instant to 1 second
+
+            // Various spells used when interacting with gameobjects
+            AdjustCastTimes({ 3365, 5166, 6477, 6478, 6658, 6802, 8386, 8517, 11535, 22810, 45137 }, 6); // from 1 to 5 seconds
+
+            // Class-related spells
+            AdjustCastTimes({ 1842 }, 5); // Disarm Trap (Rogue), from 1 to 2 seconds
+
+            // Profession-related spells
+            AdjustCastTimes({ 29688}, 37); // Transmute: Primal Might (Alchemy), from 5 to 25 seconds
+            AdjustCastTimes({ 7836 }, 6); // Blackmouth Oil (Alchemy), from 1.5 to 5 seconds
+            AdjustCastTimes({ 818 }, 7); // Basic Campfire, from 2 to 10 seconds
+            AdjustCastTimes({ 2366, 2368, 3570, 11993, 28695, 50300 }, 6); // Herb Gathering, from 3 to 5 seconds
+            AdjustCastTimes({ 8087, 8088, 8089, 8090, 8532, 9092, 45731, 64401 }, 6); // Fishing Lures, from 2 to 5 seconds
+            // Many various recipes
+            for (uint32 i = 0; i <= sSpellStore.GetNumRows(); ++i)
+            {
+                if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(i))
+                {
+                    if (spellInfo->HasAttribute(SPELL_ATTR0_IS_TRADESKILL) && spellInfo->CastTimeEntry)
+                    {
+                        switch (spellInfo->CastTimeEntry->ID)
+                        {
+                            case 5: // Tailoring's Bolts of cloth, Cooking recipes
+                                AdjustCastTimes({ i }, 14); // from 2 to 3 seconds
+                                break;
+                            case 16: // Mining, First Aid recipes
+                                AdjustCastTimes({ i }, 14); // from 1.5 to 3 seconds
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+            // Quest-related spells
+            AdjustCastTimes({ 6805, 17474, 20274, 36548, 37452 }, 6); // From various to 6 seconds
+            AdjustCastTimes({ 13399 }, 7); // From instant to 10 seconds
+            AdjustCastTimes({ 17016 }, 31); // From instant to 2.3 seconds
+            AdjustCastTimes({ 12304 }, 32); // From 1 to 7 seconds
         }
     }
 };

@@ -192,6 +192,15 @@ IndividualProgression.VanillaHunterPets = 1
 #
 IndividualProgression.WarlockDemonTrainers = 1
 
+# IndividualProgression.SpellCastTimes
+#
+#        Description: In TBC and WotLK, the cast times of many spells (for example mounts, minipets, opening gameobjects) was lowered to allow faster operation.
+#                     Enable this option to restore Vanilla/TBC cast times.
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.SpellCastTimes = 0
+
 # IndividualProgression.SimpleConfigOverride
 #
 #        Description: If enabled, it will allow this module to set a few AzerothCore config values.
