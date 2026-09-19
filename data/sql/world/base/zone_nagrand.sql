@@ -203,3 +203,45 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 (655280, 65, -1900.89, 8888.02, 37.0238, 0, 0, 0, 0, 100, 0),
 (655280, 66, -1904.16, 8887.94, 37.1452, 0, 0, 0, 0, 100, 0),
 (655280, 67, -1947.18, 8879.73, 36.1108, 0, 5000, 0, 0, 100, 0);
+
+-- fix quests "Totem of Kar'dash" (Alliance/Horde)
+UPDATE `creature` SET `ScriptName` = 'npc_kurenai_captive_ipp' WHERE `id` = 18209;
+UPDATE `creature` SET `ScriptName` = 'npc_maghar_captive_ipp'  WHERE `id` = 18210;
+
+DELETE FROM `creature_text` WHERE `CreatureID` IN (18202, 18203, 18209, 18210, 18211);
+INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
+--
+(18202, 0, 0, 'Don\'t let them escape! Kill the strong one first!', 12, 0, 100, 0, 0, 0, 15002, 0, 'Nurkblood Putrifier SAY_PUTRIFIER_ESCAPE'),
+(18202, 1, 0, 'Where do you think you\'re going? Kill them all!', 12, 0, 100, 0, 0, 0, 15003, 0, 'Murkblood Putrifier SAY_PUTRIFIER_KILL'),
+--
+(18203, 0, 0, 'Don\'t let them escape! Kill the strong one first!', 12, 0, 100, 0, 0, 0, 15002, 0, 'Nurkblood Raider SAY_RAIDER_ESCAPE'),
+(18203, 1, 0, 'Where do you think you\'re going? Kill them all!', 12, 0, 100, 0, 0, 0, 15003, 0, 'Murkblood Raider SAY_RAIDER_KILL'),
+--
+(18209, 0, 0, 'It\'s an ambush! Defend yourself!', 12, 0, 100, 0, 0, 0, 15044, 0, 'Kurenai Captive SAY_KUR_START'),
+(18209, 1, 0, 'We must leave before more are alerted.', 12, 0, 100, 0, 0, 0, 15046, 0, 'Kurenai Captive SAY_KUR_LEAVE'),
+(18209, 2, 0, 'We are surrounded!', 12, 0, 100, 0, 0, 0, 15047, 0, 'Kurenai Captive SAY_KUR_SURROUNDED'),
+(18209, 3, 0, 'Up ahead is the road to Telaar. We will split up when we reach the fork as they will surely send more Murkblood after us. Hopefully one of us makes it back to Telaar alive.', 12, 7, 100, 0, 0, 0, 15048, 0, 'Kurenai Captive SAY_KUR_TELAAR'),
+(18209, 4, 0, 'Farewell, stranger. Your heroics will be remembered by my people. Now, hurry to Telaar!', 12, 0, 100, 0, 0, 0, 15049, 0, 'Kurenai Captive SAY_KUR_FAREWELL'),
+(18209, 5, 0, 'Spirits grant me the strength to heal!', 12, 1, 100, 0, 0, 0, 15004, 0, 'Kurenai Captive SAY_KUR_HEAL'),
+(18209, 5, 1, 'Wounds be gone!', 12, 1, 100, 0, 0, 0, 15005, 0, 'Kurenai Captive SAY_KUR_HEAL'),
+(18209, 6, 0, 'Ride the lightning, filth!', 12, 1, 100, 0, 0, 0, 15006, 0, 'Kurenai Captive SAY_KUR_LIGHTNING'),
+(18209, 6, 1, 'The Sons of Lightning will have their vengeance!', 12, 1, 100, 0, 0, 0, 15007, 0, 'Kurenai Captive SAY_KUR_LIGHTNING'),
+(18209, 7, 0, 'Totem of the earth, halt their advances!', 12, 1, 100, 0, 0, 0, 15008, 0, 'Kurenai Captive SAY_KUR_TOTEMS'),
+(18209, 8, 0, 'FROST SHOCK!', 12, 0, 100, 0, 0, 0, 15009, 0, 'Kurenai Captive SAY_KUR_SHOCK'),
+--
+(18210, 0, 0, 'Look out!', 12, 0, 100, 0, 0, 0, 14999, 0, 'Maghar Captive SAY_MAG_START'),
+(18210, 1, 0, 'More of them coming! Watch out!', 12, 1, 100, 0, 0, 0, 15000, 0, 'Maghar Captive SAY_MAG_MORE'),
+(18210, 2, 0, 'It is best that we split up now, in case they send more after us. Hopefully one of us will make it back to Garrosh. Farewell, stranger.', 12, 1, 100, 0, 0, 0, 15001, 0, 'maghar captive SAY_MAG_FAREWELL'),
+(18210, 3, 0, 'Spirits grant me the strength to heal!', 12, 1, 100, 0, 0, 0, 15004, 0, 'Maghar Captive SAY_MAG_HEAL'),
+(18210, 3, 1, 'Wounds be gone!', 12, 1, 100, 0, 0, 0, 15005, 0, 'Maghar Captive SAY_MAG_HEAL'),
+(18210, 4, 0, 'Ride the lightning, filth!', 12, 1, 100, 0, 0, 0, 15006, 0, 'Maghar Captive SAY_MAG_LIGHTNING'),
+(18210, 4, 1, 'The Sons of Lightning will have their vengeance!', 12, 1, 100, 0, 0, 0, 15007, 0, 'Maghar Captive SAY_MAG_LIGHTNING'),
+(18210, 5, 0, 'Totem of the earth, halt their advances!', 12, 1, 100, 0, 0, 0, 15008, 0, 'Maghar Captive SAY_MAG_TOTEMS'),
+(18210, 6, 0, 'FROST SHOCK!', 12, 0, 100, 0, 0, 0, 15009, 0, 'Maghar Captive SAY_MAG_SHOCK'),
+--
+(18211, 0, 0, 'Treacherous whelp! I will beat you within an inch of your miserable life!', 12, 0, 100, 0, 0, 0, 14974, 0, 'Nurkblood Brute SAY_BRUTE_OOC'),
+(18211, 0, 1, 'Tell me where the totem of Kar\'dash is hidden and the beatings will stop.', 12, 0, 100, 0, 0, 0, 14975, 0, 'Nurkblood Brute SAY_BRUTE_OOC'),
+(18211, 0, 2, 'Once you die from the torture, we will go out and kidnap another of your kind. One of you is bound to crack under the pain and give us the information we need.', 12, 0, 100, 0, 0, 0, 14977, 0, 'Nurkblood Brute SAY_BRUTE_OOC'),
+(18211, 0, 3, 'Once the totem of Kar\'dash is ours, we will raze your cities and rebuild them as our own.', 12, 0, 100, 0, 0, 0, 14978, 0, 'Nurkblood Brute SAY_BRUTE_OOC'),
+(18211, 1, 0, 'Don\'t let them escape! Kill the strong one first!', 12, 0, 100, 0, 0, 0, 15002, 0, 'Nurkblood Brute SAY_BRUTE_ESCAPE'),
+(18211, 2, 0, 'Where do you think you\'re going? Kill them all!', 12, 0, 100, 0, 0, 0, 15003, 0, 'Murkblood Brute SAY_BRUTE_KILL');
