@@ -498,3 +498,4 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 
 UPDATE `creature_template` SET `flags_extra` = flags_extra|134217728 WHERE `entry` IN (18202, 18211); -- Allow to use both GUID and ENTRY specific SAI without one overwriting the other
 UPDATE `creature_template` SET `unit_flags` = 37632 WHERE `entry` IN (18209, 18210);
+UPDATE `creature_template_addon` SET `bytes2` = 0   WHERE `entry` IN (18209, 18210);
