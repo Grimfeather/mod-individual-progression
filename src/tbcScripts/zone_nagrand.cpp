@@ -270,8 +270,20 @@ public:
     bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) override
     {
         if (quest->GetQuestId() == QUEST_TOTEM_KARDASH_A)
-            creature->AI()->SetGUID(player->GetGUID(), quest->GetQuestId());
+        {
+            if (npc_kurenai_captiveAI* EscortAI = dynamic_cast<npc_kurenai_captiveAI*>(creature->AI()))
+            {
+                creature->SetStandState(UNIT_STAND_STATE_STAND);
+                creature->SetFaction(FACTION_ESCORTEE_H_NEUTRAL_ACTIVE);
+                creature->SetWalk(true);
+                EscortAI->Start(true, player->GetGUID(), quest);
+                creature->AI()->Talk(SAY_KUR_START);
 
+                creature->SummonCreature(NPC_MURK_RAIDER, kurenaiAmbushA[0] + 2.5f, kurenaiAmbushA[1] - 2.5f, kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
+                creature->SummonCreature(NPC_MURK_BRUTE, kurenaiAmbushA[0] - 2.5f, kurenaiAmbushA[1] + 2.5f, kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
+                creature->SummonCreature(NPC_MURK_SCAVENGER, kurenaiAmbushA[0], kurenaiAmbushA[1], kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
+            }
+        }
         return true;
     }
 
@@ -287,18 +299,6 @@ public:
         uint32 ChainLightningTimer;
         uint32 HealTimer;
         uint32 FrostShockTimer;
-
-        void SetGUID(ObjectGuid const& guid, int32  /*questId*/) override
-        {
-            me->SetStandState(UNIT_STAND_STATE_STAND);
-            me->SetWalk(true);
-            Start(true, guid);
-            Talk(SAY_KUR_START);
-
-            me->SummonCreature(NPC_MURK_RAIDER, kurenaiAmbushA[0] + 2.5f, kurenaiAmbushA[1] - 2.5f, kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
-            me->SummonCreature(NPC_MURK_BRUTE, kurenaiAmbushA[0] - 2.5f, kurenaiAmbushA[1] + 2.5f, kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
-            me->SummonCreature(NPC_MURK_SCAVENGER, kurenaiAmbushA[0], kurenaiAmbushA[1], kurenaiAmbushA[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 50000);
-        }
 
         void Reset() override
         {
@@ -377,10 +377,11 @@ public:
             if (summoned->GetEntry() == NPC_MURK_BRUTE)
                 summoned->AI()->Talk(SAY_BRUTE_ESCAPE);
 
-            // This function is for when we summoned enemies to fight - so that does NOT mean we should make our totem count in this!
             if (summoned->IsTotem())
                 return;
 
+            summoned->SetWalk(false);
+            summoned->GetMotionMaster()->MovePoint(0, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
             summoned->AI()->AttackStart(me);
         }
 
@@ -403,8 +404,10 @@ public:
             }
         }
 
-        void UpdateEscortAI(uint32 diff) override
+        void UpdateAI(uint32 diff) override
         {
+            npc_escortAI::UpdateAI(diff);
+
             if (!UpdateVictim())
                 return;
 
