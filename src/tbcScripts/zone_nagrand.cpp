@@ -155,10 +155,13 @@ public:
         {
             switch (waypointId)
             {
-                case 7:
+                case 5:
                 {
                     Talk(SAY_MAG_MORE);
-
+                    break;
+                }
+                case 6:
+                {
                     if (Creature* temp = me->SummonCreature(NPC_MURK_PUTRIFIER, magharAmbushB[0], magharAmbushB[1], magharAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000))
                         temp->AI()->Talk(SAY_PUTRIFIER_KILL);
 
@@ -167,7 +170,7 @@ public:
                     me->SummonCreature(NPC_MURK_SCAVENGER, magharAmbushB[0] + 2.5f, magharAmbushB[1] - 2.5f, magharAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
                     break;
                 }
-                case 16:
+                case 11:
                 {
                     Talk(SAY_MAG_FAREWELL);
 
@@ -331,15 +334,18 @@ public:
         {
             switch (waypointId)
             {
-                case 1:
+                case 2:
                 {
                     Talk(SAY_KUR_LEAVE);
                     break;
                 }
-                case 3:
+                case 8:
                 {
                     Talk(SAY_KUR_SURROUNDED);
-
+                    break;
+                }
+                case 9:
+                {
                     if (Creature* cr = me->SummonCreature(NPC_MURK_PUTRIFIER, kurenaiAmbushB[0], kurenaiAmbushB[1], kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000))
                         cr->AI()->Talk(SAY_PUTRIFIER_KILL);
 
@@ -348,12 +354,12 @@ public:
                     me->SummonCreature(NPC_MURK_SCAVENGER, kurenaiAmbushB[0] + 2.5f, kurenaiAmbushB[1] - 2.5f, kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
                     break;
                 }
-                case 4:
+                case 10:
                 {
                     Talk(SAY_KUR_TELAAR);
                     break;
                 }
-                case 7:
+                case 13:
                 {
                     Talk(SAY_KUR_FAREWELL);
 
