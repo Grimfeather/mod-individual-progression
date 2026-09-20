@@ -339,11 +339,11 @@ DELETE FROM `creature_formations` WHERE `leaderGUID` IN (@CGUID+437, @CGUID+438,
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES 
 --
 (@CGUID+437, @CGUID+437, 0, 0,   515, 0, 0),
-(@CGUID+437, @CGUID+425, 3, 270, 515, 0, 0),
+(@CGUID+437, @CGUID+425, 3, 180, 515, 0, 0),
 (@CGUID+438 ,@CGUID+438, 0, 0,   515, 0, 0),
-(@CGUID+438 ,@CGUID+434, 3, 270, 515, 0, 0),
+(@CGUID+438 ,@CGUID+434, 3, 180, 515, 0, 0),
 (@CGUID+439 ,@CGUID+439, 0, 0,   515, 0, 0),
-(@CGUID+439 ,@CGUID+436, 3, 270, 515, 0, 0);
+(@CGUID+439 ,@CGUID+436, 3, 180, 515, 0, 0);
 
 DELETE FROM `creature_addon` WHERE `guid` IN (@CGUID+437, @CGUID+438, @CGUID+439);
 INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `visibilityDistanceType`, `auras`) VALUES
