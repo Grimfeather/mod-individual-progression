@@ -77,11 +77,13 @@ enum QuestID
     QUEST_TOTEM_KARDASH_A = 9879
 };
 
-static float kurenaiAmbushA[] = { -1520.6f, 8468.4f, -4.1f };
-static float kurenaiAmbushB[] = { -1491.554321f, 8506.483398f, 1.248f };
+static float kurenaiAmbushA[]  = { -1520.6f, 8468.4f, -4.1f };
+static float kurenaiAmbushB1[] = { -1419.67f, 8515.80f, 8.32922f };
+static float kurenaiAmbushB2[] = { -1430.77f, 8524.27f, 13.5847f };
+static float kurenaiAmbushB3[] = { -1416.78f, 8504.90f, 8.10577f };
 
-static float magharAmbushA[] = {-1568.805786f, 8533.873047f, 1.958f};
-static float magharAmbushB[] = {-1491.554321f, 8506.483398f, 1.248f};
+static float magharAmbushA[] = { -1568.805786f, 8533.873047f, 1.958f };
+static float magharAmbushB[] = { -1491.554321f, 8506.483398f, 1.248f };
 
 class npc_maghar_captive_ipp : public CreatureScript
 {
@@ -346,12 +348,12 @@ public:
                 }
                 case 9:
                 {
-                    if (Creature* cr = me->SummonCreature(NPC_MURK_PUTRIFIER, kurenaiAmbushB[0], kurenaiAmbushB[1], kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000))
-                        cr->AI()->Talk(SAY_PUTRIFIER_KILL);
+                    if (Creature* cr = me->SummonCreature(NPC_MURK_BRUTE, kurenaiAmbushB1[0], kurenaiAmbushB1[1], kurenaiAmbushB1[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000))
+                        cr->AI()->Talk(SAY_BRUTE_KILL);
 
-                    me->SummonCreature(NPC_MURK_PUTRIFIER, kurenaiAmbushB[0] - 2.5f, kurenaiAmbushB[1] - 2.5f, kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
-                    me->SummonCreature(NPC_MURK_SCAVENGER, kurenaiAmbushB[0] + 2.5f, kurenaiAmbushB[1] + 2.5f, kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
-                    me->SummonCreature(NPC_MURK_SCAVENGER, kurenaiAmbushB[0] + 2.5f, kurenaiAmbushB[1] - 2.5f, kurenaiAmbushB[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
+                    me->SummonCreature(NPC_MURK_BRUTE, kurenaiAmbushB1[0], kurenaiAmbushB1[1], kurenaiAmbushB1[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
+                    me->SummonCreature(NPC_MURK_PUTRIFIER, kurenaiAmbushB2[0], kurenaiAmbushB2[1], kurenaiAmbushB2[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
+                    me->SummonCreature(NPC_MURK_PUTRIFIER, kurenaiAmbushB3[0], kurenaiAmbushB3[1], kurenaiAmbushB3[2], 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
                     break;
                 }
                 case 10:
