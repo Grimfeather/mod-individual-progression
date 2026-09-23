@@ -1247,3 +1247,33 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (-27971, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Rapid Bonemaw - On Respawn - Set Active'),
 (-27972, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Rapid Bonemaw - On Respawn - Set Active'),
 (-27973, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Rapid Bonemaw - On Respawn - Set Active');
+
+-- fix caravan escorts and quests
+UPDATE `creature` SET `ScriptName` = 'npc_cork_gizelton_ipp' WHERE `id` = 11625;
+UPDATE `creature_template` SET `unit_flags` = 0 WHERE `entry` IN (11564, 11625, 11626);
+
+DELETE FROM `script_waypoint` WHERE `entry` = 11625 AND `pointid` BETWEEN 191 AND 195; 
+INSERT INTO `script_waypoint` (`entry`, `pointid`, `location_x`, `location_y`, `location_z`, `waittime`, `point_comment`) VALUES
+--
+(11625, 191, -1932.62, 2425.58, 60.9125, 0, 'Desolace Caravan'),
+(11625, 192, -1937.94, 2414.56, 60.4535, 0, 'Desolace Caravan'),
+(11625, 193, -1932.83, 2414.21, 60.5086, 0, 'Desolace Caravan'), -- stop
+(11625, 194, -1916.88, 2405.2, 60.7632, 0, 'Desolace Caravan'),
+(11625, 195, -1904, 2405.04, 59.8224, 0, 'Desolace Caravan');
+
+DELETE FROM `creature_text` WHERE `CreatureID` IN (11625, 11626);
+INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
+--
+(11625, 0, 0, 'So sorry to leave a customer but we have places to go and people to swindle. We will be back sometime later today. Good-bye!', 12, 0, 100, 0, 0, 0, 7505, 0, 'Cork Gizelton'),
+(11625, 1, 0, 'I am looking for some bodyguards that would like to protect the Gizelton Caravan. We are stopped on the road east of Kormek\'s Hut, north of Kolkar Centaur Village.', 14, 0, 100, 0, 0, 0, 7474, 0, 'Cork Gizelton'),
+(11625, 2, 0, 'Hey, you call yourself a body guard? Get to work and protect us...', 12, 0, 100, 0, 0, 0, 7310, 0, 'Cork Gizelton'),
+(11625, 3, 0, 'Mister body guard, are you going to earn your money or what?', 12, 0, 100, 0, 0, 0, 7311, 0, 'Cork Gizelton'),
+(11625, 4, 0, 'You\'re fired! <Cough...Cork clears throat.> I mean, help!', 12, 0, 100, 0, 0, 0, 7312, 0, 'Cork Gizelton'),
+(11625, 5, 0, 'Blast those stupid centaurs! Sigh - well, it seems you kept your bargain. Up the road you shall find Smeed Scrabblescrew, he has your money.', 12, 0, 100, 0, 0, 0, 7334, 0, 'Cork Gizelton'),
+--
+(11626, 0, 0, 'Time for the Gizleton Caravan to head on out! We\'ll be back soon but if you cannot wait, head north to Kormek\'s Hut. We open shop in about an hour', 12, 0, 100, 0, 0, 0, 7506, 0, 'Rigger Gizelton'),
+(11626, 1, 0, 'This is Rigger Gizelton asking for assistance escorting my caravan past Mannoroc Coven. I\'m on the road east of Shadowprey village.', 14, 0, 100, 0, 0, 0, 7475, 0, 'Rigger Gizelton'),
+(11626, 2, 0, 'Eeck! Demons appear hungry for the kodos!', 12, 0, 100, 0, 0, 0, 7330, 0, 'Rigger Gizelton'),
+(11626, 3, 0, 'What am I paying you for? The kodos are nearly dead!', 12, 0, 100, 0, 0, 0, 7331, 0, 'Rigger Gizelton'),
+(11626, 4, 0, 'Only if I were about five feet taller, then I would show these blasphemous demons a thing or two! Help!', 12, 0, 100, 0, 0, 0, 7332, 0, 'Rigger Gizelton'),
+(11626, 5, 0, 'Wow! We did it... not sure why we thought we needed the likes of you. Nevertheless, speak with Smeed Scrabblescrew; he will give you your earnings!', 12, 0, 100, 0, 0, 0, 7332, 0, 'Rigger Gizelton');
