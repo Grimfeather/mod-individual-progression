@@ -30,6 +30,7 @@ enum Caravan
     EVENT_RESUME_PATH                   = 1,
     EVENT_WAIT_FOR_ASSIST               = 2,
     EVENT_RESTART_ESCORT                = 3,
+    EVENT_CHECK_FOLLOWERS               = 4,
 
     NPC_CORK_GIZELTON                   = 11625,
     NPC_RIGGER_GIZELTON                 = 11626,
@@ -60,7 +61,7 @@ enum Caravan
     NPC_NETHER                          = 4684,
 };
 
-constexpr Milliseconds TIME_SHOP_STOP   = 60s; // was 600
+constexpr Milliseconds TIME_SHOP_STOP   = 600s;
 constexpr Milliseconds TIME_HIRE_STOP   = 240s;
 constexpr Milliseconds TIME_SHORT_BREAK = 7s;
 
@@ -303,7 +304,8 @@ public:
                     break;
                 // Finished south path
                 case 193:
-                    me->SummonCreature(NPC_SUPER_SELLER, -1905.5f, 2463.3f, 61.52f, 5.87f, TEMPSUMMON_TIMED_DESPAWN, 600000 + 15 * IN_MILLISECONDS);
+                    me->SummonCreature(NPC_SUPER_SELLER, -1927.48f, 2418.02f, 60.77f, 5.67f, TEMPSUMMON_TIMED_DESPAWN, 600000 + 15 * IN_MILLISECONDS);
+                    
                     SetEscortPaused(true);
                     events.ScheduleEvent(EVENT_RESUME_PATH, TIME_SHOP_STOP);
                     CheckCaravan();
@@ -453,32 +455,107 @@ public:
             events.Update(diff);
             switch (events.ExecuteEvent())
             {
-                case EVENT_RESUME_PATH:
-                    SetEscortPaused(false);
-                    if (Creature* talker = headNorth ? me : ObjectAccessor::GetCreature(*me, summons[0]))
-                        talker->AI()->Talk(SAY_CARAVAN_LEAVE);
+            case EVENT_RESUME_PATH:
+                SetEscortPaused(false);
+                if (Creature* talker = headNorth ? me : ObjectAccessor::GetCreature(*me, summons[0]))
+                    talker->AI()->Talk(SAY_CARAVAN_LEAVE);
 
-                    headNorth = !headNorth;
-                    break;
-                case EVENT_WAIT_FOR_ASSIST:
-                    SetEscortPaused(false);
-                    if (Creature* active = !headNorth ? me : ObjectAccessor::GetCreature(*me, summons[0]))
-                        active->RemoveNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
-                    break;
-                case EVENT_RESTART_ESCORT:
-                    if (!IsEscorted())
+                headNorth = !headNorth;
+                break;
+            case EVENT_WAIT_FOR_ASSIST:
+                SetEscortPaused(false);
+                if (Creature* active = !headNorth ? me : ObjectAccessor::GetCreature(*me, summons[0]))
+                    active->RemoveNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
+                break;
+            case EVENT_RESTART_ESCORT:
+                if (!IsEscorted())
+                {
+                    CheckCaravan();
+                    SetDespawnAtEnd(false);
+                    Start(true, ObjectGuid::Empty, 0, false, false, true);
+                }
+                break;
+            case EVENT_CHECK_FOLLOWERS:
+            {
+                bool anyInCombat = false;
+                Creature* lastVictimSrc = nullptr;
+                for (uint8 i = 0; i < MAX_CARAVAN_SUMMONS; ++i)
+                {
+                    if (Creature* summon = ObjectAccessor::GetCreature(*me, summons[i]))
                     {
-                        CheckCaravan();
-                        SetDespawnAtEnd(false);
-                        Start(true, ObjectGuid::Empty, 0, false, false, true);
+                        if (summon->IsInCombat())
+                        {
+                            anyInCombat = true;
+                            if (Unit* victim = summon->GetVictim())
+                                lastVictimSrc = summon;
+                        }
                     }
-                    break;
+                }
+
+                if (!anyInCombat)
+                {
+                    SummonsFollow();
+                    SetEscortPaused(false);
+                }
+                else
+                {
+                    // Assist followers
+                    if (lastVictimSrc && lastVictimSrc->GetVictim())
+                    {
+                        Unit* victim = lastVictimSrc->GetVictim();
+                        if (victim && !victim->IsFriendlyTo(me))
+                        {
+                            AttackStart(victim);
+                            me->CallForHelp(30.0f);
+                        }
+                    }
+
+                    events.ScheduleEvent(EVENT_CHECK_FOLLOWERS, 1s);
+                }
+            }
+            break;
             }
 
             // Combat transition handling (only on state changes).
             bool currentlyInCombat = me->IsInCombat();
 
-            // Leader just entered combat -> order nearby summons to assist once
+            // If followers are attacked while leader is OOC, assist them and pause the escort
+            if (IsEscorted() && !currentlyInCombat && !_wasInCombat)
+            {
+                bool anyInCombat = false;
+                Creature* lastVictimSrc = nullptr;
+                for (uint8 i = 0; i < MAX_CARAVAN_SUMMONS; ++i)
+                {
+                    if (Creature* summon = ObjectAccessor::GetCreature(*me, summons[i]))
+                    {
+                        if (summon->IsInCombat())
+                        {
+                            anyInCombat = true;
+                            if (Unit* v = summon->GetVictim())
+                                lastVictimSrc = summon;
+                        }
+                    }
+                }
+
+                if (anyInCombat)
+                {
+                    // Assist followers and pause the escort, schedule checks
+                    if (lastVictimSrc && lastVictimSrc->GetVictim())
+                    {
+                        Unit* victim = lastVictimSrc->GetVictim();
+                        if (victim && !victim->IsFriendlyTo(me))
+                        {
+                            AttackStart(victim);
+                            me->CallForHelp(30.0f);
+                        }
+                    }
+
+                    SetEscortPaused(true);
+                    events.ScheduleEvent(EVENT_CHECK_FOLLOWERS, 1s);
+                }
+            }
+
+            // If leader enters combat, order nearby summons to assist
             if (currentlyInCombat && !_wasInCombat)
             {
                 UpdateVictim();
@@ -501,7 +578,42 @@ public:
             }
             else if (!currentlyInCombat && _wasInCombat)
             {
-                SummonsFollow();
+                // If any follower is still in combat, assist them and pause the escort until they finish.
+                bool anyInCombat = false;
+                Creature* lastVictimSrc = nullptr;
+
+                for (uint8 i = 0; i < MAX_CARAVAN_SUMMONS; ++i)
+                {
+                    if (Creature* summon = ObjectAccessor::GetCreature(*me, summons[i]))
+                    {
+                        if (summon->IsInCombat())
+                        {
+                            anyInCombat = true;
+                            if (Unit* v = summon->GetVictim())
+                                lastVictimSrc = summon;
+                        }
+                    }
+                }
+
+                if (!anyInCombat)
+                    SummonsFollow();
+                else
+                {
+                    // Assist followers
+                    if (lastVictimSrc && lastVictimSrc->GetVictim())
+                    {
+                        Unit* victim = lastVictimSrc->GetVictim();
+                        if (victim && !victim->IsFriendlyTo(me))
+                        {
+                            AttackStart(victim);
+                            me->CallForHelp(30.0f);
+                        }
+                    }
+
+                    // Pause escort to avoid leader moving away from engaged followers.
+                    SetEscortPaused(true);
+                    events.ScheduleEvent(EVENT_CHECK_FOLLOWERS, 1s);
+                }
             }
 
             // remember state for next tick
