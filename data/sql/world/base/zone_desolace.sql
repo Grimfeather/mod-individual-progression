@@ -1249,6 +1249,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (-27973, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Rapid Bonemaw - On Respawn - Set Active');
 
 -- fix caravan escorts and quests
+UPDATE `creature` SET `ScriptName` = 'npc_cork_gizelton_ipp' WHERE `id` = 11625;
 UPDATE `creature_template` SET `unit_flags` = 0 WHERE `entry` IN (11564, 11625, 11626);
 
 DELETE FROM `creature_text` WHERE `CreatureID` IN (11625, 11626);
