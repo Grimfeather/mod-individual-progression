@@ -1252,6 +1252,15 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 UPDATE `creature` SET `ScriptName` = 'npc_cork_gizelton_ipp' WHERE `id` = 11625;
 UPDATE `creature_template` SET `unit_flags` = 0 WHERE `entry` IN (11564, 11625, 11626);
 
+DELETE FROM `script_waypoint` WHERE `entry` = 11625 AND `pointid` BETWEEN 191 AND 195; 
+INSERT INTO `script_waypoint` (`entry`, `pointid`, `location_x`, `location_y`, `location_z`, `waittime`, `point_comment`) VALUES
+--
+(11625, 191, -1932.62, 2425.58, 60.9125, 0, 'Desolace Caravan'),
+(11625, 192, -1937.94, 2414.56, 60.4535, 0, 'Desolace Caravan'),
+(11625, 193, -1932.83, 2414.21, 60.5086, 0, 'Desolace Caravan'), -- stop
+(11625, 194, -1916.88, 2405.2, 60.7632, 0, 'Desolace Caravan'),
+(11625, 195, -1904, 2405.04, 59.8224, 0, 'Desolace Caravan');
+
 DELETE FROM `creature_text` WHERE `CreatureID` IN (11625, 11626);
 INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
 --
