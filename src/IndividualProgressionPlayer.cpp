@@ -757,62 +757,6 @@ public:
                     return;
             }
    
-            if (entry == COLOSSUS_ZORA || entry == COLOSSUS_REGAL || entry == COLOSSUS_ASHI || entry == GENERAL_NOKHOR)
-            {
-                if (group)
-                {
-                    for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
-                    {
-                        Player* member = itr->GetSource();
-                        if (!member || !sIndividualProgression->isNormalAccount(member))
-                            continue;
-
-                        switch (entry)
-                        {
-                        case COLOSSUS_ZORA:
-                            if (member->HasQuest(QUEST_COLOSSUS_ZORA))
-                                member->CompleteQuest(QUEST_COLOSSUS_ZORA);
-                            break;
-                        case COLOSSUS_REGAL:
-                            if (member->HasQuest(QUEST_COLOSSUS_REGAL))
-                                member->CompleteQuest(QUEST_COLOSSUS_REGAL);
-                            break;
-                        case COLOSSUS_ASHI:
-                            if (member->HasQuest(QUEST_COLOSSUS_ASHI))
-                                member->CompleteQuest(QUEST_COLOSSUS_ASHI);
-                            break;
-                        case GENERAL_NOKHOR:
-                            if (member->HasQuest(CHAOS_AND_DESTRUCTION))
-                                member->CompleteQuest(CHAOS_AND_DESTRUCTION);
-                            break;
-                        }
-                    }
-                }
-                else // no group
-                {
-                    switch (entry)
-                    {
-                    case COLOSSUS_ZORA:
-                        if (killer->HasQuest(QUEST_COLOSSUS_ZORA))
-                            killer->CompleteQuest(QUEST_COLOSSUS_ZORA);
-                        break;
-                    case COLOSSUS_REGAL:
-                        if (killer->HasQuest(QUEST_COLOSSUS_REGAL))
-                            killer->CompleteQuest(QUEST_COLOSSUS_REGAL);
-                        break;
-                    case COLOSSUS_ASHI:
-                        if (killer->HasQuest(QUEST_COLOSSUS_ASHI))
-                            killer->CompleteQuest(QUEST_COLOSSUS_ASHI);
-                        break;
-                    case GENERAL_NOKHOR:
-                        if (killer->HasQuest(CHAOS_AND_DESTRUCTION))
-                            killer->CompleteQuest(CHAOS_AND_DESTRUCTION);
-                        break;
-                    }
-                }
-                return;
-            }
-
             if (group)
             {
                 for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
