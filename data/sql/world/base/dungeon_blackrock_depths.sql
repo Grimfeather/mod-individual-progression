@@ -439,7 +439,7 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `p
 DELETE FROM `creature_formations` WHERE `leaderGUID` IN (45852, 45857, 45875, 47781, 47786, 47799, 90658);
 INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, `groupAI`, `point_1`, `point_2`) VALUES
 --
-(45852, 45852, 0, 0,   515, 0, 0),
+(45852, 45852, 0, 0,   515, 0, 0), -- handled by AC, only changing distance
 (45852, 45853, 6, 270, 515, 0, 0),
 (45852, 45854, 3, 270, 515, 0, 0),
 (45852, 45855, 3, 90,  515, 0, 0),
@@ -457,7 +457,7 @@ INSERT INTO `creature_formations` (`leaderGUID`, `memberGUID`, `dist`, `angle`, 
 (47781, 47784, 6, 270, 515, 0, 0),
 (47781, 47785, 3, 270, 515, 0, 0),
 --
-(47786, 47786, 0, 0,   515, 0, 0),
+(47786, 47786, 0, 0,   515, 0, 0), -- handled by AC, only changing distance
 (47786, 47787, 6, 90,  515, 0, 0),
 (47786, 47789, 3, 90,  515, 0, 0),
 (47786, 47788, 6, 270, 515, 0, 0),
