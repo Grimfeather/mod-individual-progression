@@ -573,7 +573,7 @@ UPDATE `creature_addon` SET `auras` = '8279' WHERE `guid` IN
 (45896, 45897, 45898, 45915, 45916, 45917, 45924, 45925, 45926, 47826, 47827, 47830, 47831, 47832, 90686, 90687,
 90688, 90855, 90856, 90857, 90867, 90868, 90918, 90917, 90916, 91032, 91033, 91034, 91085, 91086, 91100, 91101);
 
-DELETE FROM `waypoint_data` WHERE `id` IN (458980, 908660, 909170); 
+DELETE FROM `waypoint_data` WHERE `id` IN (458980, 908660, 909170);
 DELETE FROM `waypoint_data` WHERE `id` IN (459170, 459240, 478250, 478320, 906880, 908550, 910320, 910840, 910990); -- 00_cleanup
 INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `position_z`, `orientation`, `delay`, `move_type`, `action`, `action_chance`, `wpguid`) VALUES
 --
