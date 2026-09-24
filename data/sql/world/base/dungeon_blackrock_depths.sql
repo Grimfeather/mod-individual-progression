@@ -37,11 +37,18 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (8894, 0, 2, 0, 0, 0, 100, 0, 7000, 11000, 6000, 9000, 0, 0, 11, 15585, 64, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Anvilrage Medic - In Combat - Cast Prayer of Healing'),
 (8894, 0, 3, 0, 14, 0, 100, 0, 2500, 40, 4000, 6000, 0, 0, 11, 15586, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,        'Anvilrage Medic - Friendly Missing 2500 Health - Cast Heal'),
 (8894, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Medic - Between 0-15% Health - Flee For Assist'),
+--
 (8895, 0, 0, 0, 4, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 9128, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Anvilrage Officer - On Aggro - Cast Battle Shout'),
 (8895, 0, 1, 0, 9, 0, 100, 0, 0, 0, 9000, 15000, 0, 5, 11, 6253, 32, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Anvilrage Officer - Within 0-5 Range - Cast Backhand'),
 (8895, 0, 2, 0, 14, 0, 100, 0, 3000, 40, 6000, 10000, 0, 0, 11, 13952, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Anvilrage Officer - Friendly Missing 3000 Health - Cast Holy Light'),
 (8895, 0, 3, 0, 2, 0, 100, 0, 0, 30, 21000, 28000, 0, 0, 11, 13874, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Anvilrage Officer - Between 0-30% Health - Cast Divine Shield'),
 (8895, 0, 4, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                      'Anvilrage Officer - Between 0-15% Health - Flee For Assist'),
+(8895, 0, 5, 0, 108, 0, 100, 0, 4, 4778600, 0, 0, 0, 0, 230, 1, 7, 200, 0, 0, 0, 206, 0, 0, 1, 0, 0, 0, 0, 0,          'Anvilrage Officer - On Point 4 of Path 4778600 Reached - Follow in Single File'),
+(8895, 0, 6, 0, 108, 0, 100, 0, 17, 4778600, 0, 0, 0, 0, 230, 1, 2, 200, 0, 0, 0, 206, 0, 0, 1, 0, 0, 0, 0, 0,         'Anvilrage Officer - On Point 17 of Path 4778600 Reached - Follow in Fan Formation'),
+(8895, 0, 7, 0, 108, 0, 100, 0, 32, 4778600, 0, 0, 0, 0, 230, 1, 5, 200, 0, 0, 0, 206, 0, 0, 1, 0, 0, 0, 0, 0,         'Anvilrage Officer - On Point 32 of Path 4778600 Reached - Follow in Line Formation'),
+(8895, 0, 8, 0, 108, 0, 100, 0, 45, 4778600, 0, 0, 0, 0, 230, 1, 1, 200, 0, 0, 0, 206, 0, 0, 1, 0, 0, 0, 0, 0,         'Anvilrage Officer - On Point 45 of Path 4778600 Reached - Follow in Diamond Formation'),
+(8895, 0, 9, 0, 108, 0, 100, 0, 61, 4778600, 0, 0, 0, 0, 230, 1, 5, 200, 0, 0, 0, 206, 0, 0, 1, 0, 0, 0, 0, 0,         'Anvilrage Officer - On Point 61 of Path 4778600 Reached - Follow in Line Formation');
+--
 (8896, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Shadowforge Peasant - Outside 30 Range - Start Combat Movement'),
 (8896, 0, 1, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 5, 30, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Shadowforge Peasant - Within 5-30 Range - Stop Combat Movement'),
 (8896, 0, 2, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 0, 5, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Shadowforge Peasant - Within 0-5 Range - Start Combat Movement'),
