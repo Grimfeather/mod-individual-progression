@@ -7,14 +7,17 @@ INSERT INTO `creature` (`guid`, `id`, `map`, `position_x`, `position_y`, `positi
 UPDATE `creature_template` SET `rank` = 3, `type_flags` = 4 WHERE `entry` = 17544; -- M'uru
 
 -- Restore Blood Knight quests to pre-2.4 state
+-- The races of a quest that already exists carry over, so races other modules added to it stay.
+SET @BK_RACES_9681 := (SELECT `AllowableRaces` FROM `quest_template` WHERE `ID` = 9681);
+SET @BK_RACES_9684 := (SELECT `AllowableRaces` FROM `quest_template` WHERE `ID` = 9684);
 DELETE FROM `quest_template` WHERE `ID` IN (9681, 9684, 109681, 109684);
 INSERT INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `RewardNextQuest`, `RewardXPDifficulty`, `StartItem`, `Flags`, `AllowableRaces`,
 `LogTitle`, `QuestCompletionLog`, `RequiredItemId1`, `RequiredItemCount1`, `VerifiedBuild`) VALUES
 --
-(9681,   2, -1, 12, -141, 9684, 3, 0, 136, 512, 'A Study in Power', NULL, 0, 0, 12340),
-(9684,   2, -1, 12, -141, 9685, 3, 24157, 128, 512, 'Claiming the Light', 'Return to Knight-Lord Bloodvalor in Eversong Woods.', 24156, 1, 12340),
-(109681, 2, -1, 12, -141, 9684, 3, 0, 136, 512, 'A Study in Power', NULL, 0, 0, 12340),
-(109684, 2, -1, 12, -141, 9685, 3, 24157, 128, 512, 'Claiming the Light', 'Return to Knight-Lord Bloodvalor in Eversong Woods.', 24156, 1, 12340);
+(9681,   2, -1, 12, -141, 9684, 3, 0, 136, IFNULL(@BK_RACES_9681, 512), 'A Study in Power', NULL, 0, 0, 12340),
+(9684,   2, -1, 12, -141, 9685, 3, 24157, 128, IFNULL(@BK_RACES_9684, 512), 'Claiming the Light', 'Return to Knight-Lord Bloodvalor in Eversong Woods.', 24156, 1, 12340),
+(109681, 2, -1, 12, -141, 9684, 3, 0, 136, IFNULL(@BK_RACES_9681, 512), 'A Study in Power', NULL, 0, 0, 12340),
+(109684, 2, -1, 12, -141, 9685, 3, 24157, 128, IFNULL(@BK_RACES_9684, 512), 'Claiming the Light', 'Return to Knight-Lord Bloodvalor in Eversong Woods.', 24156, 1, 12340);
 
 UPDATE `quest_template` SET 
 `QuestDescription` = 'Do not think me unduly harsh, $N. Stillblade knew well what he was being sent to do. He understood and accepted his duty and is an example for all aspiring Blood Knights.$B$BMy words are no eulogy, $N. Stillblade\'s service to us is far from over and you will be the instrument of his resurrection.$B$BYour education in the order\'s ways has just begun. With the betrayal of Kael\'thas and the loss of our power source, you must learn new methods of wielding the Light. Seek out Magister Astalor Bloodsworn.'
