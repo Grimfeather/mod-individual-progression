@@ -1,0 +1,86 @@
+/* smart scripts */
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (24683, 24684, 24685, 24686, 24687, 24688, 24689, 24690, 24696, 24697, 24698);
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2469001, 2469002);
+
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
+`event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
+--
+(24683, 0, 0, 0, 9, 0, 100, 2, 0, 0, 12000, 24000, 10, 60, 11, 44478, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Sunblade Mage Guard - In Combat - Cast Glaive Throw'),
+(24683, 0, 1, 0, 9, 0, 100, 4, 0, 0, 10000, 20000, 10, 60, 11, 46028, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Sunblade Mage Guard - In Combat - Cast Glaive Throw (heroic)'),
+(24683, 0, 2, 0, 0, 0, 100, 1, 12000, 24000, 30000, 40000, 0, 0, 11, 44475, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,  'Sunblade Mage Guard - In Combat - Cast Magic Dampening Field'),
+(24683, 0, 3, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44574, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Mage Guard - Out of Combat - Cast Fel Energy Cosmetic'),
+--
+(24684, 0, 0, 0, 0, 0, 100, 2, 3000, 12000, 8000, 16000, 0, 0, 11, 44480, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Sunblade Blood Knight - In Combat - Cast Seal of Wrath'),
+(24684, 0, 1, 0, 0, 0, 100, 4, 3000, 12000, 8000, 16000, 0, 0, 11, 46030, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Sunblade Blood Knight - In Combat - Cast Seal of Wrath (heroic)'),
+(24684, 0, 2, 0, 9, 0, 100, 2, 0, 0, 8000, 24000, 0, 5, 11, 44482, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Sunblade Blood Knight - Within 0-5 Range - Cast Judgement of Wrath'),
+(24684, 0, 3, 0, 9, 0, 100, 4, 0, 0, 8000, 24000, 0, 5, 11, 46033, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Sunblade Blood Knight - Within 0-5 Range - Cast Judgement of Wrath (heroic)'),
+(24684, 0, 4, 0, 74, 0, 100, 2, 0, 0, 12000, 18000, 40, 40, 11, 44479, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Sunblade Blood Knight - On Friendly Between 0-40% Health - Cast Holy Light'),
+(24684, 0, 5, 0, 74, 0, 100, 4, 0, 0, 15000, 20000, 40, 40, 11, 46029, 1, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Sunblade Blood Knight - On Friendly Between 0-40% Health - Cast Holy Light (heroic)'),
+(24684, 0, 6, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44574, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Blood Knight - Out of Combat - Cast Fel Energy Cosmetic'),
+--
+(24685, 0, 0, 0, 9, 0, 100, 2, 0, 0, 2000, 2000, 6, 40, 11, 44606, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Magister - Within 6-40 Range - Cast Frostbolt'),
+(24685, 0, 1, 0, 9, 0, 100, 2, 0, 0, 5000, 10000, 0, 5, 11, 44606, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Magister - Within 0-5 Range - Cast Frostbolt'),
+(24685, 0, 2, 0, 9, 0, 100, 4, 0, 0, 2000, 2000, 6, 40, 11, 46035, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Magister - Within 6-40 Range - Cast Frostbolt (heroic)'),
+(24685, 0, 3, 0, 9, 0, 100, 4, 0, 0, 5000, 10000, 0, 5, 11, 46035, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Magister - Within 0-5 Range - Cast Frostbolt (heroic)'),
+(24685, 0, 4, 0, 106, 0, 100, 2, 0, 0, 17000, 27000, 0, 8, 11, 44644, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Sunblade Magister - Within Range 0-8 - Cast Arcane Nova'),
+(24685, 0, 5, 0, 106, 0, 100, 4, 0, 0, 15000, 21000, 0, 8, 11, 46036, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Sunblade Magister - Within Range 0-8 - Cast Arcane Nova (heroic)'),
+(24685, 0, 6, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44574, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Magister - Out of Combat - Cast Fel Energy Cosmetic'),
+--
+(24686, 0, 0, 0, 1, 0, 100, 1, 1000, 1000, 0, 0, 0, 0, 11, 44517, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Warlock - Out of Combat - Cast Summon Sunblade Imp'),
+(24686, 0, 1, 0, 1, 0, 100, 1, 1, 1000, 180000, 180000, 0, 0, 11, 44520, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Sunblade Warlock - Out of Combat - Cast Fel Armor'),
+(24686, 0, 2, 0, 0, 0, 100, 2, 4000, 12000, 12000, 24000, 0, 0, 11, 44518, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Sunblade Warlock - In Combat - Cast Immolate'),
+(24686, 0, 3, 0, 0, 0, 100, 4, 4000, 12000, 12000, 24000, 0, 0, 11, 46042, 0, 0, 0, 0, 0, 5, 30, 0, 0, 0, 0, 0, 0, 0,  'Sunblade Warlock - In Combat - Cast Immolate (heroic)'),
+(24686, 0, 4, 0, 9, 0, 100, 2, 0, 0, 2000, 2000, 6, 30, 11, 44519, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Warlock - Within 6-30 Range - Cast Incinerate'),
+(24686, 0, 5, 0, 9, 0, 100, 2, 0, 0, 5000, 10000, 0, 5, 11, 44519, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Sunblade Warlock - Within 0-5 Range - Cast Incinerate'),
+(24686, 0, 6, 0, 9, 0, 100, 4, 0, 0, 2000, 2000, 6, 30, 11, 46043, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sunblade Warlock - Within 6-30 Range - Cast Incinerate (heroic)'),
+(24686, 0, 7, 0, 9, 0, 100, 4, 0, 0, 5000, 10000, 0, 5, 11, 46043, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Sunblade Warlock - Within 0-5 Range - Cast Incinerate (heroic)'),
+(24686, 0, 8, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44574, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Warlock - Out of Combat - Cast Fel Energy Cosmetic'),
+--
+(24687, 0, 0, 0, 0, 0, 100, 2, 5000, 15000, 12000, 18000, 0, 0, 11, 44599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Sunblade Physician - In Combat - Cast Inject Poison'),
+(24687, 0, 1, 0, 0, 0, 100, 4, 5000, 15000, 12000, 18000, 0, 0, 11, 46046, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Sunblade Physician - In Combat - Cast Inject Poison (heroic)'),
+(24687, 0, 2, 0, 74, 0, 100, 2, 0, 0, 16000, 22000, 60, 40, 11, 44583, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Sunblade Physician - Friendly Below 60% Health - Cast Prayer of Mending'),
+(24687, 0, 3, 0, 74, 0, 100, 4, 0, 0, 16000, 22000, 60, 40, 11, 46045, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0,       'Sunblade Physician - Friendly Below 60% Health - Cast Prayer of Mending (heroic)'),
+(24687, 0, 4, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44574, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Sunblade Physician - Out of Combat - Cast Fel Energy Cosmetic'),
+--
+(24688, 0, 0, 0, 4, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Wretched Skulker - On Aggro - Talk'),
+(24688, 0, 1, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44374, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Wretched Skulker - Out of Combat - Cast Spell Fel Crystal Cosmetic'),
+(24688, 0, 2, 0, 0, 0, 100, 2, 20000, 40000, 30000, 60000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Wretched Skulker - In Combat - Cast Drink Fel Infusion'),
+(24688, 0, 3, 0, 0, 0, 100, 4, 5000, 15000, 15000, 30000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Wretched Skulker - In Combat - Cast Drink Fel Infusion (heroic)'),
+(24688, 0, 4, 0, 9, 0, 100, 0, 0, 0, 2000, 6000, 0, 5, 11, 44533, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,            'Wretched Skulker - Within 0-5 Range - Cast Wretched Stab'),
+--
+(24689, 0, 0, 0, 4, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Wretched Bruiser - On Aggro - Talk'),
+(24689, 0, 1, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44374, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Wretched Bruiser - Out of Combat - Cast Spell Fel Crystal Cosmetic'),
+(24689, 0, 2, 0, 0, 0, 100, 2, 20000, 40000, 30000, 60000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Wretched Bruiser - In Combat - Cast Drink Fel Infusion'),
+(24689, 0, 3, 0, 0, 0, 100, 4, 5000, 15000, 15000, 30000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Wretched Bruiser - In Combat - Cast Drink Fel Infusion (heroic)'),
+(24689, 0, 4, 0, 9, 0, 100, 0, 0, 0, 7000, 17000, 0, 5, 11, 44534, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,           'Wretched Bruiser - Within 0-5 Range - Cast Wretched Strike'),
+--
+(24690, 0, 0, 0, 4, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Wretched Husk - On Aggro - Talk'),
+(24690, 0, 1, 0, 1, 0, 100, 1, 2000, 2000, 0, 0, 0, 0, 11, 44374, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Wretched Husk - Out of Combat - Cast Spell Fel Crystal Cosmetic'),
+(24690, 0, 2, 0, 0, 0, 100, 2, 20000, 40000, 30000, 60000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Wretched Husk - In Combat - Cast Drink Fel Infusion'),
+(24690, 0, 3, 0, 0, 0, 100, 4, 5000, 15000, 15000, 30000, 0, 0, 11, 44505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Wretched Husk - In Combat - Cast Drink Fel Infusion (heroic)'),
+(24690, 0, 4, 0, 0, 0, 100, 0, 0, 0, 3000, 3000, 0, 0, 88, 2469001, 2469002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Wretched Husk - In Combat - Random Cast Fireball or Frostbolt'),
+--
+(2469001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 44503, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,               'Script9 - Wretched Husk - Cast Wretched Fireball'),
+(2469002, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 11, 44504, 64, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,               'Script9 - Wretched Husk - Cast Wretched Frostbolt'),
+--
+(24696, 0, 0, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 30, 60, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Coilskar Witch - Outside 30 Range - Start Combat Movement'),
+(24696, 0, 1, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 5, 30, 21, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,               'Coilskar Witch - Within 5-30 Range - Stop Combat Movement'),
+(24696, 0, 2, 0, 9, 0, 100, 0, 0, 0, 4000, 4000, 0, 5, 21, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Coilskar Witch - Within 0-5 Range - Start Combat Movement'),
+(24696, 0, 3, 0, 9, 0, 100, 2, 0, 0, 3000, 3000, 5, 30, 11, 35946, 512, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,         'Coilskar Witch - Within 5-30 Range - Cast Shot'),
+(24696, 0, 4, 0, 9, 0, 100, 4, 0, 0, 3000, 3000, 5, 30, 11, 22907, 512, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,         'Coilskar Witch - Within 5-30 Range - Cast Shot (heroic)'),
+(24696, 0, 5, 0, 0, 0, 100, 0, 3000, 9000, 6000, 18000, 0, 0, 11, 44639, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     'Coilskar Witch - In Combat - Cast Frost Arrow'),
+(24696, 0, 6, 0, 0, 0, 100, 2, 6000, 18000, 12000, 18000, 0, 0, 11, 20299, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Coilskar Witch - In Combat - Cast Forked Lightning'),
+(24696, 0, 7, 0, 0, 0, 100, 4, 6000, 18000, 12000, 18000, 0, 0, 11, 46150, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Coilskar Witch - In Combat - Cast Forked Lightning (heroic)'),
+(24696, 0, 8, 0, 2, 0, 100, 3, 0, 50, 0, 0, 0, 0, 11, 17741, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Coilskar Witch - Between 0-50% Health - Cast Mana Shield (no repeat)'),
+(24696, 0, 9, 0, 2, 0, 100, 5, 0, 50, 0, 0, 0, 0, 11, 46151, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Coilskar Witch - Between 0-50% Health - Cast Mana Shield (no repeat) (heroic)'),
+--
+(24697, 0, 0, 0, 0, 0, 100, 0, 8000, 18000, 13000, 18000, 0, 0, 11, 44547, 32, 0, 0, 0, 0, 5, 20, 0, 0, 0, 0, 0, 0, 0, 'Sister of Torment - In Combat - Cast Deadly Embrace'),
+(24697, 0, 1, 0, 9, 0, 100, 0, 0, 0, 10000, 10000, 0, 5, 11, 44640, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,          'Sister of Torment - Within 0-5 Range - Cast Lash of Pain'),
+--
+(24698, 0, 0, 0, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Ethereum Smuggler - On Respawn - Set Phase 0'),
+(24698, 0, 1, 0, 9, 0, 100, 0, 0, 0, 10000, 10000, 0, 8, 11, 44538, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,          'Ethereum Smuggler - Within 0-8 Range - Cast Arcane Explosion'),
+(24698, 0, 2, 3, 0, 0, 100, 0, 10000, 20000, 20000, 30000, 0, 0, 11, 36967, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0,  'Ethereum Smuggler - In Combat - Cast Teleport to Player'),
+(24698, 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 22, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                     'Ethereum Smuggler - After Teleport - Set Phase 1'),
+(24698, 0, 4, 0, 9, 1, 100, 0, 0, 0, 600, 600, 0, 5, 11, 36967, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Ethereum Smuggler - In Combat - Cast Arcane Explosion');
