@@ -28,7 +28,15 @@ public:
         if (!sIndividualProgression->isNormalAccount(player)) // bot or exluded account
         {
             if (sIndividualProgression->isBotAccount(player))
+            {
                 sIndividualProgression->UpdateRNDbotSpells(player); // give class spells to RNDbots that have been removed from trainers by IP.
+
+                if (player->getClass() == CLASS_ROGUE)
+                {
+                    if (!player->HasItemCount(5060, 1)) // Thieves' Tools
+                        player->AddItem(5060, 1);
+                }
+            }
             
             if (player->GetLevel() <= 60)
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(0));
