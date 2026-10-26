@@ -45,7 +45,7 @@ public:
         }
         else if (sIndividualProgression->isExcludedAccount(player))
         {
-            sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(17));
+            sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(18));
         }
         else // normal account
         {
