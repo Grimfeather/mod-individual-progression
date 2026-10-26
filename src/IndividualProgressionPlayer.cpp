@@ -25,25 +25,27 @@ public:
         if (!player || !player->IsInWorld())
             return;
 
-        if (!sIndividualProgression->isNormalAccount(player)) // bot or exluded account
+        if (sIndividualProgression->isBotAccount(player))
         {
-            if (sIndividualProgression->isBotAccount(player))
-            {
-                sIndividualProgression->UpdateRNDbotSpells(player); // give class spells to RNDbots that have been removed from trainers by IP.
+            sIndividualProgression->UpdateRNDbotSpells(player); // give class spells to RNDbots that have been removed from trainers by IP.
 
-                if (player->getClass() == CLASS_ROGUE)
-                {
-                    if (!player->HasItemCount(5060, 1)) // Thieves' Tools
-                        player->AddItem(5060, 1);
-                }
+            if (player->getClass() == CLASS_ROGUE)
+            {
+                uint32 ITEM_THIEVES_TOOLS = 5060;
+                if (!player->HasItemCount(ITEM_THIEVES_TOOLS, 1))
+                    player->AddItem(ITEM_THIEVES_TOOLS, 1);
             }
-            
+
             if (player->GetLevel() <= 60)
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(0));
             else if ((player->GetLevel() > 60) && (player->GetLevel() <= 70))
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(8));
             else
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(13));
+        }
+        else if (sIndividualProgression->isExcludedAccount(player))
+        {
+            sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(17));
         }
         else // normal account
         {
