@@ -27,6 +27,8 @@ enum TheGreatMasquerade
     QUEST_STORMWIND_RENDEZVOUZ = 6402,
     QUEST_THE_GREAT_MASQUERADE = 6403,
 
+    PHASEMASK_MASQUERADE = PHASEMASK_NORMAL | 131072, // IP phase II
+
     NPC_SQUIRE_ROWE = 17804,
     NPC_REGINALD_WINDSOR = 12580,
     NPC_MERCUTIO = 12581,
@@ -209,6 +211,7 @@ public:
                     me->HandleEmoteCommand(EMOTE_ONESHOT_KNEEL);
                     if (Creature* reginald = me->SummonCreature(NPC_REGINALD_WINDSOR, -9161.673828f, 351.799713f, 87.906525f, TEMPSUMMON_MANUAL_DESPAWN))
                     {
+                        reginald->SetPhaseMask(PHASEMASK_MASQUERADE, true);
                         reginald->setActive(true);
                         reginald->AI()->SetGUID(_playerGUID, ACTION_START_ESCORT);
                         reginald->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP | UNIT_NPC_FLAG_QUESTGIVER);
