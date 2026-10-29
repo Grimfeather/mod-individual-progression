@@ -3,6 +3,10 @@
 #include "DataMap.h"
 #include "EventProcessor.h"
 #include "ObjectAccessor.h"
+#include "SpellInfo.h"
+#include "SpellMgr.h"
+#include <algorithm>
+#include <array>
 
 void IndividualProgression::UpdateRNDbotSpells(Player* player)
 {
@@ -51,6 +55,131 @@ void IndividualProgression::TrainerRNDbotSpellsUnlock(Player const* player, uint
 
     if (unlockedForBots && sIndividualProgression->isBotAccount(player))
         state = Trainer::SpellState::Available;
+}
+
+// The skill lines with ranks past Artisan: the primary professions, First Aid, Cooking and Fishing.
+static constexpr std::array<uint16, 14> professionSkills =
+{
+    SKILL_FIRST_AID, SKILL_BLACKSMITHING, SKILL_LEATHERWORKING, SKILL_ALCHEMY, SKILL_HERBALISM, SKILL_COOKING, SKILL_MINING,
+    SKILL_TAILORING, SKILL_ENGINEERING, SKILL_ENCHANTING, SKILL_FISHING, SKILL_SKINNING, SKILL_INSCRIPTION, SKILL_JEWELCRAFTING
+};
+
+// The skill and max a profession rank spell gives (Grand Master Skinning 50305 gives 450), or nullptr for any other spell.
+static SpellLearnSkillNode const* GetProfessionRankNode(uint32 spellId)
+{
+    SpellLearnSkillNode const* node = sSpellMgr->GetSpellLearnSkill(spellId);
+    if (!node || std::find(professionSkills.begin(), professionSkills.end(), node->skill) == professionSkills.end())
+        return nullptr;
+
+    return node;
+}
+
+static uint16 GetProfessionRank(uint32 spellId)
+{
+    SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+    return node ? node->maxvalue : 0;
+}
+
+// The profession cap of the character's tier: Artisan (300) before PROGRESSION_PRE_TBC and Master (375)
+// before PROGRESSION_TBC_TIER_5, as on 1.12 and 2.4.3. 0 means no cap: Grand Master (450) is the 3.3.5a
+// max anyway, and the option off, an excluded account or a player not yet in the world have none.
+uint16 IndividualProgression::GetProfessionSkillCap(Player* player)
+{
+    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player))
+        return 0;
+
+    if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
+        return 300;
+
+    if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        return 375;
+
+    return 0;
+}
+
+// Whether a spell teaches a profession rank above the character's cap. A trainer sells a rank as a spell
+// that teaches it (Grand Master Skinning is bought as 50307, which teaches 50305), so the spells it
+// teaches are looked at as well.
+bool IndividualProgression::IsProfessionRankAboveCap(Player* player, uint32 spellId)
+{
+    uint16 rank = GetProfessionRank(spellId);
+    if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId))
+        for (SpellEffectInfo const& effect : spellInfo->Effects)
+            if (effect.Effect == SPELL_EFFECT_LEARN_SPELL)
+                rank = std::max(rank, GetProfessionRank(effect.TriggerSpell));
+
+    // Most spells are no rank; the cap reads the character's progression quests.
+    if (!rank)
+        return false;
+
+    uint16 const cap = GetProfessionSkillCap(player);
+    return cap && rank > cap;
+}
+
+// Takes a character's professions down to its tier's cap: the ranks above it are unlearned and the skill
+// is kept up to the cap. removeSpell steps the skill back to the rank below, but with the value a new
+// rank starts at (1), so the value is written back afterwards.
+void IndividualProgression::CapProfessionSkills(Player* player)
+{
+    uint16 const cap = GetProfessionSkillCap(player);
+    if (!cap)
+        return;
+
+    std::vector<std::pair<uint16, uint16>> cappedSkills; // skill, the value it keeps
+    for (uint16 skill : professionSkills)
+        if (player->HasSkill(skill) && player->GetPureMaxSkillValue(skill) > cap)
+            cappedSkills.emplace_back(skill, std::min(player->GetPureSkillValue(skill), cap));
+
+    if (cappedSkills.empty())
+        return;
+
+    // Only the ranks of the skills written back below: removeSpell drops the value of any other to 1.
+    std::vector<uint32> ranksAboveCap;
+    for (auto const& [spellId, playerSpell] : player->GetSpellMap())
+    {
+        if (playerSpell->State == PLAYERSPELL_REMOVED)
+            continue;
+
+        SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+        if (node && node->maxvalue > cap && std::any_of(cappedSkills.begin(), cappedSkills.end(),
+            [node](std::pair<uint16, uint16> const& capped) { return capped.first == node->skill; }))
+            ranksAboveCap.push_back(spellId);
+    }
+
+    for (uint32 spellId : ranksAboveCap)
+        player->removeSpell(spellId, SPEC_MASK_ALL, false);
+
+    for (auto const& [skill, value] : cappedSkills)
+    {
+        player->SetSkill(skill, cap / 75, value, cap);
+        LOG_INFO("module", "IndividualProgression: {} ({}) profession skill {} capped at {}/{} for their tier",
+            player->GetName(), player->GetGUID().GetCounter(), skill, value, cap);
+
+        // Learning a rank left the ones below it inactive, and removeSpell does not wake them. The spellbook
+        // was sent before this hook, so the top rank left is activated and sent, or the profession is gone until relog.
+        uint32 topRankId = 0;
+        PlayerSpell* topRank = nullptr;
+        uint16 topRankMax = 0;
+        for (auto const& [spellId, playerSpell] : player->GetSpellMap())
+        {
+            if (playerSpell->State == PLAYERSPELL_REMOVED)
+                continue;
+
+            SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+            if (node && node->skill == skill && node->maxvalue <= cap && node->maxvalue > topRankMax)
+            {
+                topRankId = spellId;
+                topRank = playerSpell;
+                topRankMax = node->maxvalue;
+            }
+        }
+
+        if (topRank && !topRank->Active)
+        {
+            topRank->Active = true;
+            player->SendLearnPacket(topRankId, true);
+        }
+    }
 }
 
 void IndividualProgression::checkHunterPetSpells(Player* player)

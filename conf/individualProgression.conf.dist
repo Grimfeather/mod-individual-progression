@@ -499,6 +499,21 @@ IndividualProgression.BotAccountsEarnPvPTitles = 0
 #
 IndividualProgression.BotAccountsMaxLevel = 80
 
+# IndividualProgression.ProfessionTierCap
+#
+#        Description: Caps professions, First Aid, Cooking and Fishing at the rank of the character's tier:
+#                     Artisan (300) before progression 8, Master (375) before progression 13, otherwise
+#                     Grand Master (450), as on 1.12, 2.4.3 and 3.3.5a. Trainers show the higher ranks as
+#                     unavailable, and they cannot be learned any other way (bot maintenance, .learn).
+#                     A character above its cap is taken down at login: the ranks above it are unlearned,
+#                     and its skill is kept up to the cap. Applies to players and bots alike; excluded
+#                     accounts have no cap.
+#
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.ProfessionTierCap = 0
+
 # IndividualProgression.BotAccountsRegex
 #
 #        Description: A regular expression to match account names that should be excluded from Individual Progression.

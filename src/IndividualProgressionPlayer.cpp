@@ -58,6 +58,7 @@ public:
         }
 
         sIndividualProgression->CheckAdjustments(player);
+        sIndividualProgression->CapProfessionSkills(player);
 
         if (sIndividualProgression->enabled)
         {
@@ -74,6 +75,16 @@ public:
             return;
 
         sIndividualProgression->TrainerRNDbotSpellsUnlock(player, spellId, state);
+
+        // The trainer takes the money before the spell is learned, so a rank above the cap must be
+        // refused here and not only in OnPlayerCanLearnSpell. hasPassedProgression only reads quest status.
+        if (state == Trainer::SpellState::Available && sIndividualProgression->IsProfessionRankAboveCap(const_cast<Player*>(player), spellId))
+            state = Trainer::SpellState::Unavailable;
+    }
+
+    bool OnPlayerCanLearnSpell(Player* player, uint32 spellId) override
+    {
+        return !sIndividualProgression->IsProfessionRankAboveCap(player, spellId);
     }
 
     void OnPlayerEquip(Player* player, Item* /*it*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) override
