@@ -146,7 +146,9 @@ public:
                 allowed = false;
             }
 
-            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
+            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                allowed = true;
+            else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
             {
                 handler.PSendSysMessage("Your progression level is too high.");
                 allowed = false;
@@ -183,11 +185,15 @@ public:
                         handler.PSendSysMessage("|cff00ffff{}|r needs to be at least level 50.", member->GetName());
                         allowed = false;
                     }
+
+                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                        allowed = true;
                     if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_TBC_TIER_5)) // death knights
                     {
                         handler.PSendSysMessage("|cff00ffff{}|r progression level is too high.", member->GetName());
                         allowed = false;
                     }
+
                     if (!member->HasItemCount(ITEM_DRAKEFIRE_AMULET))
                     {
                         if (member->getGender() == GENDER_MALE)
@@ -197,6 +203,7 @@ public:
 
                         allowed = false;
                     }
+
                     if (member->IsGameMaster())
                     {
                         handler.PSendSysMessage("|cff00ffff{}|r is a GM.", member->GetName());
@@ -213,7 +220,27 @@ public:
         else
         {
             if (player->GetLevel() < 80)
-                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
+            {
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                {
+                    player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
+                    group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
+                    return true;
+                }
+                else
+                    handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
+            }
+            else // level 80
+            {
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    return true;
+                else
+                {
+                    player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
+                    group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_NORMAL);
+                    return true;
+                }
+            }
         }
 
         return false;
