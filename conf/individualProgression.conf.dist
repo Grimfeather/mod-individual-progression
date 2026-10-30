@@ -510,12 +510,13 @@ IndividualProgression.BotAccountsMaxLevel = 80
 #                     and its skill is kept up to the cap. Achievements that need a rank above the cap are
 #                     taken back at login as well, also from a character that never had the rank; with
 #                     mod-account-achievements, put them in Account.Achievements.Excluded or they come back.
-#                     Applies to players and bots alike; excluded accounts have no cap.
+#                     Skill above the cap, those achievements and the titles Salty and Chef are lost for good.
+#                     Applies to players and bots alike; GM accounts and excluded accounts have no cap.
 #
-#        Default:     0 - Disabled
-#                     1 - Enabled
+#        Default:     1 - Enabled
+#                     0 - Disabled
 #
-IndividualProgression.ProfessionTierCap = 0
+IndividualProgression.ProfessionTierCap = 1
 
 # IndividualProgression.BotAccountsRegex
 #

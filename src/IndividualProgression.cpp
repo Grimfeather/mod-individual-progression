@@ -1122,7 +1122,7 @@ private:
         sIndividualProgression->LimitedSetRepCommand = sConfigMgr->GetOption<bool>("IndividualProgression.LimitedSetRepCommand", true);
         sIndividualProgression->sharedFactionIdsRegex = sConfigMgr->GetOption<std::string>("IndividualProgression.sharedFactionIdsRegex", "59|270|349|509|510|529|576|589|609|729|730|749|889|890|909");
         sIndividualProgression->BotAccountsMaxLevel = sConfigMgr->GetOption<uint8>("IndividualProgression.BotAccountsMaxLevel", 80);
-        sIndividualProgression->ProfessionTierCap = sConfigMgr->GetOption<bool>("IndividualProgression.ProfessionTierCap", false);
+        sIndividualProgression->ProfessionTierCap = sConfigMgr->GetOption<bool>("IndividualProgression.ProfessionTierCap", true);
     }
 
     static void LoadXpValues()

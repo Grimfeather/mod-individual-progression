@@ -1,4 +1,5 @@
 #include "IndividualProgression.h"
+#include "AccountMgr.h"
 #include "AchievementMgr.h"
 #include "Spell.h"
 #include "DataMap.h"
@@ -84,10 +85,12 @@ static uint16 GetProfessionRank(uint32 spellId)
 
 // The profession cap of the character's tier: Artisan (300) before PROGRESSION_PRE_TBC and Master (375)
 // before PROGRESSION_TBC_TIER_5, as on 1.12 and 2.4.3. 0 means no cap: Grand Master (450) is the 3.3.5a
-// max anyway, and the option off, an excluded account or a player not yet in the world have none.
+// max anyway, and the option off, a GM account, an excluded account or a player not yet in the world have
+// none. It goes by the account and not by .gm on, or the login cap would undo what a GM set.
 uint16 IndividualProgression::GetProfessionSkillCap(Player* player)
 {
-    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player))
+    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player) ||
+        !AccountMgr::IsPlayerAccount(player->GetSession()->GetSecurity()))
         return 0;
 
     if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
