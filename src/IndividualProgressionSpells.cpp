@@ -223,6 +223,13 @@ void IndividualProgression::CapProfessionAchievements(Player* player)
         const_cast<CompletedAchievementMap&>(achievementMgr->GetCompletedAchievements()).erase(achievementId);
         RemovePlayerAchievement(guid, achievementId);
 
+        // Salty (1516) and Chef (1563, 1784) come with the achievement.
+        if (AchievementReward const* reward = sAchievementMgr->GetAchievementReward(sAchievementStore.LookupEntry(achievementId)))
+            for (uint32 titleId : reward->titleId)
+                if (CharTitlesEntry const* title = sCharTitlesStore.LookupEntry(titleId))
+                    if (player->HasTitle(title))
+                        player->SetTitle(title, true);
+
         WorldPacket data(SMSG_ACHIEVEMENT_DELETED, 4);
         data << uint32(achievementId);
         player->SendDirectMessage(&data);
