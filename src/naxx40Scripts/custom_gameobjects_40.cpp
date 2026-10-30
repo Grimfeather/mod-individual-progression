@@ -31,11 +31,13 @@ public:
         ChatHandler handler(player->GetSession());
         Group* group = player->GetGroup();
 
-        if (player->GetLevel() <= 70)
+        if (player->GetLevel() <= 70 || sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
         {
             bool allowed = true;
 
-            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
+            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                allowed = true;
+            else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
             {
                 handler.PSendSysMessage("Your progression level is too high.");
                 allowed = false;
@@ -52,6 +54,9 @@ public:
                 handler.PSendSysMessage("You are not attuned to Naxxramas.");
                 allowed = false;
             }
+
+            if (player->IsGameMaster())
+                allowed = true;
 
             if (!allowed)
                 return false;
@@ -78,15 +83,17 @@ public:
 
                     bool allowed = true;
 
-                    if (sIndividualProgression->requireNaxxStrath && member->GetQuestStatus(NAXX40_ENTRANCE_FLAG) != QUEST_STATUS_REWARDED)
+                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                        allowed = true;
+                    else if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_TBC_TIER_5)) // death knights
                     {
-                        handler.PSendSysMessage("|cff00ffff{}|r needs to enter Naxxramas through Stratholme first.", member->GetName());
+                        handler.PSendSysMessage("|cff00ffff{}|r progression level is too high.", member->GetName());
                         allowed = false;
                     }
 
-                    if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_TBC_TIER_5)) // death knights
+                    if (sIndividualProgression->requireNaxxStrath && member->GetQuestStatus(NAXX40_ENTRANCE_FLAG) != QUEST_STATUS_REWARDED)
                     {
-                        handler.PSendSysMessage("|cff00ffff{}|r progression level is too high.", member->GetName());
+                        handler.PSendSysMessage("|cff00ffff{}|r needs to enter Naxxramas through Stratholme first.", member->GetName());
                         allowed = false;
                     }
 
