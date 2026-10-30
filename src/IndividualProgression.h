@@ -426,6 +426,7 @@ public:
     void CheckAdjustments(Player* player) const;
     bool hasCustomProgressionValue(uint32 creatureEntry);
     bool isExcludedAccount(Player* player);
+    bool isGMAccount(Player* player);
     bool isExcludedAccount(uint32 accountId);
     bool isBotAccount(const Player* player);
     bool isBotAccount(uint32 accountId);
@@ -464,6 +465,7 @@ private:
     {
         bool excluded = false;
         bool bot = false;
+        bool gm = false;
     };
 
     AccountMatch GetAccountMatch(uint32 accountId);

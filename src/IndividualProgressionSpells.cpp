@@ -1,5 +1,4 @@
 #include "IndividualProgression.h"
-#include "AccountMgr.h"
 #include "AchievementMgr.h"
 #include "Spell.h"
 #include "DataMap.h"
@@ -89,8 +88,7 @@ static uint16 GetProfessionRank(uint32 spellId)
 // none. It goes by the account and not by .gm on, or the login cap would undo what a GM set.
 uint16 IndividualProgression::GetProfessionSkillCap(Player* player)
 {
-    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player) ||
-        !AccountMgr::IsPlayerAccount(player->GetSession()->GetSecurity()))
+    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player) || isGMAccount(player))
         return 0;
 
     if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
@@ -130,10 +128,15 @@ void IndividualProgression::CapProfessionSkills(Player* player)
     if (!cap)
         return;
 
-    std::vector<std::pair<uint16, uint16>> cappedSkills; // skill, the value it keeps
+    struct CappedSkill
+    {
+        uint16 skill, oldValue, oldMax;
+    };
+
+    std::vector<CappedSkill> cappedSkills;
     for (uint16 skill : professionSkills)
         if (player->HasSkill(skill) && player->GetPureMaxSkillValue(skill) > cap)
-            cappedSkills.emplace_back(skill, std::min(player->GetPureSkillValue(skill), cap));
+            cappedSkills.push_back({ skill, player->GetPureSkillValue(skill), player->GetPureMaxSkillValue(skill) });
 
     if (cappedSkills.empty())
         return;
@@ -147,18 +150,20 @@ void IndividualProgression::CapProfessionSkills(Player* player)
 
         SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
         if (node && node->maxvalue > cap && std::any_of(cappedSkills.begin(), cappedSkills.end(),
-            [node](std::pair<uint16, uint16> const& capped) { return capped.first == node->skill; }))
+            [node](CappedSkill const& capped) { return capped.skill == node->skill; }))
             ranksAboveCap.push_back(spellId);
     }
 
     for (uint32 spellId : ranksAboveCap)
         player->removeSpell(spellId, SPEC_MASK_ALL, false);
 
-    for (auto const& [skill, value] : cappedSkills)
+    for (CappedSkill const& capped : cappedSkills)
     {
+        uint16 const skill = capped.skill;
+        uint16 const value = std::min(capped.oldValue, cap);
         player->SetSkill(skill, cap / 75, value, cap);
-        LOG_INFO("module", "IndividualProgression: {} ({}) profession skill {} capped at {}/{} for their tier",
-            player->GetName(), player->GetGUID().GetCounter(), skill, value, cap);
+        LOG_INFO("module", "IndividualProgression: {} ({}) profession skill {} capped at {}/{} for their tier, was {}/{}",
+            player->GetName(), player->GetGUID().GetCounter(), skill, value, cap, capped.oldValue, capped.oldMax);
 
         // Learning a rank left the ones below it inactive, and removeSpell does not wake them. The spellbook
         // was sent before this hook, so the top rank left is activated and sent, or the profession is gone until relog.

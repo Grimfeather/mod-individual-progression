@@ -369,15 +369,18 @@ IndividualProgression::AccountMatch IndividualProgression::GetAccountMatch(uint3
             return itr->second;
     }
 
-    // AccountMgr::GetName is a blocking login database query, so it runs without the lock held
+    // AccountMgr::GetName and GetSecurity are blocking login database queries, so they run without the lock held
     std::string accountName;
     if (!AccountMgr::GetName(accountId, accountName))
         return {};
+
+    uint32 const security = AccountMgr::GetSecurity(accountId);
 
     std::unique_lock<std::shared_mutex> lock(_accountMatchLock);
     AccountMatch match;
     match.excluded = std::regex_match(accountName, _excludedAccountsRegex);
     match.bot = std::regex_match(accountName, _botAccountsRegex);
+    match.gm = security >= SEC_GAMEMASTER;
     _accountMatchCache[accountId] = match;
     return match;
 }
@@ -393,6 +396,12 @@ bool IndividualProgression::isExcludedAccount(Player* player)
 bool IndividualProgression::isExcludedAccount(uint32 accountId)
 {
     return GetAccountMatch(accountId).excluded;
+}
+
+// By the account and not the session: a bot's session has player security, also on a GM's account.
+bool IndividualProgression::isGMAccount(Player* player)
+{
+    return player && GetAccountMatch(player->GetSession()->GetAccountId()).gm;
 }
 
 bool IndividualProgression::isBotAccount(const Player* player)
