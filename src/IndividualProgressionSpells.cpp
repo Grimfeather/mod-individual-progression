@@ -1,10 +1,12 @@
 #include "IndividualProgression.h"
+#include "AchievementMgr.h"
 #include "Spell.h"
 #include "DataMap.h"
 #include "EventProcessor.h"
 #include "ObjectAccessor.h"
 #include "SpellInfo.h"
 #include "SpellMgr.h"
+#include "WorldPacket.h"
 #include <algorithm>
 #include <array>
 
@@ -179,6 +181,54 @@ void IndividualProgression::CapProfessionSkills(Player* player)
             topRank->Active = true;
             player->SendLearnPacket(topRankId, true);
         }
+    }
+}
+
+// The achievements that need a profession rank past Artisan, with that rank. The last four of the 450s
+// are meta achievements of the Grand Master ones.
+static constexpr std::array<std::pair<uint32, uint16>, 27> professionRankAchievements =
+{{
+    {124, 375}, {129, 375}, {134, 375}, {733, 375},
+    {125, 450}, {130, 450}, {135, 450}, {734, 450}, {735, 450},
+    {1414, 450}, {1415, 450}, {1416, 450}, {1417, 450}, {1418, 450}, {1419, 450}, {1420, 450},
+    {1421, 450}, {1422, 450}, {1423, 450}, {1424, 450}, {1425, 450}, {1426, 450}, {1427, 450},
+    {730, 450}, {1516, 450}, {1563, 450}, {1784, 450}
+}};
+
+// Takes back the achievements of ranks above the character's cap. This does not depend on the skills: a
+// character can hold one without ever having the rank, through mod-account-achievements. AchievementMgr
+// can only reset everything, so the entry is erased from its map directly.
+void IndividualProgression::CapProfessionAchievements(Player* player)
+{
+    uint16 const cap = GetProfessionSkillCap(player);
+    if (!cap)
+        return;
+
+    AchievementMgr* achievementMgr = player->GetAchievementMgr();
+    ObjectGuid::LowType const guid = player->GetGUID().GetCounter();
+    for (auto const& [achievementId, rank] : professionRankAchievements)
+    {
+        if (rank <= cap || !player->HasAchieved(achievementId))
+            continue;
+
+        if (AchievementCriteriaEntryList const* criteria = sAchievementMgr->GetAchievementCriteriaByAchievement(achievementId))
+        {
+            for (AchievementCriteriaEntry const* criterion : *criteria)
+            {
+                achievementMgr->RemoveCriteriaProgress(criterion);
+                CharacterDatabase.Execute("DELETE FROM `character_achievement_progress` WHERE `guid` = {} AND `criteria` = {}", guid, criterion->ID);
+            }
+        }
+
+        const_cast<CompletedAchievementMap&>(achievementMgr->GetCompletedAchievements()).erase(achievementId);
+        RemovePlayerAchievement(guid, achievementId);
+
+        WorldPacket data(SMSG_ACHIEVEMENT_DELETED, 4);
+        data << uint32(achievementId);
+        player->SendDirectMessage(&data);
+
+        LOG_INFO("module", "IndividualProgression: {} ({}) lost achievement {}, it needs profession rank {} and their tier stops at {}",
+            player->GetName(), guid, achievementId, rank, cap);
     }
 }
 

@@ -445,6 +445,7 @@ public:
     uint16 GetProfessionSkillCap(Player* player);
     bool IsProfessionRankAboveCap(Player* player, uint32 spellId);
     void CapProfessionSkills(Player* player);
+    void CapProfessionAchievements(Player* player);
     void checkKillProgression(Player* player, Creature* killed);
     bool checkCustomKillProgression(Player* killer, Creature* killed);
 	void UpdateAccountReputation(uint32 factionId, uint32 accountId, Player* player);

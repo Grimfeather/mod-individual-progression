@@ -59,6 +59,7 @@ public:
 
         sIndividualProgression->CheckAdjustments(player);
         sIndividualProgression->CapProfessionSkills(player);
+        sIndividualProgression->CapProfessionAchievements(player);
 
         if (sIndividualProgression->enabled)
         {

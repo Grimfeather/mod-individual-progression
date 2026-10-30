@@ -506,8 +506,10 @@ IndividualProgression.BotAccountsMaxLevel = 80
 #                     Grand Master (450), as on 1.12, 2.4.3 and 3.3.5a. Trainers show the higher ranks as
 #                     unavailable, and they cannot be learned any other way (bot maintenance, .learn).
 #                     A character above its cap is taken down at login: the ranks above it are unlearned,
-#                     and its skill is kept up to the cap. Applies to players and bots alike; excluded
-#                     accounts have no cap.
+#                     and its skill is kept up to the cap. Achievements that need a rank above the cap are
+#                     taken back at login as well, also from a character that never had the rank; with
+#                     mod-account-achievements, put them in Account.Achievements.Excluded or they come back.
+#                     Applies to players and bots alike; excluded accounts have no cap.
 #
 #        Default:     0 - Disabled
 #                     1 - Enabled
