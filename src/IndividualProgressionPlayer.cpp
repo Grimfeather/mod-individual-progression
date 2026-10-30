@@ -412,8 +412,25 @@ public:
             if (instanceTemplate->Parent == MAP_NORTHREND && mapid != MAP_NAXXRAMAS && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
                 return false;
 
-            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS && player->GetLevel() <= 70 && (!sIndividualProgression->isAttuned(player) ||  sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) ))
-                return false;
+            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS)
+            {
+                if (player->GetLevel() <= 70)
+                {
+                    if (!sIndividualProgression->isAttuned(player))
+                         return false;
+
+                    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    {
+                        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // Death Knights
+                            return false;
+                    }
+                }
+                else // level 71+
+                {
+                    if (player->GetLevel() < 80)
+                        return false;
+                }
+            }
         }
 
         return true;
