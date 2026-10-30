@@ -203,14 +203,14 @@ public:
             {
                 if (player->GetLevel() < 50)
                     return false;
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
                     return false;
                 if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
                     return false;
             }
  			else // WotLK
             {
-                if (player->GetLevel() != 80)
+                if (player->GetLevel() != 80 && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
                     return false;
             }
         }
