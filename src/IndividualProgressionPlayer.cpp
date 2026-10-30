@@ -188,6 +188,10 @@ public:
         if (!sIndividualProgression->enabled || player->IsGameMaster() || !sIndividualProgression->isNormalAccount(player))
             return true;
 
+        // at progression 18 players completed everything and are allowed to go everywhere
+        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+            return true;
+        
         if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
         {
             ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_ONYXIA);
