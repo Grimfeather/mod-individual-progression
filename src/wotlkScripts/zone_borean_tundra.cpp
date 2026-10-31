@@ -111,6 +111,8 @@ public:
             if (Player* caster = ObjectAccessor::GetPlayer(*me, casterGUID))
             {
                 uint32 step = caster->GetAuraCount(SPELL_NEURAL_NEEDLE) + 1;
+                Group* group = caster->GetGroup();
+                
                 switch (step)
                 {
                     case 1:
