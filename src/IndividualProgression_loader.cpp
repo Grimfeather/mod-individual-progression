@@ -12,6 +12,7 @@ void AddSC_instance_stratholme_50_59_B();
 void AddSC_instance_molten_core_60_1_A();
 void AddSC_ipp_zone_ironforge();
 void AddSC_ipp_zone_nagrand();
+void AddSC_ipp_zone_borean_tundra();
 void AddSC_quest_jail_break_60_2();
 void AddSC_quest_the_masquerade_60_2();
 void AddSC_boss_azuregos_ipp();
@@ -70,6 +71,7 @@ void Addmod_individual_progressionScripts()
     AddSC_instance_naxxramas();
 	AddSC_ipp_zone_ironforge();
     AddSC_ipp_zone_nagrand();
+    AddSC_ipp_zone_borean_tundra();
     AddSC_quest_jail_break_60_2();
     AddSC_quest_the_masquerade_60_2();
     AddSC_boss_azuregos_ipp();
