@@ -272,6 +272,26 @@ IndividualProgression.MaxMonsterSight = 1
 #
 IndividualProgression.QuestMoneyAtLevelCap = 1
 
+# IndividualProgression.ProfessionTierCap
+#
+#        Description: Caps professions, First Aid, Cooking and Fishing at the rank of the character's tier:
+#                     Artisan (300) before progression 8, Master (375) before progression 13, otherwise
+#                     Grand Master (450), as on 1.12, 2.4.3 and 3.3.5a. Trainers show the higher ranks as
+#                     unavailable, which also stops bot maintenance, books that teach them cannot be used,
+#                     and .learn refuses them.
+#                     A character above its cap is taken down at login: the ranks above it are unlearned,
+#                     and its skill is kept up to the cap. Achievements that need a rank above the cap are
+#                     taken back at login as well, also from a character that never had the rank; with
+#                     mod-account-achievements, put them in Account.Achievements.Excluded or they come back.
+#                     Skill above the cap, those achievements and the titles Salty and Chef are lost for good.
+#                     Applies to players and bots alike. Accounts of GM level 2 or higher, with their altbots,
+#                     and excluded accounts have no cap; a changed GM level counts after .reload config.
+#
+#        Default:     1 - Enabled
+#                     0 - Disabled
+#
+IndividualProgression.ProfessionTierCap = 1
+
 # IndividualProgression.RepeatableVanillaQuestsXP
 #
 #        Description: Some repeatable quests in Vanilla gave XP every time they were turned in.
@@ -498,26 +518,6 @@ IndividualProgression.BotAccountsEarnPvPTitles = 0
 #        Default:     80
 #
 IndividualProgression.BotAccountsMaxLevel = 80
-
-# IndividualProgression.ProfessionTierCap
-#
-#        Description: Caps professions, First Aid, Cooking and Fishing at the rank of the character's tier:
-#                     Artisan (300) before progression 8, Master (375) before progression 13, otherwise
-#                     Grand Master (450), as on 1.12, 2.4.3 and 3.3.5a. Trainers show the higher ranks as
-#                     unavailable, which also stops bot maintenance, books that teach them cannot be used,
-#                     and .learn refuses them.
-#                     A character above its cap is taken down at login: the ranks above it are unlearned,
-#                     and its skill is kept up to the cap. Achievements that need a rank above the cap are
-#                     taken back at login as well, also from a character that never had the rank; with
-#                     mod-account-achievements, put them in Account.Achievements.Excluded or they come back.
-#                     Skill above the cap, those achievements and the titles Salty and Chef are lost for good.
-#                     Applies to players and bots alike. Accounts of GM level 2 or higher, with their altbots,
-#                     and excluded accounts have no cap; a changed GM level counts after .reload config.
-#
-#        Default:     1 - Enabled
-#                     0 - Disabled
-#
-IndividualProgression.ProfessionTierCap = 1
 
 # IndividualProgression.BotAccountsRegex
 #
