@@ -30,23 +30,24 @@
 // #include "SpellScript.h"
 // #include "SpellScriptLoader.h"
 // #include "WaypointMgr.h"
+#include "ScriptMgr.h"
 
 
 // npc_imprisoned_beryl_sorcerer
 enum ImprisionedBerylSorcerer
 {
-    SPELL_NEURAL_NEEDLE                 = 45634,
-    SPELL_COSMETIC_ENSLAVE_CHAINS_SELF  = 45631,
+    SPELL_NEURAL_NEEDLE                = 45634,
+    SPELL_COSMETIC_ENSLAVE_CHAINS_SELF = 45631,
+    NPC_IMPRISONED_BERYL_SORCERER      = 25478,
+    QUEST_ART_OF_PERSUASION            = 11648,
 
-    NPC_IMPRISONED_BERYL_SORCERER   = 25478,
-
-    SAY_IMPRISIONED_BERYL_1         = 0,
-    SAY_IMPRISIONED_BERYL_2         = 1,
-    SAY_IMPRISIONED_BERYL_3         = 2,
-    SAY_IMPRISIONED_BERYL_4         = 3,
-    SAY_IMPRISIONED_BERYL_5         = 4,
-    SAY_IMPRISIONED_BERYL_6         = 5,
-    SAY_IMPRISIONED_BERYL_7         = 6
+    SAY_IMPRISIONED_BERYL_1            = 0,
+    SAY_IMPRISIONED_BERYL_2            = 1,
+    SAY_IMPRISIONED_BERYL_3            = 2,
+    SAY_IMPRISIONED_BERYL_4            = 3,
+    SAY_IMPRISIONED_BERYL_5            = 4,
+    SAY_IMPRISIONED_BERYL_6            = 5,
+    SAY_IMPRISIONED_BERYL_7            = 6
 };
 
 class npc_imprisoned_beryl_sorcerer_ipp : public CreatureScript
@@ -110,6 +111,8 @@ public:
             if (Player* caster = ObjectAccessor::GetPlayer(*me, casterGUID))
             {
                 uint32 step = caster->GetAuraCount(SPELL_NEURAL_NEEDLE) + 1;
+                Group* group = caster->GetGroup();
+                
                 switch (step)
                 {
                     case 1:
@@ -125,9 +128,25 @@ public:
                         Talk(SAY_IMPRISIONED_BERYL_4);
                         break;
                     case 5:
+                    {
                         Talk(SAY_IMPRISIONED_BERYL_5);
                         caster->KilledMonsterCredit(NPC_IMPRISONED_BERYL_SORCERER);
+
+                        if (group)
+                        {
+                            for (GroupReference* itr = group->GetFirstMember(); itr; itr = itr->next())
+                            {
+                                Player* member = itr->GetSource();
+                                if (!member)
+                                    continue;
+
+                                if (member->HasQuest(QUEST_ART_OF_PERSUASION) && member->GetQuestStatus(QUEST_ART_OF_PERSUASION) == QUEST_STATUS_INCOMPLETE)
+                                    member->KilledMonsterCredit(NPC_IMPRISONED_BERYL_SORCERER);
+                            }
+                        }
+
                         break;
+                    }
                     case 6:
                         Talk(SAY_IMPRISIONED_BERYL_6, caster);
                         break;
