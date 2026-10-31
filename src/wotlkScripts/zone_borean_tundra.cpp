@@ -32,9 +32,7 @@
 // #include "WaypointMgr.h"
 
 
-/*######
-## npc_imprisoned_beryl_sorcerer
-######*/
+// npc_imprisoned_beryl_sorcerer
 enum ImprisionedBerylSorcerer
 {
     SPELL_NEURAL_NEEDLE                 = 45634,
@@ -54,11 +52,11 @@ enum ImprisionedBerylSorcerer
 class npc_imprisoned_beryl_sorcerer_ipp : public CreatureScript
 {
 public:
-    npc_imprisoned_beryl_sorcerer_ipp() : CreatureScript("npc_imprisoned_beryl_sorcerer") { }
+    npc_imprisoned_beryl_sorcerer_ipp() : CreatureScript("npc_imprisoned_beryl_sorcerer_ipp") { }
 
-    struct npc_imprisoned_beryl_sorcererAI : public ScriptedAI
+    struct npc_imprisoned_beryl_sorcerer_ippAI : public ScriptedAI
     {
-        npc_imprisoned_beryl_sorcererAI(Creature* creature) : ScriptedAI(creature) { }
+        npc_imprisoned_beryl_sorcerer_ippAI(Creature* creature) : ScriptedAI(creature) { }
 
         uint32 rebuff;
 
@@ -143,7 +141,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_imprisoned_beryl_sorcererAI(creature);
+        return new npc_imprisoned_beryl_sorcerer_ippAI(creature);
     }
 };
 
