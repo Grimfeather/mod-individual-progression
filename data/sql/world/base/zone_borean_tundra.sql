@@ -1,5 +1,5 @@
 -- quest `Abduction` (11590) not being rewarded for all party members
-UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` = 25262
+UPDATE `creature_template` SET `AIName` = 'SmartAI' WHERE `entry` = 25262;
 
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = 25262;
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
@@ -12,3 +12,5 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 -- quest `Monitoring the Rift, reward invoker party
 UPDATE `smart_scripts` SET `target_type` = 16 WHERE `source_type` = 0 AND `id` = 0 AND `entryorguid` = 25308;
 
+-- quest `The Art of Persuasion`, use IP script instead
+UPDATE `creature` SET `ScriptName` = 'npc_imprisoned_beryl_sorcerer_ipp' WHERE `guid` = 108032 AND `id` = 25478;
