@@ -9,7 +9,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 --
 (25262, 0, 0, 0, 20, 0, 100, 0, 11590, 0, 0, 0, 0, 0, 11, 45739, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 'Librarian Donathan - On Quest Rewarded - Cast Spell Abduction: Quest Complete (Force Cast)');
 
--- quest `Monitoring the Rift, reward invoker party
+-- quest `Monitoring the Rift`, reward invoker party
 UPDATE `smart_scripts` SET `target_type` = 16 WHERE `source_type` = 0 AND `id` = 0 AND `entryorguid` = 25308;
 
 -- quest `The Art of Persuasion`, use IP script instead
