@@ -77,21 +77,32 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 SET @NPC_CAPTAIN_ELLIS  := 24910;
 SET @NPC_SORLOF         := 24914;
 SET @NPC_JUNIPER        := 24956;
+SET @GUID_JUNIPER       := 624956;
 SET @GO_STAIRWAY_MERCY  := 187117;
 
+DELETE FROM `creature` WHERE `guid` = @GUID_JUNIPER;
+INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`,
+`wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES
+--
+(@GUID_JUNIPER, 24956, 571, 0, 0, 1, 1, 0, 105.78, -3689.83, 2.10135, 2.20969, 300, 0, 0, 61160, 0, 0, 0, 0, 0, '', NULL, 0, NULL);
+
+UPDATE creature_template SET `AIName` = 'SmartAI' WHERE `entry` = @NPC_JUNIPER;
 DELETE FROM `gameobject` WHERE `guid` = 100055 AND `id` = @GO_STAIRWAY_MERCY; -- remove GO added by AC
-DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = @NPC_CAPTAIN_ELLIS;
-DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2491001, 2491002);
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (@NPC_CAPTAIN_ELLIS, -(@GUID_JUNIPER));
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2491001, 2491002, 2495601);
 
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
 `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
 `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 --
-(@NPC_CAPTAIN_ELLIS, 0, 0, 0, 103, 0, 100, 0, 0, @NPC_SORLOF, 1, 80, 5000, 0, 80, 2491001, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,    'Captain Ellis - On Near Sorlof - Run Script 2491001'),
-(@NPC_CAPTAIN_ELLIS, 0, 1, 0, 103, 0, 100, 0, 0, @NPC_JUNIPER, 1, 80, 5000, 0, 80, 2491002, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,   'Captain Ellis - On Near Juniper - Run Script 2491002'),
+(@NPC_CAPTAIN_ELLIS, 0, 0, 0, 103, 0, 100, 0, 0, @NPC_SORLOF, 1, 80, 5000, 0, 80, 2491001, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,      'Captain Ellis - On Near Sorlof - Run Script 2491001'),
+(-(@GUID_JUNIPER), 0, 0, 0, 103, 0, 100, 0, 0, @NPC_CAPTAIN_ELLIS, 1, 50, 5000, 0, 80, 2495601, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0, 'Juniper - On Near Captain Ellis - Run Script 2495601'),
+(-(@GUID_JUNIPER), 0, 1, 2, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Juniper - On Respawn - Set Active'),
+(-(@GUID_JUNIPER), 0, 2, 3, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Juniper - On Respawn - Set Visible OFF'),
+(-(@GUID_JUNIPER), 0, 3, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 35, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Juniper - On Respawn - Set Faction Friendly'),
 --
-(2491001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                               'Script9 - Captain Ellis - Say Text 0'),
-(2491001, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Script9 - Captain Ellis - Wait for Ship to disappear'),
-(2491002, 9, 0, 0, 0, 0, 100, 0,0,0,0,0,0,0, 50, @GO_STAIRWAY_MERCY, 60, 0,0,0,0, 8, 0,0,0,0, 97.52, -3684.33, 2.944, -2.0246,   'Script9 - Captain Ellis - Summon Stairway to Mercy'),
-(2491002, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Script9 - Captain Ellis - Wait for Ship to disappear');
+(2491001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                                 'Script9 - Captain Ellis - Say Text 0'),
+(2491001, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Script9 - Captain Ellis - Wait for Ship to disappear'),
+(2495601, 9, 0, 0, 0, 0, 100, 0,0,0,0,0,0,0, 50, @GO_STAIRWAY_MERCY, 60, 0,0,0,0, 8, 0,0,0,0, 97.52, -3684.33, 2.944, -2.0246,     'Script9 - Juniper - Summon Stairway to Mercy'),
+(2495601, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Script9 - Juniper - Wait for Ship to disappear');
