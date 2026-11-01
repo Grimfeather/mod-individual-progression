@@ -52,11 +52,19 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (@NPC_SPECTRAL_SAILOR, 0, 2, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Spectral Sailor - On Evade - Despawn Self'),
 --
 (2479001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                               'Script9 - Black Conrad\'s Ghost - Say Text 0'),
-(2479001, 9, 1, 0, 0, 0, 100, 0, 6000, 6000, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                        'Script9 - Black Conrad\'s Ghost - Reset Faction'),
+(2479001, 9, 1, 0, 0, 0, 100, 0, 7000, 7000, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                         'Script9 - Black Conrad\'s Ghost - Say Text 2'),
+(2479001, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                              'Script9 - Black Conrad\'s Ghost - Reset Faction'),
 --
-(2479601, 9, 0, 0, 0, 0, 100, 0, 5000, 5000, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                         'Script9 - Spectral Sailor - Say Text 0'),
+(2479601, 9, 0, 0, 0, 0, 50, 0, 5000, 5000, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                          'Script9 - Spectral Sailor - Say Text 0'),
 (2479601, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                              'Script9 - Spectral Sailor - Reset Faction'),
 --
 (18694401, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, @NPC_BLACK_CONRAD,    7, 60000, 1, 0, 0, 8, 0, 0, 0, 0, 688.965, -3378.28, 67.7668, 1.45666, 'Script9 - Dirt Mound - Summon Black Conrad'),
 (18694401, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, @NPC_SPECTRAL_SAILOR, 7, 60000, 1, 0, 0, 8, 0, 0, 0, 0, 691.829, -3376.94, 67.9698, 1.45666, 'Script9 - Dirt Mound - Summon Black Conrad'),
 (18694401, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, @NPC_SPECTRAL_SAILOR, 7, 60000, 1, 0, 0, 8, 0, 0, 0, 0, 686.696, -3376.46, 67.7311, 1.52735, 'Script9 - Dirt Mound - Summon Black Conrad');
+
+DELETE FROM `creature_text` WHERE `CreatureID` = @NPC_BLACK_CONRAD;
+INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Language`, `Probability`, `Emote`, `Duration`, `Sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES
+--
+(@NPC_BLACK_CONRAD, 0, 0, 'Yarrrr!  If it\'s me treasure yer lookin\' for... yer gonna have to fight for it!', 12, 0, 100, 1, 0, 0, 23833, 0, 'Black Conrad\'s Ghost'),
+(@NPC_BLACK_CONRAD, 1, 0, 'Yarrrrr... dead again!', 12, 0, 100, 0, 0, 0, 23848, 0, 'Black Conrad\'s Ghost'),
+(@NPC_BLACK_CONRAD, 2, 0, 'Looks like me boys need a hand!', 12, 0, 100, 0, 0, 0, 23844, 0, 'Black Conrad\'s Ghost');
