@@ -85,8 +85,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 `action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
 `target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
 --
-(@NPC_CAPTAIN_ELLIS, 0, 0, 0, 103, 0, 100, 0, 0, @NPC_SORLOF, 1, 60, 5000, 0, 80, 2491001, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,    'Captain Ellis - On Near Sorlof - Run Script 2491001'),
-(@NPC_CAPTAIN_ELLIS, 0, 1, 0, 103, 0, 100, 0, 0, @NPC_JUNIPER, 1, 60, 5000, 0, 80, 2491002, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,   'Captain Ellis - On Near Juniper - Run Script 2491002'),
+(@NPC_CAPTAIN_ELLIS, 0, 0, 0, 103, 0, 100, 0, 0, @NPC_SORLOF, 1, 70, 5000, 0, 80, 2491001, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,    'Captain Ellis - On Near Sorlof - Run Script 2491001'),
+(@NPC_CAPTAIN_ELLIS, 0, 1, 0, 103, 0, 100, 0, 0, @NPC_JUNIPER, 1, 70, 5000, 0, 80, 2491002, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,   'Captain Ellis - On Near Juniper - Run Script 2491002'),
 --
 (2491001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                               'Script9 - Captain Ellis - Say Text 0'),
 (2491001, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Script9 - Captain Ellis - Wait for Ship to disappear'),
