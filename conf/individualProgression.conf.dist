@@ -499,6 +499,24 @@ IndividualProgression.BotAccountsEarnPvPTitles = 0
 #
 IndividualProgression.BotAccountsMaxLevel = 80
 
+# IndividualProgression.LockLaterExpansionGear
+#
+#        Description: Characters cannot equip weapons and armor from an expansion they have not
+#                     reached. Before progression 8: item id 23728 or higher that requires level
+#                     57 or has item level above 92, except the vanilla rank gear 29594-29617.
+#                     Before progression 13: item id 35570 or higher that requires level 67 or has
+#                     item level above 164, except the TBC gear with those ids.
+#                     Bot accounts use BotAccountsMaxLevel in place of progression, locked as above
+#                     at 60 or lower and at 70 or lower, so the default of 80 does not lock them.
+#                     Not locked: characters above their limit, excluded accounts, and heirlooms and
+#                     other gear below both the level and the item level above. Gear worn at login
+#                     stays on, but it cannot go back on once it is taken off.
+#
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.LockLaterExpansionGear = 0
+
 # IndividualProgression.BotAccountsRegex
 #
 #        Description: A regular expression to match account names that should be excluded from Individual Progression.
