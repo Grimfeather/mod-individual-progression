@@ -10,6 +10,10 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (24014, 0,  9, 0, 0, 0, 100, 0, 0, 0, 25000, 35000, 0, 0, 11, 18267, 33, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,        'Necrolord - In Combat - Cast Curse of Weakness'),
 (24014, 0, 10, 0, 9, 0, 100, 0, 4000, 4000, 8000, 12000, 0, 0, 11, 17173, 65, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0,   'Necrolord - In Combat - Cast Drain Life');
 
+-- give dead Crazed Northsea Slavers: UNIT_FLAG_IMMUNE and UNIT_FLAG_NON_ATTACKABLE
+UPDATE `creature` SET `unit_flags` = 2147483650 WHERE `guid` IN
+(131263, 131264, 131265, 131266, 131267, 131268, 131269, 131270, 131271, 131272, 131273, 131274, 131275, 131276, 131277, 131278, 131279, 131280, 131281);
+
 -- quest: The Dead Rise! - fix Fengir's Clue
 UPDATE `gameobject` SET `position_z` = 297.034 WHERE `guid` = 59521 AND `id` = 187022; -- Mound of Debris
 
