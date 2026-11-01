@@ -75,8 +75,7 @@ SET @NPC_SORLOF         := 24914;
 SET @NPC_JUNIPER        := 24956;
 SET @GO_STAIRWAY_MERCY  := 187117;
 
-UPDATE `gameobject_template` SET `AIName` = '' WHERE `entry` = @GO_STAIRWAY_MERCY;
-
+DELETE FROM `gameobject` WHERE `guid` = 100055 AND `entry` = @GO_STAIRWAY_MERCY; -- remove GO added by AC
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = @NPC_CAPTAIN_ELLIS;
 DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2491001, 2491002);
 
