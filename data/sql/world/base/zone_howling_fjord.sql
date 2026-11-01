@@ -17,6 +17,9 @@ UPDATE `creature` SET `unit_flags` = 2147483650 WHERE `guid` IN
 -- quest: The Dead Rise! - fix Fengir's Clue
 UPDATE `gameobject` SET `position_z` = 297.034 WHERE `guid` = 59521 AND `id` = 187022; -- Mound of Debris
 
+-- fix loot table Iceshard Elemental, exceeded 100% chance
+UPDATE `creature_loot_template` SET `Chance` = 65 WHERE `Item` = 36810 AND `Entry` = 24228;
+
 -- quest: Dead Man's Debt - fix spawn of Black Conrad
 SET @NPC_BLACK_CONRAD    := 24790;
 SET @NPC_SPECTRAL_SAILOR := 24796;
