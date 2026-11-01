@@ -68,3 +68,26 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (@NPC_BLACK_CONRAD, 0, 0, 'Yarrrr!  If it\'s me treasure yer lookin\' for... yer gonna have to fight for it!', 12, 0, 100, 1, 0, 0, 23833, 0, 'Black Conrad\'s Ghost'),
 (@NPC_BLACK_CONRAD, 1, 0, 'Yarrrrr... dead again!', 12, 0, 100, 0, 0, 0, 23848, 0, 'Black Conrad\'s Ghost'),
 (@NPC_BLACK_CONRAD, 2, 0, 'Looks like me boys need a hand!', 12, 0, 100, 0, 0, 0, 23844, 0, 'Black Conrad\'s Ghost');
+
+-- fix Stairway to Mercy
+SET @NPC_CAPTAIN_ELLIS  := 24910;
+SET @NPC_SORLOF         := 24914;
+SET @NPC_JUNIPER        := 24956;
+SET @GO_STAIRWAY_MERCY  := 187117;
+
+DELETE FROM `gameobject` WHERE `guid` = 100055 AND `entry` = @GO_STAIRWAY_MERCY; -- remove GO added by AC
+DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` = @NPC_CAPTAIN_ELLIS;
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (2491001, 2491002);
+
+INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
+`event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
+`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
+`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
+--
+(@NPC_CAPTAIN_ELLIS, 0, 0, 0, 103, 0, 100, 0, 0, @NPC_SORLOF, 1, 70, 5000, 0, 80, 2491001, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,    'Captain Ellis - On Near Sorlof - Run Script 2491001'),
+(@NPC_CAPTAIN_ELLIS, 0, 1, 0, 103, 0, 100, 0, 0, @NPC_JUNIPER, 1, 70, 5000, 0, 80, 2491002, 0, 0, 0, 0, 0, 1, 0,0,0,0,0,0,0,0,   'Captain Ellis - On Near Juniper - Run Script 2491002'),
+--
+(2491001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                               'Script9 - Captain Ellis - Say Text 0'),
+(2491001, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Script9 - Captain Ellis - Wait for Ship to disappear'),
+(2491002, 9, 0, 0, 0, 0, 100, 0,0,0,0,0,0,0, 50, @GO_STAIRWAY_MERCY, 60, 0,0,0,0, 8, 0,0,0,0, 97.52, -3684.33, 2.944, -2.0246,   'Script9 - Captain Ellis - Summon Stairway to Mercy'),
+(2491002, 9, 1, 0, 0, 0, 100, 0, 90000, 90000, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                      'Script9 - Captain Ellis - Wait for Ship to disappear');
