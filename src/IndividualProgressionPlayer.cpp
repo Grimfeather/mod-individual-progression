@@ -25,17 +25,27 @@ public:
         if (!player || !player->IsInWorld())
             return;
 
-        if (!sIndividualProgression->isNormalAccount(player)) // bot or exluded account
+        if (sIndividualProgression->isBotAccount(player))
         {
-            if (sIndividualProgression->isBotAccount(player))
-                sIndividualProgression->UpdateRNDbotSpells(player); // give class spells to RNDbots that have been removed from trainers by IP.
-            
+            sIndividualProgression->UpdateRNDbotSpells(player); // give class spells to RNDbots that have been removed from trainers by IP.
+
+            if (player->getClass() == CLASS_ROGUE)
+            {
+                uint32 ITEM_THIEVES_TOOLS = 5060;
+                if (!player->HasItemCount(ITEM_THIEVES_TOOLS, 1))
+                    player->AddItem(ITEM_THIEVES_TOOLS, 1);
+            }
+
             if (player->GetLevel() <= 60)
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(0));
             else if ((player->GetLevel() > 60) && (player->GetLevel() <= 70))
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(8));
             else
                 sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(13));
+        }
+        else if (sIndividualProgression->isExcludedAccount(player))
+        {
+            sIndividualProgression->ForceUpdateProgressionState(player, static_cast<ProgressionState>(18));
         }
         else // normal account
         {
@@ -178,6 +188,10 @@ public:
         if (!sIndividualProgression->enabled || player->IsGameMaster() || !sIndividualProgression->isNormalAccount(player))
             return true;
 
+        // at progression 18 players completed everything and are allowed to go everywhere
+        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+            return true;
+        
         if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
         {
             ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_ONYXIA);
@@ -189,14 +203,14 @@ public:
             {
                 if (player->GetLevel() < 50)
                     return false;
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
                     return false;
                 if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
                     return false;
             }
  			else // WotLK
             {
-                if (player->GetLevel() != 80)
+                if (player->GetLevel() != 80 && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
                     return false;
             }
         }
@@ -398,8 +412,25 @@ public:
             if (instanceTemplate->Parent == MAP_NORTHREND && mapid != MAP_NAXXRAMAS && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
                 return false;
 
-            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS && player->GetLevel() <= 70 && (!sIndividualProgression->isAttuned(player) ||  sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) ))
-                return false;
+            if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS)
+            {
+                if (player->GetLevel() <= 70)
+                {
+                    if (!sIndividualProgression->isAttuned(player))
+                         return false;
+
+                    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    {
+                        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // Death Knights
+                            return false;
+                    }
+                }
+                else // level 71+
+                {
+                    if (player->GetLevel() < 80)
+                        return false;
+                }
+            }
         }
 
         return true;
