@@ -1,8 +1,14 @@
 #include "IndividualProgression.h"
+#include "AchievementMgr.h"
 #include "Spell.h"
 #include "DataMap.h"
 #include "EventProcessor.h"
 #include "ObjectAccessor.h"
+#include "SpellInfo.h"
+#include "SpellMgr.h"
+#include "WorldPacket.h"
+#include <algorithm>
+#include <array>
 
 void IndividualProgression::UpdateRNDbotSpells(Player* player)
 {
@@ -51,6 +57,194 @@ void IndividualProgression::TrainerRNDbotSpellsUnlock(Player const* player, uint
 
     if (unlockedForBots && sIndividualProgression->isBotAccount(player))
         state = Trainer::SpellState::Available;
+}
+
+// The skill lines with ranks past Artisan: the primary professions, First Aid, Cooking and Fishing.
+static constexpr std::array<uint16, 14> professionSkills =
+{
+    SKILL_FIRST_AID, SKILL_BLACKSMITHING, SKILL_LEATHERWORKING, SKILL_ALCHEMY, SKILL_HERBALISM, SKILL_COOKING, SKILL_MINING,
+    SKILL_TAILORING, SKILL_ENGINEERING, SKILL_ENCHANTING, SKILL_FISHING, SKILL_SKINNING, SKILL_INSCRIPTION, SKILL_JEWELCRAFTING
+};
+
+// The skill and max a profession rank spell gives (Grand Master Skinning 50305 gives 450), or nullptr for any other spell.
+static SpellLearnSkillNode const* GetProfessionRankNode(uint32 spellId)
+{
+    SpellLearnSkillNode const* node = sSpellMgr->GetSpellLearnSkill(spellId);
+    if (!node || std::find(professionSkills.begin(), professionSkills.end(), node->skill) == professionSkills.end())
+        return nullptr;
+
+    return node;
+}
+
+static uint16 GetProfessionRank(uint32 spellId)
+{
+    SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+    return node ? node->maxvalue : 0;
+}
+
+// The profession cap of the character's tier: Artisan (300) before PROGRESSION_PRE_TBC and Master (375)
+// before PROGRESSION_TBC_TIER_5, as on 1.12 and 2.4.3. 0 means no cap: Grand Master (450) is the 3.3.5a
+// max anyway, and the option off, a GM account, an excluded account or a player not yet in the world have
+// none. It goes by the account and not by .gm on, or the login cap would undo what a GM set.
+uint16 IndividualProgression::GetProfessionSkillCap(Player* player)
+{
+    if (!enabled || !ProfessionTierCap || !player || !player->IsInWorld() || isExcludedAccount(player) || isGMAccount(player))
+        return 0;
+
+    if (!hasPassedProgression(player, PROGRESSION_PRE_TBC))
+        return 300;
+
+    if (!hasPassedProgression(player, PROGRESSION_TBC_TIER_5))
+        return 375;
+
+    return 0;
+}
+
+// Whether a spell teaches a profession rank above the character's cap. A trainer sells a rank as a spell
+// that teaches it (Grand Master Skinning is bought as 50307, which teaches 50305), so the spells it
+// teaches are looked at as well.
+bool IndividualProgression::IsProfessionRankAboveCap(Player* player, uint32 spellId)
+{
+    uint16 rank = GetProfessionRank(spellId);
+    if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId))
+        for (SpellEffectInfo const& effect : spellInfo->Effects)
+            if (effect.Effect == SPELL_EFFECT_LEARN_SPELL)
+                rank = std::max(rank, GetProfessionRank(effect.TriggerSpell));
+
+    // Most spells are no rank; the cap reads the character's progression quests.
+    if (!rank)
+        return false;
+
+    uint16 const cap = GetProfessionSkillCap(player);
+    return cap && rank > cap;
+}
+
+// Takes a character's professions down to its tier's cap: the ranks above it are unlearned and the skill
+// is kept up to the cap. removeSpell steps the skill back to the rank below, but with the value a new
+// rank starts at (1), so the value is written back afterwards.
+void IndividualProgression::CapProfessionSkills(Player* player)
+{
+    uint16 const cap = GetProfessionSkillCap(player);
+    if (!cap)
+        return;
+
+    struct CappedSkill
+    {
+        uint16 skill, oldValue, oldMax;
+    };
+
+    std::vector<CappedSkill> cappedSkills;
+    for (uint16 skill : professionSkills)
+        if (player->HasSkill(skill) && player->GetPureMaxSkillValue(skill) > cap)
+            cappedSkills.push_back({ skill, player->GetPureSkillValue(skill), player->GetPureMaxSkillValue(skill) });
+
+    if (cappedSkills.empty())
+        return;
+
+    // Only the ranks of the skills written back below: removeSpell drops the value of any other to 1.
+    std::vector<uint32> ranksAboveCap;
+    for (auto const& [spellId, playerSpell] : player->GetSpellMap())
+    {
+        if (playerSpell->State == PLAYERSPELL_REMOVED)
+            continue;
+
+        SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+        if (node && node->maxvalue > cap && std::any_of(cappedSkills.begin(), cappedSkills.end(),
+            [node](CappedSkill const& capped) { return capped.skill == node->skill; }))
+            ranksAboveCap.push_back(spellId);
+    }
+
+    for (uint32 spellId : ranksAboveCap)
+        player->removeSpell(spellId, SPEC_MASK_ALL, false);
+
+    for (CappedSkill const& capped : cappedSkills)
+    {
+        uint16 const skill = capped.skill;
+        uint16 const value = std::min(capped.oldValue, cap);
+        player->SetSkill(skill, cap / 75, value, cap);
+        LOG_INFO("module", "IndividualProgression: {} ({}) profession skill {} capped at {}/{} for their tier, was {}/{}",
+            player->GetName(), player->GetGUID().GetCounter(), skill, value, cap, capped.oldValue, capped.oldMax);
+
+        // Learning a rank left the ones below it inactive, and removeSpell does not wake them. The spellbook
+        // was sent before this hook, so the top rank left is activated and sent, or the profession is gone until relog.
+        uint32 topRankId = 0;
+        PlayerSpell* topRank = nullptr;
+        uint16 topRankMax = 0;
+        for (auto const& [spellId, playerSpell] : player->GetSpellMap())
+        {
+            if (playerSpell->State == PLAYERSPELL_REMOVED)
+                continue;
+
+            SpellLearnSkillNode const* node = GetProfessionRankNode(spellId);
+            if (node && node->skill == skill && node->maxvalue <= cap && node->maxvalue > topRankMax)
+            {
+                topRankId = spellId;
+                topRank = playerSpell;
+                topRankMax = node->maxvalue;
+            }
+        }
+
+        if (topRank && !topRank->Active)
+        {
+            topRank->Active = true;
+            player->SendLearnPacket(topRankId, true);
+        }
+    }
+}
+
+// The achievements that need a profession rank past Artisan, with that rank. The last four of the 450s
+// are meta achievements of the Grand Master ones.
+static constexpr std::array<std::pair<uint32, uint16>, 27> professionRankAchievements =
+{{
+    {124, 375}, {129, 375}, {134, 375}, {733, 375},
+    {125, 450}, {130, 450}, {135, 450}, {734, 450}, {735, 450},
+    {1414, 450}, {1415, 450}, {1416, 450}, {1417, 450}, {1418, 450}, {1419, 450}, {1420, 450},
+    {1421, 450}, {1422, 450}, {1423, 450}, {1424, 450}, {1425, 450}, {1426, 450}, {1427, 450},
+    {730, 450}, {1516, 450}, {1563, 450}, {1784, 450}
+}};
+
+// Takes back the achievements of ranks above the character's cap. This does not depend on the skills: a
+// character can hold one without ever having the rank, through mod-account-achievements. AchievementMgr
+// can only reset everything, so the entry is erased from its map directly.
+void IndividualProgression::CapProfessionAchievements(Player* player)
+{
+    uint16 const cap = GetProfessionSkillCap(player);
+    if (!cap)
+        return;
+
+    AchievementMgr* achievementMgr = player->GetAchievementMgr();
+    ObjectGuid::LowType const guid = player->GetGUID().GetCounter();
+    for (auto const& [achievementId, rank] : professionRankAchievements)
+    {
+        if (rank <= cap || !player->HasAchieved(achievementId))
+            continue;
+
+        if (AchievementCriteriaEntryList const* criteria = sAchievementMgr->GetAchievementCriteriaByAchievement(achievementId))
+        {
+            for (AchievementCriteriaEntry const* criterion : *criteria)
+            {
+                achievementMgr->RemoveCriteriaProgress(criterion);
+                CharacterDatabase.Execute("DELETE FROM `character_achievement_progress` WHERE `guid` = {} AND `criteria` = {}", guid, criterion->ID);
+            }
+        }
+
+        const_cast<CompletedAchievementMap&>(achievementMgr->GetCompletedAchievements()).erase(achievementId);
+        RemovePlayerAchievement(guid, achievementId);
+
+        // Salty (1516) and Chef (1563, 1784) come with the achievement.
+        if (AchievementReward const* reward = sAchievementMgr->GetAchievementReward(sAchievementStore.LookupEntry(achievementId)))
+            for (uint32 titleId : reward->titleId)
+                if (CharTitlesEntry const* title = sCharTitlesStore.LookupEntry(titleId))
+                    if (player->HasTitle(title))
+                        player->SetTitle(title, true);
+
+        WorldPacket data(SMSG_ACHIEVEMENT_DELETED, 4);
+        data << uint32(achievementId);
+        player->SendDirectMessage(&data);
+
+        LOG_INFO("module", "IndividualProgression: {} ({}) lost achievement {}, it needs profession rank {} and their tier stops at {}",
+            player->GetName(), guid, achievementId, rank, cap);
+    }
 }
 
 void IndividualProgression::checkHunterPetSpells(Player* player)
