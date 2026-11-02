@@ -666,7 +666,7 @@ INSERT INTO `creature_addon` (`guid`, `path_id`, `mount`, `bytes1`, `bytes2`, `e
 
 DELETE FROM `dungeon_access_template` WHERE `id` = 123;
 INSERT INTO `dungeon_access_template` (`id`, `map_id`, `difficulty`, `min_level`, `max_level`, `min_avg_item_level`, `comment`) VALUES
-(123, 249, 2, 50, 70, 0, 'Onyxia\'s Lair - 40man');
+(123, 249, 2, 50, 80, 0, 'Onyxia\'s Lair - 40man');
 
 DELETE FROM `mapdifficulty_dbc` WHERE `MapID` = 249;
 INSERT INTO `mapdifficulty_dbc` (`ID`, `MapID`, `Difficulty`, `RaidDuration`, `MaxPlayers`, `Difficultystring`) VALUES
