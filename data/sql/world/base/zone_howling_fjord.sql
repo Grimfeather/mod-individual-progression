@@ -27,7 +27,7 @@ SET @GO_DIRT_MOUND_ENTRY := 186944;
 SET @GO_DIRT_MOUND_GUID  := 680001;
 
 DELETE FROM `creature` WHERE `id` = @NPC_BLACK_CONRAD; -- remove npc placed by AC
-UPDATE `creature_template` SET `faction` = 35 WHERE `entry` IN (@NPC_BLACK_CONRAD, @NPC_SPECTRAL_SAILOR); -- was 16, should be something else that's not hostile instead of 35, so they appear red instead of green
+UPDATE `creature_template` SET `faction` = 16, `unit_flags` = 256 WHERE `entry` IN (@NPC_BLACK_CONRAD, @NPC_SPECTRAL_SAILOR);
 UPDATE `gameobject_template` SET `AIName` = 'SmartGameObjectAI' WHERE `entry` = @GO_DIRT_MOUND_ENTRY;
 
 DELETE FROM `gameobject` WHERE `guid` = @GO_DIRT_MOUND_GUID AND `id` = @GO_DIRT_MOUND_ENTRY;
@@ -60,10 +60,10 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 --
 (2479001, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                               'Script9 - Black Conrad\'s Ghost - Say Text 0'),
 (2479001, 9, 1, 0, 0, 0, 100, 0, 7000, 7000, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                         'Script9 - Black Conrad\'s Ghost - Say Text 2'),
-(2479001, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                              'Script9 - Black Conrad\'s Ghost - Reset Faction'),
+(2479001, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 256, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                            'Script9 - Black Conrad\'s Ghost - Remove Flags Immune To Players'),
 --
 (2479601, 9, 0, 0, 0, 0, 50, 0, 5000, 5000, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                          'Script9 - Spectral Sailor - Say Text 0'),
-(2479601, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 16, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                              'Script9 - Spectral Sailor - Reset Faction'),
+(2479601, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 19, 256, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                            'Script9 - Spectral Sailor - Remove Flags Immune To Players'),
 --
 (18694401, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, @NPC_BLACK_CONRAD,    7, 60000, 1, 0, 0, 8, 0, 0, 0, 0, 688.965, -3378.28, 67.7668, 1.45666, 'Script9 - Dirt Mound - Summon Black Conrad'),
 (18694401, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, @NPC_SPECTRAL_SAILOR, 7, 60000, 1, 0, 0, 8, 0, 0, 0, 0, 691.829, -3376.94, 67.9698, 1.45666, 'Script9 - Dirt Mound - Summon Black Conrad'),
