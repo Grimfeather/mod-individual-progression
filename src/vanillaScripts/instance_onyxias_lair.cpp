@@ -219,32 +219,24 @@ public:
         }
         else // level 71+
         {
-            if (player->GetLevel() < 80)
-            {
-                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair."); // return false
-            }
-            else // level 80
+            if (player->GetLevel() == 80)
             {
                 if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
                 {
-                    if (player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
-                    {
-                        player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-                        if (group)
-                            group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                        // teleport player, needed because AC doesn't do this by default for vanilla 10-man heroic
-                        player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
-                    }
-
-                    return true; // AC will handle 10/25 normal versions
+                    // teleport player, needed because AC doesn't do this by default
+                    player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
+                    return true;
                 }
                 else // progression 0-17
                 {
                     if (player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
-                        handler.PSendSysMessage("You need progression level 18 to enter the vanilla version of Onyxia's Lair.");
+                        handler.PSendSysMessage("You need progression 18 to enter the vanilla version of Onyxia's Lair.");
                     else
+                    {
+                        // teleport player, needed because AC doesn't do this by default
+                        player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
                         return true; // AC will handle 10/25 normal versions
+                    }
                 }
             }
         }
