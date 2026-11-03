@@ -4,6 +4,7 @@
 
 #include "IndividualProgression.h"
 #include "naxxramas_40.h"
+#include "Mail.h"
 #include "ReputationMgr.h"
 #include "PetDefines.h"
 
@@ -70,6 +71,8 @@ void IndividualProgression::UpdateProgressionState(Player* player, ProgressionSt
             player->CompleteQuest(PROGRESSION_QUEST);
             player->RewardQuest(quest, 0, player, false, false);
         }
+
+        sIndividualProgression->GrantAttunements(player, newState);
     }
 }
 
@@ -101,6 +104,8 @@ void IndividualProgression::ForceUpdateProgressionState(Player* player, Progress
         player->CompleteQuest(PROGRESSION_QUEST);
         player->RewardQuest(quest, 0, player, false, false);
     }
+
+    sIndividualProgression->GrantAttunements(player, newState);
 }
 
 void IndividualProgression::CheckAdjustments(Player* player) const
@@ -286,6 +291,72 @@ void IndividualProgression::UpdateGroupAttunement(Player* player, std::string lo
             ChatHandler(player->GetSession()).PSendSysMessage("You must have the Medallion of Karabor in your inventory to use this command.");
             return;
         }
+    }
+}
+
+// Grants the attunements of the raids that state has reached. Nothing is taken back when progression goes down.
+void IndividualProgression::GrantAttunements(Player* player, ProgressionState state)
+{
+    if (!enabled || !AutoAttune || !player || !player->IsInWorld() || isBotAccount(player))
+        return;
+
+    auto giveItem = [player](uint32 itemId, uint32 otherItemId = 0)
+    {
+        if (player->HasItemCount(itemId, 1, true) || (otherItemId && player->HasItemCount(otherItemId, 1, true)))
+            return;
+
+        // An earlier grant may still be waiting in the mailbox
+        for (Mail const* mail : player->GetMails())
+            for (MailItemInfo const& info : mail->items)
+                if (info.item_template == itemId)
+                    return;
+
+        if (player->AddItem(itemId, 1))
+            return;
+
+        // Bags are full: mail it
+        Item* item = Item::CreateItem(itemId, 1, player);
+        if (!item)
+            return;
+
+        CharacterDatabaseTransaction transaction = CharacterDatabase.BeginTransaction();
+        MailDraft draft("Raid attunement", "Your bags were full when your progression granted you this attunement.");
+        item->SaveToDB(transaction);
+        draft.AddItem(item);
+        draft.SendMailTo(transaction, MailReceiver(player, player->GetGUID().GetCounter()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+        CharacterDatabase.CommitTransaction(transaction);
+    };
+
+    // Marked as rewarded without the quest's own rewards. A quest still in the log is dropped first, or it would keep its status.
+    auto giveQuest = [player](uint32 questId)
+    {
+        QuestStatus const status = player->GetQuestStatus(questId);
+        if (status == QUEST_STATUS_REWARDED)
+            return;
+
+        if (status != QUEST_STATUS_NONE)
+            player->RemoveActiveQuest(questId);
+
+        player->SetRewardedQuest(questId);
+    };
+
+    if (state >= PROGRESSION_ONYXIA)
+        giveItem(ITEM_DRAKEFIRE_AMULET);
+
+    if (state >= PROGRESSION_AQ && !isAttuned(player))
+        giveQuest(NAXX40_ATTUNEMENT_1);
+
+    if (state >= PROGRESSION_TBC_TIER_1)
+    {
+        giveItem(ITEM_TEMPEST_KEY);
+        giveQuest(TRIAL_MAGTHERIDON);
+        giveQuest(CUDGEL_OF_KARDESH);
+    }
+
+    if (state >= PROGRESSION_TBC_TIER_2)
+    {
+        giveQuest(VIALS_OF_ETERNITY);
+        giveItem(ITEM_MEDALLION_OF_KARABOR, ITEM_BLESSED_MEDALLION_OF_KARABOR);
     }
 }
 
@@ -1193,6 +1264,7 @@ private:
         sIndividualProgression->LockLaterExpansionGear = sConfigMgr->GetOption<bool>("IndividualProgression.LockLaterExpansionGear", false);
         sIndividualProgression->ProfessionTierCap = sConfigMgr->GetOption<bool>("IndividualProgression.ProfessionTierCap", true);
         sIndividualProgression->AllowVanillaRaidAccess = sConfigMgr->GetOption<bool>("IndividualProgression.AllowVanillaRaidAccess", false);
+        sIndividualProgression->AutoAttune = sConfigMgr->GetOption<bool>("IndividualProgression.AutoAttune", false);
     }
 
     static void LoadXpValues()
