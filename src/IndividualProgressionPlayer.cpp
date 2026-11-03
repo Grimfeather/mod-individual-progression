@@ -214,11 +214,7 @@ public:
 
         if (!sIndividualProgression->enabled || player->IsGameMaster() || !sIndividualProgression->isNormalAccount(player))
             return true;
-
-        // at progression 18 players completed everything and are allowed to go everywhere
-        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
-            return true;
-        
+       
         if (mapid == MAP_BLACKWING_LAIR && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_ONYXIA))
         {
             ChatHandler(player->GetSession()).PSendSysMessage("Progression Level Required = |cff00ffff{}|r", PROGRESSION_ONYXIA);
@@ -228,12 +224,17 @@ public:
         {
             if (player->GetLevel() <= 70) // vanilla version
             {
-                if (player->GetLevel() < 50)
-                    return false;
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5) && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
-                    return false;
-                if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
-                    return false;
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+                    return true;
+                else // progression 0-17
+                {
+                    if (player->GetLevel() < 50)
+                        return false;
+                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // Death Knights
+                        return false;
+                    if (!player->HasItemCount(ITEM_DRAKEFIRE_AMULET))
+                        return false;
+                }
             }
  			else // WotLK
             {
@@ -441,21 +442,26 @@ public:
 
             if (instanceTemplate->Parent == MAP_NORTHREND && mapid == MAP_NAXXRAMAS)
             {
-                if (player->GetLevel() <= 70)
+                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+                    return true;
+                else // progression 0-17
                 {
-                    if (!sIndividualProgression->isAttuned(player))
-                         return false;
-
-                    if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    if (player->GetLevel() <= 70)
                     {
-                        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // Death Knights
+                        if (!sIndividualProgression->isAttuned(player))
+                            return false;
+
+                        if (!sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                        {
+                            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // Death Knights
+                                return false;
+                        }
+                    }
+                    else // level 71+
+                    {
+                        if (player->GetLevel() < 80)
                             return false;
                     }
-                }
-                else // level 71+
-                {
-                    if (player->GetLevel() < 80)
-                        return false;
                 }
             }
         }
