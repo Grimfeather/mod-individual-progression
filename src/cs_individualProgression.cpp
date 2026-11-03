@@ -641,58 +641,77 @@ public:
 
         if (location == "naxx" || location == "naxx40")
         {
-            if ((target->GetLevel() <= 70 && (progressionLevel < PROGRESSION_TBC_TIER_5)) || sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5))
+            if (target->GetLevel() <= 70 || target->GetLevel() == 80)
             {
+                bool allowed = false;
+
                 if (sIndividualProgression->isAttuned(target))
                 {
-                    Group* group = target->GetGroup();
+                    if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    {
+                        allowed = true;
+                    }
+                    else // progression 0-17
+                    {
+                        if (sIndividualProgression->AllowVanillaRaidAccess && target->GetLevel() == 80)
+                            allowed = true;
 
-                    if (group)
-                        group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                    target->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                    target->TeleportTo(533, 3005.51f, -3434.64f, 304.195f, 6.2831f);
-                    return true;
+                        if (progressionLevel < PROGRESSION_TBC_TIER_5) // Death Knights
+                            allowed = true;
+                        else
+                            handler->PSendSysMessage("|cff00ffff{}|r is at WotLK progression and not allowed to enter.", playername);
+                    }
                 }
                 else
-                {
                     handler->PSendSysMessage("|cff00ffff{}|r has not completed the Naxxramas attunement quest.", playername);
-                    return false;
+
+                if (allowed)
+                {
+                    target->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
+                    target->TeleportTo(533, 3005.51f, -3434.64f, 304.195f, 6.2831f);
+                    return true;
                 }
             }
             else
             {
-                handler->PSendSysMessage("|cff00ffff{}|r is not allowed to teleport to |cff00ffff{}|r.", playername, location);
-                return false;
+                handler->PSendSysMessage("|cff00ffff{}|r needs to be level 80 to enter the vanilla version of Naxxramas.", playername);
             }
         }
         else if (location == "onyxia" || location == "onyxia40")
         {
-            if ((target->GetLevel() <= 70 && (progressionLevel < PROGRESSION_TBC_TIER_5)) || sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5))
+            if (target->GetLevel() <= 70 || target->GetLevel() == 80)
             {
+                bool allowed = false;
+
                 if (target->HasItemCount(ITEM_DRAKEFIRE_AMULET))
                 {
-                    Group* group = target->GetGroup();
+                    if (sIndividualProgression->hasPassedProgression(target, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    {
+                        allowed = true;
+                    }
+                    else // progression 0-17
+                    {
+                        if (sIndividualProgression->AllowVanillaRaidAccess && target->GetLevel() == 80)
+                            allowed = true;
+                        else if (progressionLevel < PROGRESSION_TBC_TIER_5) // Death Knights
+                            allowed = true;
+                        else
+                            handler->PSendSysMessage("|cff00ffff{}|r is at WotLK progression and not allowed to enter.", playername);
+                    }
+                }
+                else 
+                    handler->PSendSysMessage("|cff00ffff{}|r does not have a Drakefire Amulet.", playername);
 
-                    if (group)
-                        group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
+                if (allowed)
+                {
                     target->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-                   
                     target->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
                     return true;
-                }
-                else
-                {
-                    handler->PSendSysMessage("|cff00ffff{}|r does not have a Drakefire Amulet.", playername);
-                    return false;
                 }
             }
             else
             {
-                handler->PSendSysMessage("|cff00ffff{}|r is not allowed to teleport to |cff00ffff{}|r.", playername, location);
-                return false;
+                handler->PSendSysMessage("|cff00ffff{}|r needs to be level 80 to enter the vanilla version of Onyxia's Lair.", playername);
             }
         }
 

@@ -452,6 +452,16 @@ IndividualProgression.AllowEarlyDungeonSet2 = 0
 #
 IndividualProgression.AllowEarlyScourgeBosses = 0
 
+# IndividualProgression.AllowVanillaRaidAccess
+#
+#        Description: When enabled, this allows players, at level 80, to enter the vanilla version of Onyxia and Naxxramas.
+#                     Excluded accounts already get access to these raids at level 80.
+#
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+IndividualProgression.AllowVanillaRaidAccess = 0
+
 # IndividualProgression.TBC.ArenaSeason
 #
 #        Description: Current TBC arena season id
