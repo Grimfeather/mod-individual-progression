@@ -237,7 +237,7 @@ public:
             }
  			else // WotLK
             {
-                if (player->GetLevel() != 80 && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5))
+                if (player->GetLevel() != 80)
                     return false;
             }
         }
