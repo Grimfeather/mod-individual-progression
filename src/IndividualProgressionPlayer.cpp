@@ -238,7 +238,10 @@ public:
             }
  			else // WotLK
             {
-                if (player->GetLevel() != 80)
+                if (player->GetLevel() < 80)
+                    return false;
+
+                if (player->GetLevel() == 80 && !sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5) && player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
                     return false;
             }
         }
