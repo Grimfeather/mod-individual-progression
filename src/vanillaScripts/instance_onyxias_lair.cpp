@@ -220,21 +220,7 @@ public:
         else // level 71+
         {
             if (player->GetLevel() < 80)
-            {
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
-                {
-                    player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-                    if (group)
-                        group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                    // teleport player, needed because AC doesn't do this by default
-                    player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
-                    
-                    return true;
-                }
-                else
-                    handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
-            }
+                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
             else // level 80
             {
                 if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
