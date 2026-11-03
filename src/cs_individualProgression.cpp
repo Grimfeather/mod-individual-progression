@@ -617,10 +617,27 @@ public:
             return false;
         }
 
-        player = PlayerIdentifier::FromTargetOrSelf(handler);
+        if (!player)
+            player = PlayerIdentifier::FromTargetOrSelf(handler);
+
+        if (!player)
+        {
+            handler->SendSysMessage("Player not found.");
+            return false;
+        }
+
+        std::string playername = player->GetName();
         Player* target = player->GetConnectedPlayer();
+        if (!target)
+        {
+            handler->PSendSysMessage("Player |cff00ffff{}|r is not online.", playername);
+            return false;
+        }
+
+        if (handler->HasLowerSecurity(target))
+            return false;
+
         uint32 progressionLevel = sIndividualProgression->GetPlayerProgressionFromQuests(target);
-        std::string playername = target->GetName();
 
         if (location == "naxx" || location == "naxx40")
         {
