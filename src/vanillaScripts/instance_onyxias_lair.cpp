@@ -221,7 +221,7 @@ public:
         {
             if (player->GetLevel() < 80)
             {
-                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
+                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair."); // return false
             }
             else // level 80
             {
@@ -239,7 +239,7 @@ public:
 
                     return true; // AC will handle 10/25 normal versions
                 }
-                else
+                else // progression 0-17
                 {
                     if (player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
                         handler.PSendSysMessage("You need progression level 18 to enter the vanilla version of Onyxia's Lair.");
