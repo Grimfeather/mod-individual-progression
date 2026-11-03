@@ -83,7 +83,7 @@ public:
 
                     bool allowed = true;
 
-                    if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_WOTLK_TIER_5)) // progression 18
                         allowed = true;
                     else if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_TBC_TIER_5)) // death knights
                     {
