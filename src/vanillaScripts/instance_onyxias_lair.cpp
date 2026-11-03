@@ -225,6 +225,7 @@ public:
                 {
                     // teleport player, needed because AC doesn't do this by default
                     player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
+
                     return true;
                 }
                 else // progression 0-17
@@ -235,9 +236,14 @@ public:
                     {
                         // teleport player, needed because AC doesn't do this by default
                         player->TeleportTo(249, 29.1607f, -71.3372f, -8.18032f, 4.58f);
-                        return true; // AC will handle 10/25 normal versions
+
+                        return true;
                     }
                 }
+            }
+            else
+            {
+                handler.PSendSysMessage("You need to be level 80 to enter Onyxia's Lair.");
             }
         }
 
