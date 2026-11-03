@@ -336,6 +336,12 @@ bool IndividualProgression::isAttuned(Player* player)
         return false;
 }
 
+// The config extends level 80 access below progression 18; excluded accounts already have access.
+bool IndividualProgression::canEnterVanillaRaidAt80(Player* player)
+{
+    return AllowVanillaRaidAccess || !isNormalAccount(player) || hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5);
+}
+
 void IndividualProgression::LoadAccountRegexes()
 {
     auto compile = [](std::string const& option, std::string const& pattern)

@@ -31,11 +31,11 @@ public:
         ChatHandler handler(player->GetSession());
         Group* group = player->GetGroup();
 
-        if (player->GetLevel() <= 70)
+        if (player->GetLevel() <= 70 || (player->GetLevel() == 80 && sIndividualProgression->canEnterVanillaRaidAt80(player)))
         {
             bool allowed = true;
 
-            if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
+            if (player->GetLevel() == 80 || sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
                 allowed = true;
             else if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_TBC_TIER_5)) // death knights
             {
@@ -83,7 +83,12 @@ public:
 
                     bool allowed = true;
 
-                    if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_WOTLK_TIER_5)) // progression 18
+                    if (member->GetLevel() > 70 && !(member->GetLevel() == 80 && sIndividualProgression->canEnterVanillaRaidAt80(member)))
+                    {
+                        handler.PSendSysMessage("|cff00ffff{}|r can't enter this version of Naxxramas.", member->GetName());
+                        allowed = false;
+                    }
+                    else if (member->GetLevel() == 80 || sIndividualProgression->hasPassedProgression(member, PROGRESSION_WOTLK_TIER_5)) // progression 18
                         allowed = true;
                     else if (sIndividualProgression->hasPassedProgression(member, PROGRESSION_TBC_TIER_5)) // death knights
                     {
@@ -124,41 +129,9 @@ public:
             player->TeleportTo(533, 3005.51f, -3434.64f, 304.195f, 6.2831f);
             return true;
         }
-        else // level 71+
+        else
         {
-            if (player->GetLevel() == 80)
-            {
-                bool allowed = false;
-
-                if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_WOTLK_TIER_5)) // progression 18
-                {
-                    allowed = true;
-                }
-                else // progression 0-17
-                {
-                    if (sIndividualProgression->AllowVanillaRaidAccess)
-                        allowed = true;
-                }
-
-                if (allowed)
-                {
-                    player->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                    if (group)
-                        group->SetRaidDifficulty(RAID_DIFFICULTY_10MAN_HEROIC);
-
-                    player->TeleportTo(533, 3005.51f, -3434.64f, 304.195f, 6.2831f);
-                    return true;
-                }
-                else
-                {
-                    handler.PSendSysMessage("You need progression 18 to enter the vanilla version of Naxxramas.");
-                }
-            }
-            else
-            {
-                handler.PSendSysMessage("You need to be level 80 to enter the vanilla version of Naxxramas.");
-            }
+            handler.PSendSysMessage("You need to be level 70 or below, or level 80 with progression 18 or vanilla raid access enabled, to enter this version of Naxxramas.");
         }
 
         return false;

@@ -437,6 +437,7 @@ public:
     void checkHunterPetSpells(Player* player);
     void checkWarlockPetSpells(Player* player);
     bool isAttuned(Player* player);
+    bool canEnterVanillaRaidAt80(Player* player);
     bool isPlayerInDungeonOrRaid(Player* player);
     void checkIPPhasing(Player* player, uint32 newArea);
     void checkIPProgression(Player* player);
