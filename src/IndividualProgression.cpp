@@ -71,8 +71,6 @@ void IndividualProgression::UpdateProgressionState(Player* player, ProgressionSt
             player->CompleteQuest(PROGRESSION_QUEST);
             player->RewardQuest(quest, 0, player, false, false);
         }
-
-        sIndividualProgression->GrantAttunements(player, newState);
     }
 }
 
@@ -294,11 +292,15 @@ void IndividualProgression::UpdateGroupAttunement(Player* player, std::string lo
     }
 }
 
-// Grants the attunements of the raids that state has reached. Nothing is taken back when progression goes down.
+// Grants the attunements of the raids that state has reached, for a bump only. Nothing is taken back when progression goes down.
 void IndividualProgression::GrantAttunements(Player* player, ProgressionState state)
 {
     if (!enabled || !AutoAttune || !player || !player->IsInWorld() || isBotAccount(player))
         return;
+
+    uint8 stage = state;
+    if (progressionLimit && stage > progressionLimit)
+        stage = progressionLimit;
 
     auto giveItem = [player](uint32 itemId, uint32 otherItemId = 0)
     {
@@ -311,23 +313,32 @@ void IndividualProgression::GrantAttunements(Player* player, ProgressionState st
                 if (info.item_template == itemId)
                     return;
 
-        if (player->AddItem(itemId, 1))
+        ItemPosCountVec dest;
+        InventoryResult const result = player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, itemId, 1);
+        if (result == EQUIP_ERR_OK)
+        {
+            player->AddItem(itemId, 1);
+            return;
+        }
+
+        // Only a full bag is mailed: any other refusal, such as the unique check on an item in a trade window, would make a second copy
+        if (result != EQUIP_ERR_INVENTORY_FULL)
             return;
 
-        // Bags are full: mail it
+        constexpr uint32 NPC_SORIDORMI = 19935;
         Item* item = Item::CreateItem(itemId, 1, player);
         if (!item)
             return;
 
         CharacterDatabaseTransaction transaction = CharacterDatabase.BeginTransaction();
-        MailDraft draft("Raid attunement", "Your bags were full when your progression granted you this attunement.");
+        MailDraft draft("Raid attunement", "Your bags were full when your progression granted you this attunement. Mail that is not collected is deleted when it expires, 30 days after it was sent.");
         item->SaveToDB(transaction);
         draft.AddItem(item);
-        draft.SendMailTo(transaction, MailReceiver(player, player->GetGUID().GetCounter()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+        draft.SendMailTo(transaction, MailReceiver(player, player->GetGUID().GetCounter()), MailSender(MAIL_CREATURE, NPC_SORIDORMI));
         CharacterDatabase.CommitTransaction(transaction);
     };
 
-    // Marked as rewarded without the quest's own rewards. A quest still in the log is dropped first, or it would keep its status.
+    // Marked as rewarded without the quest's own rewards. A quest in the log leaves it the way an abandon does, slot included, or the next slot walk brings its status back.
     auto giveQuest = [player](uint32 questId)
     {
         QuestStatus const status = player->GetQuestStatus(questId);
@@ -335,25 +346,33 @@ void IndividualProgression::GrantAttunements(Player* player, ProgressionState st
             return;
 
         if (status != QUEST_STATUS_NONE)
+        {
+            uint16 const slot = player->FindQuestSlot(questId);
+            if (slot < MAX_QUEST_LOG_SIZE)
+                player->SetQuestSlot(slot, 0);
+
+            player->TakeQuestSourceItem(questId, false);
+            player->AbandonQuest(questId);
             player->RemoveActiveQuest(questId);
+        }
 
         player->SetRewardedQuest(questId);
     };
 
-    if (state >= PROGRESSION_ONYXIA)
+    if (stage >= PROGRESSION_MOLTEN_CORE)
         giveItem(ITEM_DRAKEFIRE_AMULET);
 
-    if (state >= PROGRESSION_AQ && !isAttuned(player))
+    if (stage >= PROGRESSION_AQ && !isAttuned(player))
         giveQuest(NAXX40_ATTUNEMENT_1);
 
-    if (state >= PROGRESSION_TBC_TIER_1)
+    if (stage >= PROGRESSION_TBC_TIER_1)
     {
         giveItem(ITEM_TEMPEST_KEY);
         giveQuest(TRIAL_MAGTHERIDON);
         giveQuest(CUDGEL_OF_KARDESH);
     }
 
-    if (state >= PROGRESSION_TBC_TIER_2)
+    if (stage >= PROGRESSION_TBC_TIER_2)
     {
         giveQuest(VIALS_OF_ETERNITY);
         giveItem(ITEM_MEDALLION_OF_KARABOR, ITEM_BLESSED_MEDALLION_OF_KARABOR);
