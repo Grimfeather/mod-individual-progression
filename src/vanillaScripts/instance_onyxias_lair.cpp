@@ -228,7 +228,7 @@ public:
                 else
                 {
                     if (player->GetDifficulty(true) == RAID_DIFFICULTY_10MAN_HEROIC)
-                        handler.PSendSysMessage("You are not allowed to enter the vanilla version of Onyxia's Lair.");
+                        handler.PSendSysMessage("You need progression level 18 to enter the vanilla version of Onyxia's Lair.");
                     else
                         return true;
                 }
