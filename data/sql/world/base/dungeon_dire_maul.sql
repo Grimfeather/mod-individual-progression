@@ -1132,7 +1132,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`, `event_
 (14502, 0, 5, 0, 61, 0, 100, 1, 0, 0, 0, 0, 0, 0, 19, 768, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Xorothian Dreadsteed - OOC - Remove Immune'),
 (14502, 0, 6, 0, 2, 0, 100, 1, 0, 50, 0, 0, 0, 0, 12, 14506, 1, 36000, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Xorothian Dreadsteed - On 80% HP - Summon Hel Nurath'),
 (14502, 0, 7, 8, 6, 0, 100, 515, 0, 0, 0, 0, 0, 0, 11, 23159, 3, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                'Xorothian Dreadsteed - On Just Died - Cast Summon Dreadsteed Spirit'),
-(14502, 0, 8, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 15, 7631, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,                 'Xorothian Dreadsteed - On Just Died - Credit Dreadsteed of Xoroth'),
+(14502, 0, 8, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 15, 7631, 0, 0, 0, 0, 0, 18, 80, 0, 0, 0, 0, 0, 0, 0,                'Xorothian Dreadsteed - On Just Died - Credit Dreadsteed of Xoroth'),
 --
 (14504, 0, 0, 0, 1, 0, 100, 0, 5000, 5000, 30000, 30000, 0, 0, 89, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,        'Dreadsteed Spirit - OOC - Random Movement'),
 --
