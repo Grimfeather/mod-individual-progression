@@ -4,6 +4,7 @@
 
 #include "IndividualProgression.h"
 #include "naxxramas_40.h"
+#include "Mail.h"
 #include "ReputationMgr.h"
 #include "PetDefines.h"
 
@@ -101,6 +102,8 @@ void IndividualProgression::ForceUpdateProgressionState(Player* player, Progress
         player->CompleteQuest(PROGRESSION_QUEST);
         player->RewardQuest(quest, 0, player, false, false);
     }
+
+    sIndividualProgression->GrantAttunements(player, newState);
 }
 
 void IndividualProgression::CheckAdjustments(Player* player) const
@@ -286,6 +289,93 @@ void IndividualProgression::UpdateGroupAttunement(Player* player, std::string lo
             ChatHandler(player->GetSession()).PSendSysMessage("You must have the Medallion of Karabor in your inventory to use this command.");
             return;
         }
+    }
+}
+
+// Grants the attunements of the raids that state has reached, for a bump only. Nothing is taken back when progression goes down.
+void IndividualProgression::GrantAttunements(Player* player, ProgressionState state)
+{
+    if (!enabled || !AutoAttune || !player || !player->IsInWorld() || isBotAccount(player))
+        return;
+
+    uint8 stage = state;
+    if (progressionLimit && stage > progressionLimit)
+        stage = progressionLimit;
+
+    auto giveItem = [player](uint32 itemId, uint32 otherItemId = 0)
+    {
+        if (player->HasItemCount(itemId, 1, true) || (otherItemId && player->HasItemCount(otherItemId, 1, true)))
+            return;
+
+        // An earlier grant may still be waiting in the mailbox
+        for (Mail const* mail : player->GetMails())
+            for (MailItemInfo const& info : mail->items)
+                if (info.item_template == itemId)
+                    return;
+
+        ItemPosCountVec dest;
+        InventoryResult const result = player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, itemId, 1);
+        if (result == EQUIP_ERR_OK)
+        {
+            player->AddItem(itemId, 1);
+            return;
+        }
+
+        // Only a full bag is mailed: any other refusal, such as the unique check on an item in a trade window, would make a second copy
+        if (result != EQUIP_ERR_INVENTORY_FULL)
+            return;
+
+        constexpr uint32 NPC_SORIDORMI = 19935;
+        Item* item = Item::CreateItem(itemId, 1, player);
+        if (!item)
+            return;
+
+        CharacterDatabaseTransaction transaction = CharacterDatabase.BeginTransaction();
+        MailDraft draft("Raid attunement", "Your bags were full when your progression granted you this attunement. Mail that is not collected is deleted when it expires, 30 days after it was sent.");
+        item->SaveToDB(transaction);
+        draft.AddItem(item);
+        draft.SendMailTo(transaction, MailReceiver(player, player->GetGUID().GetCounter()), MailSender(MAIL_CREATURE, NPC_SORIDORMI));
+        CharacterDatabase.CommitTransaction(transaction);
+    };
+
+    // Marked as rewarded without the quest's own rewards. A quest in the log leaves it the way an abandon does, slot included, or the next slot walk brings its status back.
+    auto giveQuest = [player](uint32 questId)
+    {
+        QuestStatus const status = player->GetQuestStatus(questId);
+        if (status == QUEST_STATUS_REWARDED)
+            return;
+
+        if (status != QUEST_STATUS_NONE)
+        {
+            uint16 const slot = player->FindQuestSlot(questId);
+            if (slot < MAX_QUEST_LOG_SIZE)
+                player->SetQuestSlot(slot, 0);
+
+            player->TakeQuestSourceItem(questId, false);
+            player->AbandonQuest(questId);
+            player->RemoveActiveQuest(questId);
+        }
+
+        player->SetRewardedQuest(questId);
+    };
+
+    if (stage >= PROGRESSION_MOLTEN_CORE)
+        giveItem(ITEM_DRAKEFIRE_AMULET);
+
+    if (stage >= PROGRESSION_AQ && !isAttuned(player))
+        giveQuest(NAXX40_ATTUNEMENT_1);
+
+    if (stage >= PROGRESSION_TBC_TIER_1)
+    {
+        giveItem(ITEM_TEMPEST_KEY);
+        giveQuest(TRIAL_MAGTHERIDON);
+        giveQuest(CUDGEL_OF_KARDESH);
+    }
+
+    if (stage >= PROGRESSION_TBC_TIER_2)
+    {
+        giveQuest(VIALS_OF_ETERNITY);
+        giveItem(ITEM_MEDALLION_OF_KARABOR, ITEM_BLESSED_MEDALLION_OF_KARABOR);
     }
 }
 
@@ -1193,6 +1283,7 @@ private:
         sIndividualProgression->LockLaterExpansionGear = sConfigMgr->GetOption<bool>("IndividualProgression.LockLaterExpansionGear", false);
         sIndividualProgression->ProfessionTierCap = sConfigMgr->GetOption<bool>("IndividualProgression.ProfessionTierCap", true);
         sIndividualProgression->AllowVanillaRaidAccess = sConfigMgr->GetOption<bool>("IndividualProgression.AllowVanillaRaidAccess", false);
+        sIndividualProgression->AutoAttune = sConfigMgr->GetOption<bool>("IndividualProgression.AutoAttune", false);
     }
 
     static void LoadXpValues()

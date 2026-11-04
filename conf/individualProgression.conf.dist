@@ -159,6 +159,28 @@ IndividualProgression.SerpentshrineCavern.RequireAllBosses = 1
 #
 IndividualProgression.TheEye.RequireAllBosses = 1
 
+# IndividualProgression.AutoAttune
+#
+#        Description: Attunements are not progression, so by default a character at a high progression stage still has to earn them.
+#                     If enabled, a character that is bumped to a stage also gets the raid attunements for the stages it has reached.
+#                     A bump is .ip set, a starting progression option, or an excluded account set to 18 at login.
+#                     Killing bosses, and progression caught up from the achievements of another character, grant nothing.
+#                     Stages above ProgressionLimit are not granted. Bot accounts get nothing.
+#                     Nothing is taken back when progression is lowered, and what the character already has (the bank counts)
+#                     is not given twice. An item goes to the bags, or to the mailbox if they are full. Mail that is not collected
+#                     is deleted when it expires. A quest is marked as done without its own rewards (no XP, gold, reputation, title or items).
+#                     Characters already at a stage when this is switched on get nothing until they are bumped again (.ip set).
+#
+#                     Stage 1  (Molten Core)   Drakefire Amulet (Onyxia's Lair 40, which has no stage of its own; Onyxia is the next raid after Molten Core)
+#                     Stage 6  (AQ)            The Dread Citadel - Naxxramas (Naxxramas 40)
+#                     Stage 9  (TBC Tier 1)    Tempest Key and Trial of the Naaru: Magtheridon (The Eye), The Cudgel of Kar'desh (Serpentshrine Cavern)
+#                     Stage 10 (TBC Tier 2)    The Vials of Eternity (Hyjal Summit), Medallion of Karabor (Black Temple)
+#
+#        Default:     0 - Disabled (attunements are earned in game)
+#                     1 - Enabled
+#
+IndividualProgression.AutoAttune = 0
+
 # IndividualProgression.FishingFix
 #
 #        Description: Before patch 3.1, fishing skill had progression and had to be leveled in low level zones before high level areas could add skill

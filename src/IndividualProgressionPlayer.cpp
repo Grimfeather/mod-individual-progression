@@ -52,16 +52,19 @@ public:
             if ((player->getRace() == RACE_DRAENEI || player->getRace() == RACE_BLOODELF) && sIndividualProgression->tbcRacesStartingProgression && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression)))
             {
                 sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression));
+                sIndividualProgression->GrantAttunements(player, static_cast<ProgressionState>(sIndividualProgression->tbcRacesStartingProgression));
             }
 
             if (player->getClass() == CLASS_DEATH_KNIGHT && sIndividualProgression->deathKnightStartingProgression && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression)))
             {
                 sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression));
+                sIndividualProgression->GrantAttunements(player, static_cast<ProgressionState>(sIndividualProgression->deathKnightStartingProgression));
             }
 
             if (sIndividualProgression->startingProgression && !sIndividualProgression->hasPassedProgression(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression)))
             {
                 sIndividualProgression->UpdateProgressionState(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression));
+                sIndividualProgression->GrantAttunements(player, static_cast<ProgressionState>(sIndividualProgression->startingProgression));
             }
 
             sIndividualProgression->checkIPProgression(player);
