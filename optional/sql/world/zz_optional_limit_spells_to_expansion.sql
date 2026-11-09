@@ -4,6 +4,8 @@
     This does not effect RNDbots, they don't learn their spells from trainers.
 */
 
+USE acore_world;
+
 -- Warrior
 UPDATE `trainer_spell` SET `ReqLevel` = 62 WHERE `TrainerId` = 1 AND `SpellId` = 34428;  -- Victory Rush, level 6 -> 62
 UPDATE `trainer_spell` SET `ReqLevel` = 62 WHERE `TrainerId` = 2 AND `SpellId` = 34428;  -- Victory Rush, level 6 -> 62
