@@ -52,7 +52,7 @@ enum Phases
 enum KZDataTypes
 {
     DATA_ATTUMEN = 0,
-    DATA_NIGHTBANE = 11,
+    DATA_NIGHTBANE = 10,
     DATA_MIDNIGHT = 32,
 
     NPC_MIDNIGHT = 16151,
