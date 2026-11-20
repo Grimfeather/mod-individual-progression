@@ -113,18 +113,6 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (13019, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                    'Burning Blade Seer - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (14225, 0, 0, 0, 2, 0, 100, 0, 0, 30, 0, 0, 0, 0, 11, 8599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Prince Kellen - Between 0-30% Health - Cast Enrage');
 
--- Serpent Statue summons Lord Kragaru: the core's own rows (azerothcore-wotlk#27611), kept here so a
--- database that ran an older version of this file gets them back; change them with the core's
-DELETE FROM `smart_scripts` WHERE (`source_type` = 1 AND `entryorguid` IN (177673, 177705)) OR (`source_type` = 9 AND `entryorguid` = 17767300);
-INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
-`event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
-`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
-`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
---
-(177673, 1, 0, 1, 70, 0, 100, 0, 2, 0, 0, 0, 0, 0, 80, 17767300, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Serpent Statue - On Loot State Changed (Activated) - Call Timed Actionlist'),
-(177673, 1, 1, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 241, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Serpent Statue - On Link - Summon Gameobject Group 0 \'Naga Beam\''),
-(17767300, 9, 0, 0, 0, 0, 100, 0, 3500, 3500, 0, 0, 0, 0, 12, 12369, 1, 180000, 0, 0, 0, 8, 0, 0, 0, 0, 252.57, 2963.7, 1.72356, 1.29154, 'Serpent Statue - On Script - Summon Creature \'Lord Kragaru\'');
-
 -- Khan Dez'Hepah, 3 spawn locations
 DELETE FROM `creature` WHERE `guid` IN (29141, 27042, 27052);
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`,
