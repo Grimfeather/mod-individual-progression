@@ -1354,8 +1354,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (1162506, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 61162503, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162503'),
 (1162507, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 61162505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162505'),
 -- waypoint events fire twice per point (MovementInform and WaypointReached), so the stops are not repeatable; clear that each round
-(1162508, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 78, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Script9 - Cork Gizelton - Reset Script (not repeatable events fire again)'),
-(1162508, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 61162501, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162501'),
+(1162508, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 78, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Script9 - Cork Gizelton - Reset Script (not repeatable events fire again)'),
+(1162508, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 61162501, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Script9 - Cork Gizelton - Start Waypoints 61162501'),
 --
 (1162600, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 64, 1, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,                   'Script9 - Rigger Gizelton - Store Targetlist'),
 (1162600, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Script9 - Rigger Gizelton - Remove Quest Giver flag'),
