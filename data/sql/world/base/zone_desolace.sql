@@ -1287,7 +1287,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (11625, 0, 14, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162501, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Cork Gizelton - On Waypoint Reached - Run Script 1162501'), -- centaur ambush 3
 (11625, 0, 15, 16, 108, 0, 100, 1, 26, 61162502, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Cork Gizelton - On Waypoint Reached - Say Text 5'),
 (11625, 0, 16, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162502, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Cork Gizelton - On Waypoint Reached - Run Script 1162502'), -- complete escort
-(11625, 0, 17, 0, 108, 0, 100, 0, 105, 61162501, 0, 0, 0, 0, 80, 1162506, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Cork Gizelton - On Waypoint Reached - Run Script 1162506'), -- peaceful route done, continue to south camp
+(11625, 0, 17, 0, 108, 0, 100, 0, 105, 61162501, 0, 0, 0, 0, 80, 1162506, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162506'), -- peaceful route done, continue to south camp
 (11625, 0, 18, 19, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Cork Gizelton - On Respawn - Remove Quest Giver flag'),
 (11625, 0, 19, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 61162501, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Cork Gizelton - On Respawn - Start Waypoints 61162501'),
 --
@@ -1300,8 +1300,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (11625, 0, 26, 27, 108, 0, 100, 1, 27, 61162504, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 10, 611626, 11626, 0, 0, 0, 0, 0, 0, 'Cork Gizelton - On Waypoint Reached - Rigger Gizelton Say Say Text 5'),
 (11625, 0, 27, 28, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162504, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Cork Gizelton - On Waypoint Reached - Run Script 1162504'), -- complete escort
 (11625, 0, 28, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162601, 0, 0, 0, 0, 0, 10, 611626, 11626, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162601'), -- give quest credit
-(11625, 0, 29, 0, 108, 0, 100, 0, 134, 61162503, 0, 0, 0, 0, 80, 1162507, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,   'Cork Gizelton - On Waypoint Reached - Run Script 1162507'), -- peaceful route done, continue to final waypoint
-(11625, 0, 44, 0, 108, 0, 100, 0, 47, 61162505, 0, 0, 0, 0, 80, 1162508, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162508'), -- back at the north camp, start the next round
+(11625, 0, 29, 0, 108, 0, 100, 0, 134, 61162503, 0, 0, 0, 0, 80, 1162507, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162507'), -- peaceful route done, continue to final waypoint
+(11625, 0, 44, 0, 108, 0, 100, 0, 47, 61162505, 0, 0, 0, 0, 80, 1162508, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Cork Gizelton - On Waypoint Reached - Run Script 1162508'), -- back at the north camp, start the next round
 --
 (11625, 0, 30, 31, 108, 0, 100, 1, 52, 61162501, 0, 0, 0, 0, 12, @NPC_VENDOR_TRON, 1, 600000, 0,0,0,8,0,0,0,0, -694.61, 1460.7, 90.794, 2.4, 'Cork Gizelton - On Waypoint Reached - Spawn NPC_VENDOR_TRON'), -- north stop
 (11625, 0, 31, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 82, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Cork Gizelton - On Waypoint Reached - Add Gossip flag'),
