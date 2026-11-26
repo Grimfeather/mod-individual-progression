@@ -113,16 +113,6 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (13019, 0, 2, 0, 2, 0, 100, 1, 0, 15, 0, 0, 0, 0, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                    'Burning Blade Seer - Between 0-15% Health - Flee For Assist (No Repeat)'),
 (14225, 0, 0, 0, 2, 0, 100, 0, 0, 30, 0, 0, 0, 0, 11, 8599, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                 'Prince Kellen - Between 0-30% Health - Cast Enrage');
 
--- fix worldserver error at serpent shrine to summon Lord Kragaru
-DELETE FROM `smart_scripts` WHERE `source_type` = 1 AND `entryorguid` IN (177673, 177705);
-INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
-`event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
-`action_type`, `action_param1`, `action_param2`, `action_param3`, `action_param4`, `action_param5`, `action_param6`,
-`target_type`, `target_param1`, `target_param2`, `target_param3`, `target_param4`, `target_x`, `target_y`, `target_z`, `target_o`, `comment`) VALUES
---
-(177673, 1, 0, 0, 70, 0, 100, 0, 2, 0, 0, 0, 0, 0, 50, 177705, 4, 0, 0, 0, 0, 8, 0, 0, 0, 0, 252.547, 2963.69, 1.64267, 5.58505,    'Serpent Statue - On Gameobject State Changed - Summon Gameobject \'Naga Beam\''),
-(177705, 1, 0, 0, 63, 0, 100, 0, 0, 0, 0, 0, 0, 0, 12, 12369, 7, 60000, 1, 1, 0, 8, 0, 0, 0, 0, 255.13, 2967.05, 1.39319, 0.785541, 'Naga Beam - On Gameobject Just spawned - Summon Creature \'Lord Kragaru\'');
-
 -- Khan Dez'Hepah, 3 spawn locations
 DELETE FROM `creature` WHERE `guid` IN (29141, 27042, 27052);
 INSERT INTO `creature` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`,
@@ -1270,7 +1260,7 @@ INSERT INTO `creature_text` (`CreatureID`, `GroupID`, `ID`, `Text`, `Type`, `Lan
 (11626, 5, 0, 'Wow! We did it... not sure why we thought we needed the likes of you. Nevertheless, speak with Smeed Scrabblescrew; he will give you your earnings!', 12, 0, 100, 0, 0, 0, 7332, 0, 'Rigger Gizelton');
 
 DELETE FROM `smart_scripts` WHERE `source_type` = 0 AND `entryorguid` IN (11625, 11626, -611627, -611628);
-DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (1162500, 1162501, 1162502, 1162503, 1162504, 1162505, 1162600, 1162601);
+DELETE FROM `smart_scripts` WHERE `source_type` = 9 AND `entryorguid` IN (1162500, 1162501, 1162502, 1162503, 1162504, 1162505, 1162506, 1162507, 1162508, 1162600, 1162601);
 
 INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 `event_type`, `event_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `event_param5`, `event_param6`,
@@ -1297,7 +1287,7 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (11625, 0, 14, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162501, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Cork Gizelton - On Waypoint Reached - Run Script 1162501'), -- centaur ambush 3
 (11625, 0, 15, 16, 108, 0, 100, 1, 26, 61162502, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,           'Cork Gizelton - On Waypoint Reached - Say Text 5'),
 (11625, 0, 16, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162502, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Cork Gizelton - On Waypoint Reached - Run Script 1162502'), -- complete escort
-(11625, 0, 17, 0, 108, 0, 100, 0, 105, 61162501, 0, 0, 0, 0, 232, 61162503, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Cork Gizelton - On Waypoint Reached - Start Waypoints 61162503'), -- peaceful route done, continue to south camp
+(11625, 0, 17, 0, 108, 0, 100, 0, 105, 61162501, 0, 0, 0, 0, 80, 1162506, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162506'), -- peaceful route done, continue to south camp
 (11625, 0, 18, 19, 11, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                   'Cork Gizelton - On Respawn - Remove Quest Giver flag'),
 (11625, 0, 19, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 61162501, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Cork Gizelton - On Respawn - Start Waypoints 61162501'),
 --
@@ -1310,7 +1300,8 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (11625, 0, 26, 27, 108, 0, 100, 1, 27, 61162504, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 10, 611626, 11626, 0, 0, 0, 0, 0, 0, 'Cork Gizelton - On Waypoint Reached - Rigger Gizelton Say Say Text 5'),
 (11625, 0, 27, 28, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162504, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,             'Cork Gizelton - On Waypoint Reached - Run Script 1162504'), -- complete escort
 (11625, 0, 28, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 80, 1162601, 0, 0, 0, 0, 0, 10, 611626, 11626, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162601'), -- give quest credit
-(11625, 0, 29, 0, 108, 0, 100, 0, 134, 61162503, 0, 0, 0, 0, 232, 61162505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,  'Cork Gizelton - On Waypoint Reached - Start Waypoints 61162505'), -- peaceful route done, continue to final waypoint
+(11625, 0, 29, 0, 108, 0, 100, 0, 134, 61162503, 0, 0, 0, 0, 80, 1162507, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,    'Cork Gizelton - On Waypoint Reached - Run Script 1162507'), -- peaceful route done, continue to final waypoint
+(11625, 0, 44, 0, 108, 0, 100, 0, 47, 61162505, 0, 0, 0, 0, 80, 1162508, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,     'Cork Gizelton - On Waypoint Reached - Run Script 1162508'), -- back at the north camp, start the next round
 --
 (11625, 0, 30, 31, 108, 0, 100, 1, 52, 61162501, 0, 0, 0, 0, 12, @NPC_VENDOR_TRON, 1, 600000, 0,0,0,8,0,0,0,0, -694.61, 1460.7, 90.794, 2.4, 'Cork Gizelton - On Waypoint Reached - Spawn NPC_VENDOR_TRON'), -- north stop
 (11625, 0, 31, 0, 61, 0, 100, 0, 0, 0, 0, 0, 0, 0, 82, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Cork Gizelton - On Waypoint Reached - Add Gossip flag'),
@@ -1359,6 +1350,12 @@ INSERT INTO `smart_scripts` (`entryorguid`, `source_type`, `id`, `link`,
 (1162504, 9, 2, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 10, 611627, 11564, 0, 0, 0, 0, 0, 0,           'Script9 - Cork Gizelton - Reset faction for kodo 1'),
 (1162504, 9, 3, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 10, 611628, 11564, 0, 0, 0, 0, 0, 0,           'Script9 - Cork Gizelton - Reset faction for kodo 2'),
 (1162504, 9, 5, 0, 0, 0, 100, 0, 7000, 7000, 0, 0, 0, 0, 232, 61162505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162505'), -- escort done, continue to final waypoint
+-- a path started on the last waypoint of another loses its id when the old one ends (SmartAI::PathEndReached), so start it a moment later
+(1162506, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 61162503, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162503'),
+(1162507, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 232, 61162505, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,      'Script9 - Cork Gizelton - Start Waypoints 61162505'),
+-- waypoint events fire twice per point (MovementInform and WaypointReached), so the stops are not repeatable; clear that each round
+(1162508, 9, 0, 0, 0, 0, 100, 0, 1000, 1000, 0, 0, 0, 0, 78, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,              'Script9 - Cork Gizelton - Reset Script (not repeatable events fire again)'),
+(1162508, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 232, 61162501, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,            'Script9 - Cork Gizelton - Start Waypoints 61162501'),
 --
 (1162600, 9, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 64, 1, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,                   'Script9 - Rigger Gizelton - Store Targetlist'),
 (1162600, 9, 1, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 83, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,                    'Script9 - Rigger Gizelton - Remove Quest Giver flag'),

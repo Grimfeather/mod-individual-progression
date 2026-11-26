@@ -15,8 +15,7 @@ enum BlackUrn
 enum KZDataTypes
 {
     DATA_NIGHTBANE = 10,
-
-    NPC_NIGHTBANE = 17225,
+    NPC_NIGHTBANE  = 17225,
 };
 
 class go_blackened_urn_70 : public GameObjectScript
@@ -33,9 +32,10 @@ public:
         {
             if (InstanceScript* pInstance = go->GetInstanceScript())
             {
-                if (pInstance->GetData(DATA_NIGHTBANE) != DONE && !go->FindNearestCreature(NPC_NIGHTBANE, 40.0f))
+                if (pInstance->GetBossState(DATA_NIGHTBANE) == NOT_STARTED && !go->FindNearestCreature(NPC_NIGHTBANE, 40.0f))
                     if (Creature* cr = ObjectAccessor::GetCreature(*player, pInstance->GetGuidData(DATA_NIGHTBANE)))
-                        cr->AI()->DoAction(0 /*ACTION_START_INTRO */);
+                        if (cr->IsAlive())
+                            cr->AI()->DoAction(0 /*ACTION_START_INTRO */);
             }
         }
         else
